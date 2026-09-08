@@ -1,0 +1,38 @@
+[
+  {
+    "capture_id": "cap_101",
+    "raw_asr_text": "reminder call the vendor tomorrow, also my wifi password is Xk29mPqZ7 for the guest network",
+    "formatted_text": "Reminder: call the vendor tomorrow. Also, my wifi password is Xk29mPqZ7 for the guest network.",
+    "source_modality": "speech",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note",
+    "captured_at": "2026-09-01T09:00:00"
+  },
+  {
+    "capture_id": "cap_102",
+    "raw_asr_text": "meridian final budget confirmed at forty two lakh after the last negotiation round",
+    "formatted_text": "Meridian final budget confirmed at ₹42,00,000 after the last negotiation round.",
+    "source_modality": "speech",
+    "foreground_app": "Slack",
+    "window_title": "Meridian - #general",
+    "captured_at": "2026-09-02T10:00:00"
+  },
+  {
+    "capture_id": "cap_103",
+    "raw_asr_text": "the otp is four seven two nine one for the vendor portal login",
+    "formatted_text": "The OTP is 47291 for the vendor portal login.",
+    "source_modality": "speech",
+    "foreground_app": "Chrome",
+    "window_title": "Vendor Portal - Login",
+    "captured_at": "2026-09-03T11:00:00"
+  },
+  {
+  "capture_id": "cap_104",
+  "raw_asr_text": "for the meridian project rollout we need to submit the revised contract to the legal team by tomorrow at four pm",
+  "formatted_text": "For the Meridian project rollout, we need to submit the revised contract to the legal team by tomorrow at 4 PM.",
+  "source_modality": "speech",
+  "foreground_app": "Slack",
+  "window_title": "#meridian-legal",
+  "captured_at": "2026-09-04T10:00:00"
+}
+]

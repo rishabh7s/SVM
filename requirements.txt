@@ -1,0 +1,6 @@
+pydantic>=2.0
+instructor
+google-genai
+jsonref
+python-dotenv
+pytest
