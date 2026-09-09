@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from kivi.retrieval.memory_ops import delete_memory, get_memory, update_memory
+from kivi.api.memory_ops import delete_memory, get_memory, update_memory
 from kivi.retrieval.tools import get_connected_edges, get_node_history, search_nodes
 
 DB_PATH = Path(__file__).resolve().parents[1] / "db" / "kivi.db"

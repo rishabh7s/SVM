@@ -42,7 +42,7 @@ from typing import Any, Literal, Optional
 import instructor
 from pydantic import BaseModel, Field
 
-from kivi.retrieval import memory_ops
+from kivi.api import memory_ops
 from kivi.models.responses import AgentResponse, Citation
 from kivi.retrieval import tools as tool_impls
 

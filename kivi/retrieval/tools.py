@@ -55,7 +55,7 @@ def _node_type_from_id(node_id: str) -> Optional[NodeType]:
         if node_id.startswith(prefix):
             return node_type
     return None
-
+node_type_from_id = _node_type_from_id
 
 # ---------------------------------------------------------------------------
 # 1. search_nodes -- the entry point into the graph
