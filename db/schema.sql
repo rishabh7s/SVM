@@ -9,12 +9,18 @@ PRAGMA foreign_keys = ON;
 
 -- ============================================================
 -- Raw captures: one row per ingested record, unmodified, ever.
+-- 'manual_edit' is a third modality (alongside speech/selected_text) for
+-- captures synthesized when a user edits or corrects a memory directly
+-- through the UI or a REST call, rather than through dictation -- keeping
+-- this as its own honest modality rather than mislabeling a manual edit as
+-- 'selected_text' preserves accurate provenance for that memory going
+-- forward (see kivi/api/memory_ops.py).
 -- ============================================================
 CREATE TABLE IF NOT EXISTS captures (
     capture_id          TEXT PRIMARY KEY,
     raw_asr_text        TEXT,
     formatted_text      TEXT,
-    source_modality     TEXT NOT NULL CHECK (source_modality IN ('speech', 'selected_text')),
+    source_modality     TEXT NOT NULL CHECK (source_modality IN ('speech', 'selected_text', 'manual_edit')),
     foreground_app      TEXT,
     window_title        TEXT,
     captured_at         TEXT NOT NULL,          -- ISO-8601; anchor for relative-time resolution
@@ -75,6 +81,8 @@ CREATE TABLE IF NOT EXISTS declarative_facts (
     source_capture_id           TEXT NOT NULL REFERENCES captures(capture_id),
     is_active                   INTEGER NOT NULL DEFAULT 1 CHECK (is_active IN (0, 1)),
     superseded_by_id            TEXT REFERENCES declarative_facts(fact_id),
+    deleted_at                  TEXT,                    -- NULL unless explicitly deleted; distinct from
+                                                            -- supersession -- see module docstring above idx below
     created_at                  TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -83,6 +91,14 @@ CREATE TABLE IF NOT EXISTS declarative_facts (
 -- fact without first deactivating the old one raises an integrity error --
 -- this is deliberate; it forces the ingestion code to go through proper
 -- supersession logic rather than silently accumulating duplicates.
+--
+-- deleted_at is orthogonal to is_active/superseded_by_id: a fact can be
+-- is_active=1 (still the current pointer in the supersession chain) AND
+-- deleted_at set (a user explicitly asked to forget it) at the same time --
+-- that combination means "the current value has been deleted, and nothing
+-- has superseded it since." The row is never actually removed from the
+-- table, so the full audit trail (what it said, when, and that it was later
+-- deleted) stays inspectable via get_node_history even after deletion.
 CREATE UNIQUE INDEX IF NOT EXISTS idx_one_active_fact_per_attribute
     ON declarative_facts (entity_id, attribute)
     WHERE is_active = 1;
@@ -102,6 +118,7 @@ CREATE TABLE IF NOT EXISTS episodic_events (
     resolved_time                TEXT,
     asserter_role                TEXT CHECK (asserter_role IN ('self', 'third_party') OR asserter_role IS NULL),
     source_capture_id           TEXT NOT NULL REFERENCES captures(capture_id),
+    deleted_at                  TEXT,                    -- NULL unless explicitly deleted (soft delete only)
     created_at                  TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -126,6 +143,7 @@ CREATE TABLE IF NOT EXISTS commitments (
     description              TEXT NOT NULL,
     entity_id                TEXT REFERENCES entities(entity_id),
     source_capture_id        TEXT NOT NULL REFERENCES captures(capture_id),  -- capture that first created this commitment
+    deleted_at                TEXT,                     -- NULL unless explicitly deleted (soft delete only)
     created_at                TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
