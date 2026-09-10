@@ -360,3 +360,73 @@ def test_live_clarification_flow_on_genuine_miss(client):
             ),
         )
         print(f"[TIMED]   -> after clarification, response_type: {r2.json()['response_type']}")
+
+
+# ---------------------------------------------------------------------------
+# /ingest -- the triage-quarantine path never calls the LLM (secrets are
+# short-circuited pre-extraction), so it's fully testable headless with no
+# key required. The happy (extraction) path is exercised only by the
+# live-only test below, same pattern as /query's condensation/clarification
+# flow above.
+# ---------------------------------------------------------------------------
+
+def test_ingest_quarantines_pii_without_calling_llm(client, monkeypatch):
+    """A capture containing an OTP is quarantined by pre-LLM triage --
+    proven here by removing the API key entirely (get_client() would raise
+    if this path ever reached it) and confirming the request still
+    succeeds with extraction_status='pii_detected'."""
+    import kivi.api.app as app_module
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    monkeypatch.setattr(app_module, "get_client", lambda: (_ for _ in ()).throw(AssertionError("LLM should never be called for a quarantined capture")))
+
+    r, elapsed = _timed(
+        "POST /ingest -- OTP-containing note (should quarantine, no LLM call)",
+        lambda: client.post("/ingest", json={"content": "Your one time code is 4 7 2 9 1, don't share it.", "source_type": "selected_text"}),
+    )
+    assert r.status_code == 200
+    body = r.json()
+    print(f"[TIMED]   -> extraction_status: {body['extraction_status']}")
+    assert body["extraction_status"] == "pii_detected"
+    assert body["discard_reason"]
+    assert body["facts_inserted"] == 0
+
+
+def test_ingest_rejects_duplicate_capture_id(client):
+    payload = {"content": "some note", "metadata": {"capture_id": "cap_dupe_test"}, "source_type": "selected_text"}
+    r1 = client.post("/ingest", json=payload)
+    assert r1.status_code in (200,)
+    r2 = client.post("/ingest", json=payload)
+    assert r2.status_code == 409
+
+
+def test_ingest_rejects_invalid_source_type(client):
+    r = client.post("/ingest", json={"content": "some note", "source_type": "manual_edit"})
+    assert r.status_code == 422  # manual_edit is reserved for in-app edits, not external ingestion
+
+
+def test_ingest_rejects_empty_content(client):
+    r = client.post("/ingest", json={"content": ""})
+    assert r.status_code == 422
+
+
+@pytest.mark.skipif(not _live_key_available(), reason="requires a real, network-reachable GEMINI_API_KEY")
+def test_live_ingest_then_immediately_searchable(client):
+    r, elapsed = _timed(
+        "POST /ingest -- real note, real extraction (live)",
+        lambda: client.post(
+            "/ingest",
+            json={
+                "content": "We hired Priya as the new design lead for the Meridian project, starting Monday.",
+                "metadata": {"foreground_app": "Notes"},
+                "source_type": "selected_text",
+            },
+        ),
+    )
+    body = r.json()
+    print(f"[TIMED]   -> extraction_status: {body['extraction_status']}, facts_inserted: {body['facts_inserted']}")
+    assert r.status_code == 200
+    if body["extraction_status"] == "processed":
+        r2 = client.post("/query", json={"question": "Who is the new design lead for Meridian?", "headless_mode": True})
+        print(f"[TIMED]   -> follow-up query response_type: {r2.json()['response_type']}")
+        assert r2.json()["response_type"] == "answer"
+        assert "Priya" in (r2.json()["response_text"] or "")

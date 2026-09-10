@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from typing import Optional
 
 from google import genai
 import instructor
@@ -9,8 +10,15 @@ from dotenv import load_dotenv
 load_dotenv()  # picks up .env in the working directory if present; harmless if absent
 
 
-# API key check
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+# NOTE: intentionally NOT read into a module-level constant here. Binding
+# `GEMINI_API_KEY = os.environ.get(...)` once at import time means anything
+# that sets the env var AFTER this module is first imported (a test's
+# monkeypatch.setenv, a .env loaded by a different entrypoint after this
+# import runs, a key rotated mid-process) has no effect -- get_client() would
+# keep raising "not set" against a stale snapshot. Reading it fresh inside
+# get_client() avoids that whole class of bug for one os.environ.get() call.
+def _get_api_key() -> Optional[str]:
+    return os.environ.get("GEMINI_API_KEY")
 
 
 def _sanitize_model_name(raw: str) -> str:
@@ -53,13 +61,13 @@ def get_client() -> instructor.Instructor:
     Raises a clear, actionable error immediately if the API key is missing,
     rather than letting a cryptic auth error surface later from inside a
     batch run."""
-    if not GEMINI_API_KEY:
+    if not _get_api_key():
         raise RuntimeError(
             "GEMINI_API_KEY is not set. Copy .env.example to .env and set your key, "
             "or export GEMINI_API_KEY in your shell before running ingestion."
         )
 
-    raw_client = genai.Client(api_key=GEMINI_API_KEY)
+    raw_client = genai.Client(api_key=_get_api_key())
     return instructor.from_genai(
         client=raw_client,
         mode=instructor.Mode.JSON,

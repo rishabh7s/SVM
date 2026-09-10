@@ -12,6 +12,8 @@ from __future__ import annotations
 
 import sqlite3
 import time
+import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Literal, Optional
 
@@ -21,6 +23,10 @@ from pydantic import BaseModel, Field
 
 from kivi.api import memory_ops
 from kivi.api.session_store import SESSION_STORE, PendingClarification
+from kivi.ingestion.extractor import ExtractionFailed, extract_capture
+from kivi.ingestion.triage import triage
+from kivi.ingestion.vocab_log import VocabLogger
+from kivi.ingestion.writer import apply_extraction_result
 from kivi.llm import LIGHT_MODEL, RETRIEVAL_MODEL, get_client
 from kivi.retrieval import agent as agent_module
 from kivi.retrieval.condensation import condense_query, enrich_with_clarification
@@ -111,6 +117,53 @@ class MemoryDeleteRequest(BaseModel):
     reason: Optional[str] = None
 
 
+class IngestRequest(BaseModel):
+    """One external transcript/note to ingest. Deliberately mirrors the
+    shape kivi/ingestion/pipeline.py's batch CLI already consumes (a
+    captures row) rather than inventing a parallel schema -- 'content' is
+    what's stored as formatted_text, and this same record becomes
+    immediately searchable through search_nodes once extraction runs,
+    because it goes through the identical write path (triage -> extract ->
+    kivi/ingestion/writer.py) that populates the unified_search FTS index
+    for every other capture in this system.
+    """
+
+    content: str = Field(..., min_length=1, description="The raw transcript or note text.")
+    metadata: Optional[dict[str, Any]] = Field(
+        default=None,
+        description=(
+            "Optional. Recognized keys: capture_id (auto-generated if omitted), "
+            "captured_at (ISO-8601; defaults to now), foreground_app, window_title."
+        ),
+    )
+    source_type: Optional[Literal["speech", "selected_text"]] = Field(
+        default="selected_text",
+        description=(
+            "Maps directly to captures.source_modality. 'manual_edit' is deliberately not a "
+            "valid value here -- that modality is reserved for edits made through the memory "
+            "management endpoints/tools (kivi/api/memory_ops.py), so provenance always tells "
+            "the truth about whether a record came from external content or an in-app edit."
+        ),
+    )
+
+
+class IngestResponse(BaseModel):
+    capture_id: str
+    extraction_status: str
+    discard_reason: Optional[str] = None
+    facts_inserted: int = 0
+    facts_superseded: int = 0
+    facts_unchanged: int = 0
+    events_inserted: int = 0
+    commitments_created: int = 0
+    commitment_status_changed: int = 0
+    commitment_status_unchanged: int = 0
+    relationships_resolved: int = 0
+    relationships_skipped: int = 0
+    entity_resolutions: list[dict[str, Any]] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+
+
 # ---------------------------------------------------------------------------
 # Health
 # ---------------------------------------------------------------------------
@@ -163,6 +216,107 @@ def delete_memory(memory_id: str, body: MemoryDeleteRequest = MemoryDeleteReques
     finally:
         conn.close()
     return result
+
+
+# ---------------------------------------------------------------------------
+# Ingestion -- synchronous single-record entry point for external
+# transcripts/notes. Deliberately reuses the SAME triage -> extract -> write
+# path as the batch pipeline (kivi/ingestion/pipeline.py), rather than a
+# parallel "just insert some rows" implementation -- that's what makes the
+# result "immediately searchable via existing retrieval tools" true by
+# construction: writer.py's INSERTs into declarative_facts/episodic_events/
+# commitments fire the exact same unified_search triggers a batch-ingested
+# capture would, so search_nodes finds this content with no separate
+# indexing step.
+# ---------------------------------------------------------------------------
+
+@app.post("/ingest", response_model=IngestResponse)
+def ingest(body: IngestRequest) -> IngestResponse:
+    metadata = body.metadata or {}
+    capture_id = metadata.get("capture_id") or f"cap_{uuid.uuid4().hex[:12]}"
+    captured_at = metadata.get("captured_at") or datetime.now(timezone.utc).replace(tzinfo=None).isoformat()
+    foreground_app = metadata.get("foreground_app")
+    window_title = metadata.get("window_title")
+    source_modality = body.source_type or "selected_text"
+
+    conn = get_db()
+    try:
+        existing = conn.execute("SELECT 1 FROM captures WHERE capture_id = ?", (capture_id,)).fetchone()
+        if existing:
+            raise HTTPException(status_code=409, detail=f"capture_id '{capture_id}' already exists")
+
+        conn.execute(
+            "INSERT INTO captures "
+            "(capture_id, raw_asr_text, formatted_text, source_modality, foreground_app, window_title, "
+            " captured_at, extraction_status) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')",
+            (capture_id, body.content, body.content, source_modality, foreground_app, window_title, captured_at),
+        )
+        conn.commit()
+
+        # --- Pre-LLM triage, identical to the batch pipeline: a flagged
+        # secret is quarantined directly with NO extraction call, so it
+        # never leaves the machine at all. ---
+        triage_result = triage(body.content, body.content)
+        if triage_result.flagged:
+            discard_reason = f"pre-LLM triage: {triage_result.reason}"
+            conn.execute(
+                "UPDATE captures SET extraction_status = 'pii_detected', discard_reason = ? WHERE capture_id = ?",
+                (discard_reason, capture_id),
+            )
+            conn.commit()
+            return IngestResponse(capture_id=capture_id, extraction_status="pii_detected", discard_reason=discard_reason)
+
+        client = get_client()  # raises RuntimeError -> FastAPI 500 if GEMINI_API_KEY is missing
+        try:
+            result = extract_capture(conn, client, capture_id, body.content, body.content, captured_at)
+        except ExtractionFailed as e:
+            conn.rollback()
+            discard_reason = f"extraction failed after retries: {e.underlying}"
+            conn.execute(
+                "UPDATE captures SET extraction_status = 'incomplete_capture', discard_reason = ? WHERE capture_id = ?",
+                (discard_reason, capture_id),
+            )
+            conn.commit()
+            return IngestResponse(
+                capture_id=capture_id, extraction_status="incomplete_capture", discard_reason=discard_reason
+            )
+
+        vocab_logger = VocabLogger()
+        summary = apply_extraction_result(conn, capture_id, result, vocab_logger)
+
+        conn.execute(
+            "UPDATE captures SET extraction_status = ?, discard_reason = ? WHERE capture_id = ?",
+            (result.extraction_status, result.discard_reason, capture_id),
+        )
+        conn.commit()
+
+        return IngestResponse(
+            capture_id=capture_id,
+            extraction_status=result.extraction_status,
+            discard_reason=result.discard_reason,
+            facts_inserted=summary.facts_inserted,
+            facts_superseded=summary.facts_superseded,
+            facts_unchanged=summary.facts_unchanged,
+            events_inserted=summary.events_inserted,
+            commitments_created=summary.commitments_created,
+            commitment_status_changed=summary.commitment_status_changed,
+            commitment_status_unchanged=summary.commitment_status_unchanged,
+            relationships_resolved=summary.relationships_resolved,
+            relationships_skipped=summary.relationships_skipped,
+            entity_resolutions=[
+                {"entity_id": r.entity_id, "method": r.method, "matched_alias": r.matched_alias, "similarity": r.similarity}
+                for r in summary.entity_resolutions
+            ],
+            warnings=summary.warnings,
+        )
+    except HTTPException:
+        raise
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
 
 
 # ---------------------------------------------------------------------------

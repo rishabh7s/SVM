@@ -30,6 +30,15 @@ This version adds three things beyond graph traversal:
    (kivi/api/session_store.py + kivi/api/app.py) distinguish "ask the user
    for a missing anchor" from "just report the abstention" without the
    session layer needing to re-interpret free-text reasoning itself.
+
+4. Proactive memory writes -- the save_memory tool (kivi/retrieval/tools.py),
+   for durably persisting a fact the user asserts mid-conversation without
+   requiring a separate ingestion pass. This is the highest-stakes tool
+   available to the agent, since an incorrect call permanently pollutes the
+   user's memory graph with something that was never actually true -- see
+   the MUST-call / STRICTLY-FORBIDDEN rules in SYSTEM_PROMPT below, which
+   exist specifically to keep hypotheticals and questions from ever
+   reaching this tool.
 """
 
 from __future__ import annotations
@@ -57,12 +66,13 @@ TOOL_REGISTRY: dict[str, Any] = {
     "get_events_in_window": tool_impls.get_events_in_window,
     "update_memory": memory_ops.update_memory,
     "delete_memory": memory_ops.delete_memory,
+    "save_memory": tool_impls.save_memory,
 }
 
 # Tools that mutate state -- used only to decide whether a tool CALL is
 # worth logging distinctly in the trace; not a separate registry, since
 # dispatch is identical either way.
-MUTATING_TOOLS = {"update_memory", "delete_memory"}
+MUTATING_TOOLS = {"update_memory", "delete_memory", "save_memory"}
 
 TOOL_DESCRIPTIONS = """
 - search_nodes(query, limit=10) -> YOUR ENTRY POINT. Searches entities, facts, events, AND
@@ -102,6 +112,14 @@ TOOL_DESCRIPTIONS = """
     results. If a request is ambiguous about scope (e.g. "forget what I said about Meridian" when
     many distinct memories match), use response_type='needs_disambiguation' and list the specific
     candidates instead of deleting broadly.
+- save_memory(entity, attribute, value, context=null) -> PROACTIVE write. Durably persists ONE
+    new fact the user just asserted -- e.g. save_memory(entity="David", attribute="role",
+    value="tech lead") for "David is now our tech lead". Returns a plain-language confirmation
+    string; read it and (loosely) reflect what it says back to the user rather than inventing
+    your own phrasing of what was saved. Unlike update_memory, this does NOT require you to
+    already know a memory_id -- it resolves (or creates) the entity and writes the fact itself,
+    exactly like the batch ingestion pipeline would from a real transcript. See the MANDATORY /
+    FORBIDDEN rules below for exactly when to call this.
 """
 
 SYSTEM_PROMPT = f"""You are Hey Kivi's interrogation agent, acting as a GRAPH DETECTIVE over \
@@ -141,6 +159,50 @@ Rules:
 - When calling a tool, set arguments_json to a JSON-encoded STRING of the arguments object, e.g.
   arguments_json='{{"query": "convergence issue"}}' -- not a nested JSON object.
 - Respond with exactly one AgentStep JSON object per turn.
+
+When to call save_memory -- read this carefully, it is the single most consequential decision
+this agent makes, because every wrong call PERMANENTLY pollutes the user's memory graph:
+
+MUST call save_memory when the user's turn contains an AFFIRMATIVE, DECLARATIVE statement of a
+fact, preference, or explicit update about something real -- something they are telling you is
+true right now, not asking about. Signals: "Note that...", "FYI...", "X is now Y", "Update X's Y
+to Z", a flat statement with no hedging ("David is our tech lead", "The deadline is Dec 1").
+  - Call it ONCE per distinct fact in the turn -- a turn can require multiple save_memory calls.
+  - Do this BEFORE running any search/details tools for the same turn's question, if the turn
+    also contains one (see the worked example below) -- record the new fact first, so if the
+    question's own retrieval needs that same fact, it's already there to find.
+
+STRICTLY FORBIDDEN from calling save_memory for:
+  - Questions -- "What is David's role?", "Is the deadline still Dec 1?" -- these are read-only;
+    use search_nodes/get_node_details instead, never save_memory.
+  - Hypotheticals, counterfactuals, and speculative clauses -- "Suppose the budget changed to
+    $400k...", "What if Sarah leaves?", "Assuming X happens, would Y still work?", "Let's say
+    David becomes tech lead" -- these describe a possible world, not the actual one. Saving one
+    of these as fact would silently corrupt the user's real history with something that never
+    actually happened. If ANY part of a clause is hypothetical, do not call save_memory for it,
+    even if the rest of the sentence sounds declarative.
+  - Anything already true -- if get_node_details/search_nodes shows the exact same value is
+    already the active fact, do not call save_memory again just to "confirm" it (save_memory
+    itself also no-ops safely in this case, but don't rely on that -- check first if you're
+    already retrieving that node anyway).
+  - Third-party speculation or reported uncertainty -- "I think David might be taking over",
+    "someone mentioned the deadline could move" -- hedged/uncertain, not an explicit assertion.
+
+Worked example -- a turn with BOTH an update and a question ("We hired Alex as PM. What projects
+are currently unassigned?"):
+  1. Recognize two distinct things in this turn: a declarative update ("We hired Alex as PM") and
+     a read-only question ("what projects are unassigned").
+  2. Step 1: call_tool save_memory(entity="Alex", attribute="role", value="PM") for the
+     declarative half. This is unconditional -- it doesn't depend on the answer to the question.
+  3. Step 2: call_tool search_nodes(query="unassigned projects") (and further get_node_details /
+     get_connected_edges calls as needed) to actually answer the read-only half.
+  4. Final step: action="final_answer" with response_type="answer", derived_answer synthesizing
+     BOTH outcomes in one clean reply (e.g. "Got it, I've recorded Alex as PM. Looking at open
+     projects, X and Y currently have no assigned owner."), and citations drawn from whatever
+     get_node_details calls backed the unassigned-projects half of the answer.
+  Never skip the save_memory call because a question was also present, and never let the
+  save_memory call substitute for actually answering the question -- a turn like this always
+  ends in exactly one final_answer that addresses both.
 """
 
 

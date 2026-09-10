@@ -32,13 +32,20 @@ Tools:
   - get_node_history      -- version history: fact supersession chain, or commitment status chain
   - compute                -- deterministic arithmetic, unrelated to graph traversal but still needed
   - get_events_in_window   -- temporal slicing ("what happened last week"), also orthogonal to graph traversal
+  - save_memory            -- proactive write: durably persists ONE fact asserted mid-conversation
+                               (see save_memory's own docstring below for why this is deliberately
+                               narrower than the full ingestion pipeline)
 """
 
 from __future__ import annotations
 
 import re
 import sqlite3
+import uuid
+from datetime import datetime, timezone
 from typing import Literal, Optional
+
+from kivi.ingestion.entity_resolution import get_l1_context, resolve_entity
 
 NodeType = Literal["entity", "fact", "event", "commitment"]
 
@@ -56,6 +63,20 @@ def _node_type_from_id(node_id: str) -> Optional[NodeType]:
             return node_type
     return None
 node_type_from_id = _node_type_from_id
+
+
+def _is_deleted(conn: sqlite3.Connection, node_type: str, node_id: str) -> bool:
+    """True if the given fact/event/commitment has deleted_at set (see
+    kivi/api/memory_ops.py's delete_memory). deleted_at is the ONLY
+    soft-delete column on these tables (db/schema.sql) -- there is no
+    separate boolean is_deleted or deleted_reason column. Entities are
+    never deletable through that operation, so always False for 'entity'."""
+    table = {"fact": "declarative_facts", "event": "episodic_events", "commitment": "commitments"}.get(node_type)
+    if table is None:
+        return False
+    id_col = {"fact": "fact_id", "event": "event_id", "commitment": "commitment_id"}[node_type]
+    row = conn.execute(f"SELECT deleted_at FROM {table} WHERE {id_col} = ?", (node_id,)).fetchone()
+    return bool(row and row["deleted_at"] is not None)
 
 # ---------------------------------------------------------------------------
 # 1. search_nodes -- the entry point into the graph
@@ -104,6 +125,12 @@ def search_nodes(conn: sqlite3.Connection, query: str, limit: int = 10) -> list[
         if key in seen:
             continue
         seen.add(key)
+        if row["source_type"] != "entity" and _is_deleted(conn, row["source_type"], row["source_id"]):
+            # A deleted memory shouldn't surface as a starting point for
+            # further exploration -- see memory_ops.delete_memory's
+            # docstring. The row itself is untouched (soft delete only), so
+            # it stays reachable directly via get_node_details for audit.
+            continue
         snippet = row["content"]
         results.append(
             {
@@ -158,7 +185,7 @@ def get_node_details(conn: sqlite3.Connection, node_id: str) -> dict:
         row = conn.execute(
             "SELECT f.fact_id, f.entity_id, f.attribute, f.value_text, f.value_numeric, f.unit, "
             "       f.precision_class, f.asserter_role, f.relative_time_expression, f.resolved_time, "
-            "       f.is_active, f.superseded_by_id, f.created_at, "
+            "       f.is_active, f.superseded_by_id, f.deleted_at, f.created_at, "
             "       c.capture_id, c.captured_at, c.foreground_app, c.formatted_text "
             "FROM declarative_facts f "
             "JOIN captures c ON c.capture_id = f.source_capture_id "
@@ -172,7 +199,7 @@ def get_node_details(conn: sqlite3.Connection, node_id: str) -> dict:
     if node_type == "event":
         row = conn.execute(
             "SELECT e.event_id, e.entity_id, e.event_type, e.description, "
-            "       e.relative_time_expression, e.resolved_time, e.asserter_role, e.created_at, "
+            "       e.relative_time_expression, e.resolved_time, e.asserter_role, e.deleted_at, e.created_at, "
             "       c.capture_id, c.captured_at, c.foreground_app, c.formatted_text "
             "FROM episodic_events e "
             "JOIN captures c ON c.capture_id = e.source_capture_id "
@@ -185,7 +212,7 @@ def get_node_details(conn: sqlite3.Connection, node_id: str) -> dict:
 
     if node_type == "commitment":
         row = conn.execute(
-            "SELECT co.commitment_id, co.entity_id, co.commitment_mention, co.description, co.created_at, "
+            "SELECT co.commitment_id, co.entity_id, co.commitment_mention, co.description, co.deleted_at, co.created_at, "
             "       cse.status, cse.status_confirmed_by_user, cse.blocking_reason, "
             "       cse.due_date_relative_expression, cse.due_date_resolved, "
             "       c.capture_id, c.captured_at, c.foreground_app, c.formatted_text "
@@ -313,7 +340,7 @@ def get_node_history(conn: sqlite3.Connection, node_id: str) -> dict:
             return {"error": f"no fact found with id '{node_id}'"}
         rows = conn.execute(
             "SELECT fact_id, value_text, value_numeric, unit, is_active, superseded_by_id, "
-            "       source_capture_id, created_at "
+            "       deleted_at, source_capture_id, created_at "
             "FROM declarative_facts WHERE entity_id = ? AND attribute = ? ORDER BY created_at ASC",
             (anchor["entity_id"], anchor["attribute"]),
         ).fetchall()
@@ -391,3 +418,145 @@ def get_events_in_window(
     query += " ORDER BY COALESCE(resolved_time, created_at) ASC"
     rows = conn.execute(query, params).fetchall()
     return [dict(r) for r in rows]
+
+
+# ---------------------------------------------------------------------------
+# 5. save_memory -- proactive write during conversation
+# ---------------------------------------------------------------------------
+
+def save_memory(
+    conn: sqlite3.Connection,
+    entity: str,
+    attribute: str,
+    value: str,
+    context: Optional[str] = None,
+) -> str:
+    """Durably persists ONE explicit fact the user asserted mid-conversation
+    -- "David is now our tech lead" becomes
+    save_memory(entity="David", attribute="role", value="tech lead"). This is
+    the AGENT'S proactive counterpart to the batch ingestion pipeline
+    (kivi/ingestion/pipeline.py): same underlying write path (entity
+    resolution via kivi/ingestion/entity_resolution.py, then the exact
+    three-step supersession order used by kivi/ingestion/writer.py's
+    _write_fact -- deactivate old active row -> insert new -> point old at
+    new, since the DB's own partial unique index checks this immediately,
+    not deferred), but triggered synchronously inside the tool-calling loop
+    instead of an offline batch run, and WITHOUT an LLM extraction call in
+    the middle -- the agent has already done the "what is the fact here"
+    judgment call itself by deciding to invoke this tool with these
+    specific arguments, so there's nothing left for a second model call to
+    extract.
+
+    Every save is backed by a real capture row (source_modality=
+    'manual_edit', matching the same honest-provenance convention
+    kivi/api/memory_ops.py uses for REST-driven edits) so a citation for
+    this memory later will correctly show it came from a conversational
+    save, not a dictation that never happened. `context`, if given, becomes
+    that capture's formatted_text -- the closest thing to "what was
+    actually said" available to this tool, since the agent only passes
+    structured arguments through, not the raw turn.
+
+    Returns a plain-language, human-readable STRING (not a dict, unlike
+    update_memory/delete_memory) -- this is fed straight back into the
+    agent's tool-result message, so it needs to read naturally as something
+    the agent can quote or paraphrase directly in its final answer.
+
+    Deliberately narrow, on purpose:
+      - No entity_type parameter -- a newly-created entity gets
+        entity_type='unspecified'. This tool trades a little schema
+        precision for a signature simple enough for the model to call
+        reliably; entity_type barely matters for retrieval anyway, since
+        search_nodes and entity resolution both match on name/alias text,
+        not type.
+      - No attribute vocabulary enforcement -- `attribute` is free text,
+        consistent with the rest of this schema's "generalized" design
+        (see db/schema.sql's own comments on attribute/event_type/
+        relationship_type all being open text on purpose).
+      - Exactly one fact per call. The agent should call this once per
+        distinct fact in a turn, not try to encode multiple updates into
+        one call -- keeps each write's provenance and audit trail
+        (memory_mutation_log-equivalent: this capture row + the fact's own
+        source_capture_id) unambiguous.
+    """
+    entity = (entity or "").strip()
+    attribute = (attribute or "").strip()
+    value = (value or "").strip()
+    if not entity:
+        return "save_memory failed -- 'entity' was empty; nothing was written."
+    if not attribute:
+        return "save_memory failed -- 'attribute' was empty; nothing was written."
+    if not value:
+        return "save_memory failed -- 'value' was empty; nothing was written."
+
+    try:
+        capture_id = f"cap_{uuid.uuid4().hex[:12]}"
+        captured_at = datetime.now(timezone.utc).replace(tzinfo=None).isoformat()
+        provenance_text = context.strip() if context and context.strip() else f"{entity} -- {attribute}: {value}"
+
+        conn.execute(
+            "INSERT INTO captures "
+            "(capture_id, raw_asr_text, formatted_text, source_modality, foreground_app, window_title, "
+            " captured_at, extraction_status) "
+            "VALUES (?, NULL, ?, 'manual_edit', 'Hey Kivi', 'Conversational Save', ?, 'processed')",
+            (capture_id, provenance_text, captured_at),
+        )
+
+        l1_context = get_l1_context(conn)
+        resolution = resolve_entity(
+            conn, entity, entity_type="unspecified", source_capture_id=capture_id, l1_context=l1_context
+        )
+
+        existing = conn.execute(
+            "SELECT * FROM declarative_facts WHERE entity_id = ? AND attribute = ? AND is_active = 1",
+            (resolution.entity_id, attribute),
+        ).fetchone()
+
+        if existing and existing["value_text"] == value:
+            conn.commit()
+            return f"No change needed -- {entity}'s {attribute} was already recorded as '{value}' ({existing['fact_id']})."
+
+        new_fact_id = f"fact_{uuid.uuid4().hex[:12]}"
+
+        if existing:
+            # Same ordering constraint as kivi/ingestion/writer.py's
+            # _write_fact: deactivate the old active row before inserting
+            # the new one, since the partial unique index on
+            # (entity_id, attribute) WHERE is_active=1 is checked
+            # immediately, not deferred to commit.
+            conn.execute("UPDATE declarative_facts SET is_active = 0 WHERE fact_id = ?", (existing["fact_id"],))
+
+        conn.execute(
+            """
+            INSERT INTO declarative_facts
+                (fact_id, entity_id, attribute, value_text, value_numeric, unit,
+                 precision_class, asserter_role, relative_time_expression, resolved_time,
+                 source_capture_id, is_active, superseded_by_id)
+            VALUES (?, ?, ?, ?, NULL, NULL, 'exact_source', 'self', NULL, NULL, ?, 1, NULL)
+            """,
+            (new_fact_id, resolution.entity_id, attribute, value, capture_id),
+        )
+
+        if existing:
+            # Old row can only point at the new one AFTER the new row
+            # exists -- the FK on superseded_by_id requires it.
+            conn.execute(
+                "UPDATE declarative_facts SET superseded_by_id = ? WHERE fact_id = ?",
+                (new_fact_id, existing["fact_id"]),
+            )
+
+        conn.commit()
+
+        if existing:
+            return (
+                f"Saved. Updated {entity}'s {attribute} to '{value}' "
+                f"(fact_id={new_fact_id}, supersedes {existing['fact_id']})."
+            )
+        return (
+            f"Saved. Recorded that {entity}'s {attribute} is '{value}' "
+            f"(fact_id={new_fact_id}, entity_id={resolution.entity_id}, "
+            f"entity_resolution={resolution.method})."
+        )
+
+    except Exception as e:  # noqa: BLE001 -- a partial write must never be left committed
+        conn.rollback()
+        return f"save_memory failed -- nothing was written due to an error: {e}"
