@@ -111,6 +111,66 @@ def condense_query(
     )
 
 
+CONDENSE_STATEMENT_SYSTEM_PROMPT = """You rewrite a user's manual update/note into a fully self-contained \
+standalone DECLARATIVE STATEMENT, using the recent conversation history to resolve anaphora and \
+implicit references (e.g. "it", "that", "the project", "the budget") into the actual thing being \
+referred to.
+
+This is the SAME kind of reference resolution as ordinary query condensation, but the input is a \
+statement (an update, a correction, a note), not a question -- and the output must ALSO stay a \
+statement. Never rephrase a declarative update into a question, and never answer anything.
+
+Rules:
+- If the new text is ALREADY fully self-contained (names its own subject clearly), return it \
+  completely unchanged and set used_history=false.
+- If it depends on prior turns to make sense (e.g. "Update the budget to $400k" after a \
+  conversation about Project Meridian), rewrite it into a standalone declarative statement that \
+  names the actual entity/subject explicitly (e.g. "Update Project Meridian's budget to $400,000"), \
+  and set used_history=true.
+- Preserve the statement's own grammatical mood exactly -- an imperative stays an imperative, a \
+  plain assertion stays a plain assertion. Do NOT turn it into a question under any circumstance.
+- If the history doesn't actually contain enough to resolve a reference, leave the ambiguous \
+  reference as-is rather than guessing -- set used_history=false and explain why in reasoning.
+"""
+
+
+def condense_statement(
+    client: instructor.Instructor,
+    model: str,
+    session: SessionState,
+    new_statement: str,
+) -> CondensationResult:
+    """Declarative-preserving counterpart to condense_query, used by the
+    manual ingestion path (POST /ingest's Flow 1 / "Put Info") instead of
+    condense_query itself. Reuses the same CondensationResult shape and the
+    same "skip the model call on a session's first turn" optimization, but
+    a DIFFERENT system prompt -- condense_query's own prompt talks about
+    "the user's follow-up question" throughout and has no instruction
+    against reframing a statement as a question, so reusing it here risks
+    silently turning a declarative update into a question. See this
+    module's CONDENSE_STATEMENT_SYSTEM_PROMPT for the exact guard."""
+    if not session.turns:
+        return CondensationResult(
+            standalone_query=new_statement,
+            used_history=False,
+            reasoning="first turn in session -- nothing to condense against",
+        )
+
+    history_text = _format_history(session)
+    return client.chat.completions.create(
+        model=model,
+        response_model=CondensationResult,
+        max_retries=2,
+        messages=[
+            {"role": "system", "content": CONDENSE_STATEMENT_SYSTEM_PROMPT},
+            {
+                "role": "user",
+                "content": f"Recent conversation:\n{history_text}\n\nNew update/note: {new_statement}",
+            },
+        ],
+    )
+
+
 def enrich_with_clarification(
     client: instructor.Instructor,
     model: str,

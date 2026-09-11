@@ -180,6 +180,71 @@ CREATE INDEX IF NOT EXISTS idx_commitment_status_commitment ON commitment_status
 CREATE INDEX IF NOT EXISTS idx_commitment_status_source_capture ON commitment_status_events (source_capture_id);
 
 -- ============================================================
+-- Preferences: enduring user habits/operational constraints -- distinct
+-- from declarative_facts (a fact is a ground truth ABOUT something in the
+-- world; a preference is a standing instruction about HOW the user wants
+-- things done, e.g. "always summarize in bullet points", "David prefers
+-- async updates over meetings"). entity_id is nullable because most
+-- preferences aren't about any one entity at all.
+--
+-- Supersession mirrors declarative_facts' pattern (is_active/
+-- superseded_by_id, same three-step write order enforced by the DB's own
+-- partial unique index below) but keyed on (entity_id, category) instead
+-- of (entity_id, attribute) -- and ONLY when both a resolved entity_id and
+-- an explicit category are present. A general preference with no entity
+-- and no category is simply appended each time rather than deduplicated,
+-- since there's no reliable key to group repeats under; see
+-- kivi/ingestion/writer.py's apply_structured_bundle for the exact rule.
+-- ============================================================
+CREATE TABLE IF NOT EXISTS preferences (
+    preference_id      TEXT PRIMARY KEY,
+    entity_id           TEXT REFERENCES entities(entity_id),   -- nullable: most preferences aren't entity-scoped
+    category             TEXT,                                  -- open text, e.g. 'formatting','workflow'; nullable
+    preference_text      TEXT NOT NULL,
+    is_active             INTEGER NOT NULL DEFAULT 1 CHECK (is_active IN (0, 1)),
+    superseded_by_id      TEXT REFERENCES preferences(preference_id),
+    source_capture_id     TEXT NOT NULL REFERENCES captures(capture_id),
+    deleted_at             TEXT,                                 -- NULL unless explicitly deleted (soft delete only)
+    created_at              TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Only enforceable as a hard uniqueness constraint when both keys are
+-- concrete (SQLite partial-unique-index predicates can't express "treat
+-- NULL entity_id as its own group" the way a plain UNIQUE constraint
+-- would want to) -- so this index protects the entity-scoped+categorized
+-- case, which is the only case apply_structured_bundle ever attempts to
+-- supersede rather than append.
+CREATE UNIQUE INDEX IF NOT EXISTS idx_one_active_preference_per_entity_category
+    ON preferences (entity_id, category)
+    WHERE is_active = 1 AND entity_id IS NOT NULL AND category IS NOT NULL;
+
+CREATE INDEX IF NOT EXISTS idx_preferences_entity ON preferences (entity_id);
+CREATE INDEX IF NOT EXISTS idx_preferences_source_capture ON preferences (source_capture_id);
+
+-- ============================================================
+-- Decision logs: one row per capture processed through triage+extraction,
+-- independent of whether it was memorized or rejected. This is what makes
+-- "why did/didn't this capture become memory" inspectable without having
+-- to diff captures.extraction_status/discard_reason against the
+-- facts/events/commitments/preferences tables by hand -- see
+-- kivi/ingestion/writer.py's log_decision().
+-- ============================================================
+CREATE TABLE IF NOT EXISTS decision_logs (
+    decision_log_id     TEXT PRIMARY KEY,
+    capture_id          TEXT NOT NULL REFERENCES captures(capture_id),
+    decision            TEXT NOT NULL CHECK (decision IN ('memorized', 'rejected')),
+    reason               TEXT,                 -- discard_reason when rejected; NULL when memorized
+    facts_created        INTEGER NOT NULL DEFAULT 0,
+    events_created        INTEGER NOT NULL DEFAULT 0,
+    commitments_created    INTEGER NOT NULL DEFAULT 0,
+    preferences_created     INTEGER NOT NULL DEFAULT 0,
+    latency_ms               REAL,             -- wall-clock time for this capture's triage+extraction+write
+    created_at                TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_decision_logs_capture ON decision_logs (capture_id);
+
+-- ============================================================
 -- Relationships: generic links between any two facts/events/commitments
 -- ============================================================
 CREATE TABLE IF NOT EXISTS relationships (
@@ -294,4 +359,16 @@ BEGIN
         new.entity_id,
         'commitment',
         new.commitment_id;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_index_preference AFTER INSERT ON preferences
+BEGIN
+    INSERT INTO unified_search (content, entity_id, source_type, source_id)
+    SELECT
+        COALESCE((SELECT canonical_name FROM entities WHERE entity_id = new.entity_id), '') || ' ' ||
+        COALESCE(new.category, '') || ' ' || new.preference_text || ' ' ||
+        COALESCE((SELECT foreground_app FROM captures WHERE capture_id = new.source_capture_id), ''),
+        new.entity_id,
+        'preference',
+        new.preference_id;
 END;

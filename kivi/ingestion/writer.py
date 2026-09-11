@@ -33,7 +33,7 @@ from dataclasses import dataclass, field
 
 from kivi.ingestion.entity_resolution import ResolutionResult, get_l1_context, resolve_entity
 from kivi.ingestion.vocab_log import VocabLogger
-from kivi.models.extraction import Commitment, ExtractionResult, Fact
+from kivi.models.extraction import Commitment, ExtractionResult, Fact, Preference
 
 
 @dataclass
@@ -45,6 +45,9 @@ class WriteSummary:
     commitments_created: int = 0
     commitment_status_changed: int = 0
     commitment_status_unchanged: int = 0
+    preferences_inserted: int = 0
+    preferences_superseded: int = 0
+    preferences_unchanged: int = 0
     relationships_resolved: int = 0
     relationships_skipped: int = 0
     entity_resolutions: list[ResolutionResult] = field(default_factory=list)
@@ -180,6 +183,110 @@ def _write_commitment(
     return commitment_id
 
 
+def _write_preference(
+    conn: sqlite3.Connection,
+    preference: Preference,
+    entity_id: str | None,
+    capture_id: str,
+    summary: WriteSummary,
+) -> str:
+    """Mirrors _write_fact's supersession discipline, but ONLY when both
+    entity_id and category are concrete -- matching db/schema.sql's partial
+    unique index (idx_one_active_preference_per_entity_category), which is
+    the only case the DB itself can enforce as a hard uniqueness
+    constraint. An unscoped preference (missing entity_id or category) has
+    no reliable dedup key, so it is always appended as a fresh row rather
+    than compared against anything existing."""
+    scoped = entity_id is not None and preference.category is not None
+
+    if scoped:
+        existing = conn.execute(
+            "SELECT * FROM preferences WHERE entity_id = ? AND category = ? AND is_active = 1",
+            (entity_id, preference.category),
+        ).fetchone()
+        if existing and existing["preference_text"] == preference.preference_text:
+            summary.preferences_unchanged += 1
+            return existing["preference_id"]
+    else:
+        existing = None
+
+    new_preference_id = f"pref_{uuid.uuid4().hex[:12]}"
+
+    if existing:
+        # Same ordering constraint as _write_fact: deactivate the old
+        # active row before inserting the new one, since the partial
+        # unique index is checked immediately, not deferred to commit.
+        conn.execute("UPDATE preferences SET is_active = 0 WHERE preference_id = ?", (existing["preference_id"],))
+
+    conn.execute(
+        """
+        INSERT INTO preferences
+            (preference_id, entity_id, category, preference_text, is_active, superseded_by_id, source_capture_id)
+        VALUES (?, ?, ?, ?, 1, NULL, ?)
+        """,
+        (new_preference_id, entity_id, preference.category, preference.preference_text, capture_id),
+    )
+
+    if existing:
+        conn.execute(
+            "UPDATE preferences SET superseded_by_id = ? WHERE preference_id = ?",
+            (new_preference_id, existing["preference_id"]),
+        )
+        summary.preferences_superseded += 1
+    else:
+        summary.preferences_inserted += 1
+
+    return new_preference_id
+
+
+def log_decision(
+    conn: sqlite3.Connection,
+    capture_id: str,
+    decision: str,
+    reason: str | None = None,
+    summary: "WriteSummary | None" = None,
+    latency_ms: float | None = None,
+) -> str:
+    """Records one row in decision_logs for a capture that has finished
+    processing, whether that ended in a pre-LLM triage rejection, a
+    model-decided rejection (extraction_status != 'processed'), or a
+    successful memorize. Called from the batch pipeline (pipeline.py) and
+    the synchronous /ingest route at every exit point. `summary` is the
+    WriteSummary from apply_extraction_result when one exists; omit it
+    (counts default to zero) for a pre-LLM triage rejection, which never
+    reaches extraction at all.
+
+    This is separate from captures.extraction_status/discard_reason --
+    that pair answers "what is this capture's current state," while
+    decision_logs answers "what did we decide and how much did it cost,"
+    which is what an auditor or a batch-run summary actually wants to
+    aggregate over. decision must be exactly 'memorized' or 'rejected',
+    matching db/schema.sql's CHECK constraint."""
+    if decision not in ("memorized", "rejected"):
+        raise ValueError(f"decision must be 'memorized' or 'rejected', got {decision!r}")
+    decision_log_id = f"dlog_{uuid.uuid4().hex[:12]}"
+    conn.execute(
+        """
+        INSERT INTO decision_logs
+            (decision_log_id, capture_id, decision, reason, facts_created, events_created,
+             commitments_created, preferences_created, latency_ms)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (
+            decision_log_id,
+            capture_id,
+            decision,
+            reason,
+            summary.facts_inserted if summary else 0,
+            summary.events_inserted if summary else 0,
+            summary.commitments_created if summary else 0,
+            summary.preferences_inserted if summary else 0,
+            latency_ms,
+        ),
+    )
+    return decision_log_id
+
+
 def apply_extraction_result(
     conn: sqlite3.Connection,
     capture_id: str,
@@ -248,6 +355,13 @@ def apply_extraction_result(
         entity_id = resolve(commitment.entity_mention, "general") if commitment.entity_mention else None
         commitment_id = _write_commitment(conn, commitment, entity_id, capture_id, summary)
         commitment_id_by_mention[commitment.commitment_mention] = commitment_id
+
+    # preferences -- entity_id resolved the same way as facts/commitments;
+    # scoped ones (entity + category) participate in supersession, unscoped
+    # ones are always appended (see _write_preference's own docstring)
+    for preference in result.preferences:
+        entity_id = resolve(preference.entity_mention, "general") if preference.entity_mention else None
+        _write_preference(conn, preference, entity_id, capture_id, summary)
 
     # relationships -- resolved only against mentions produced by this same
     # capture (see module docstring for why cross-capture resolution is

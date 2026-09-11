@@ -134,6 +134,45 @@ class Commitment(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# Preference
+# ---------------------------------------------------------------------------
+
+class Preference(BaseModel):
+    """An enduring habit or operational constraint -- HOW the user wants
+    something done, not a ground truth about the world (that's a Fact).
+    e.g. "always summarize in bullet points" (unscoped: no entity_mention,
+    no category), or "David prefers async updates over meetings"
+    (entity_mention='David', category='communication_style').
+
+    entity_mention/category are both optional together on purpose: a
+    general standing preference has neither. When BOTH are present, this
+    preference participates in supersession (see writer.py) the same way a
+    Fact does for (entity_id, attribute); when either is missing, it is
+    always appended fresh rather than deduplicated, since there is no
+    reliable key to group repeats under.
+    """
+
+    preference_text: str = Field(
+        ..., description="The standing instruction/habit itself, in the user's own terms."
+    )
+    entity_mention: Optional[str] = Field(
+        default=None, description="Entity this preference is scoped to, if any. Most preferences are unscoped."
+    )
+    category: Optional[str] = Field(
+        default=None, description="Free-text grouping, e.g. 'formatting', 'workflow', 'communication_style'."
+    )
+
+    @model_validator(mode="after")
+    def _category_requires_entity_or_is_general(self) -> "Preference":
+        # Deliberately NOT enforced as a hard requirement -- a category
+        # without an entity_mention is still meaningful (e.g. a general
+        # 'formatting' preference with category='formatting' but no
+        # specific entity). Left as a plain pass-through; kept as an
+        # explicit validator stub so a future stricter rule has a home.
+        return self
+
+
+# ---------------------------------------------------------------------------
 # Relationship
 # ---------------------------------------------------------------------------
 
@@ -168,7 +207,15 @@ class ExtractionResult(BaseModel):
     facts: list[Fact] = Field(default_factory=list)
     events: list[Event] = Field(default_factory=list)
     commitments: list[Commitment] = Field(default_factory=list)
+    preferences: list[Preference] = Field(default_factory=list)
     relationships: list[Relationship] = Field(default_factory=list)
+
+    # Metadata inferred by the extractor about the capture itself, distinct
+    # from the memory items above. Populated only when the source text
+    # explicitly names an application ("In Slack...", "From Chrome...") --
+    # see extractor.py's SYSTEM_PROMPT_TEMPLATE. None means "not stated,"
+    # never a guess.
+    inferred_foreground_app: Optional[str] = None
 
     @model_validator(mode="after")
     def _discard_reason_required_when_not_processed(self) -> "ExtractionResult":
@@ -179,11 +226,11 @@ class ExtractionResult(BaseModel):
     @model_validator(mode="after")
     def _no_content_leak_on_discard(self) -> "ExtractionResult":
         if self.extraction_status != "processed" and (
-            self.facts or self.events or self.commitments or self.relationships
+            self.facts or self.events or self.commitments or self.preferences or self.relationships
         ):
             raise ValueError(
                 "A capture with extraction_status != 'processed' must not carry any "
-                "facts/events/commitments/relationships -- a quarantined or discarded "
-                "capture must never leak content into active memory."
+                "facts/events/commitments/preferences/relationships -- a quarantined or "
+                "discarded capture must never leak content into active memory."
             )
         return self

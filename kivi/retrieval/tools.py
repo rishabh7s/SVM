@@ -47,13 +47,14 @@ from typing import Literal, Optional
 
 from kivi.ingestion.entity_resolution import get_l1_context, resolve_entity
 
-NodeType = Literal["entity", "fact", "event", "commitment"]
+NodeType = Literal["entity", "fact", "event", "commitment", "preference"]
 
 _PREFIX_TO_TYPE: dict[str, NodeType] = {
     "ent_": "entity",
     "fact_": "fact",
     "evt_": "event",
     "com_": "commitment",
+    "pref_": "preference",
 }
 
 
@@ -71,10 +72,20 @@ def _is_deleted(conn: sqlite3.Connection, node_type: str, node_id: str) -> bool:
     soft-delete column on these tables (db/schema.sql) -- there is no
     separate boolean is_deleted or deleted_reason column. Entities are
     never deletable through that operation, so always False for 'entity'."""
-    table = {"fact": "declarative_facts", "event": "episodic_events", "commitment": "commitments"}.get(node_type)
+    table = {
+        "fact": "declarative_facts",
+        "event": "episodic_events",
+        "commitment": "commitments",
+        "preference": "preferences",
+    }.get(node_type)
     if table is None:
         return False
-    id_col = {"fact": "fact_id", "event": "event_id", "commitment": "commitment_id"}[node_type]
+    id_col = {
+        "fact": "fact_id",
+        "event": "event_id",
+        "commitment": "commitment_id",
+        "preference": "preference_id",
+    }[node_type]
     row = conn.execute(f"SELECT deleted_at FROM {table} WHERE {id_col} = ?", (node_id,)).fetchone()
     return bool(row and row["deleted_at"] is not None)
 
@@ -226,6 +237,20 @@ def get_node_details(conn: sqlite3.Connection, node_id: str) -> dict:
             return {"error": f"no commitment found with id '{node_id}'"}
         return {"node_type": "commitment", **dict(row)}
 
+    if node_type == "preference":
+        row = conn.execute(
+            "SELECT p.preference_id, p.entity_id, p.category, p.preference_text, "
+            "       p.is_active, p.superseded_by_id, p.deleted_at, p.created_at, "
+            "       c.capture_id, c.captured_at, c.foreground_app, c.formatted_text "
+            "FROM preferences p "
+            "JOIN captures c ON c.capture_id = p.source_capture_id "
+            "WHERE p.preference_id = ?",
+            (node_id,),
+        ).fetchone()
+        if not row:
+            return {"error": f"no preference found with id '{node_id}'"}
+        return {"node_type": "preference", **dict(row)}
+
     return {"error": f"unhandled node_type: {node_type}"}  # unreachable given _PREFIX_TO_TYPE, kept defensive
 
 
@@ -252,6 +277,11 @@ def _snippet_for_node(conn: sqlite3.Connection, node_type: str, node_id: str) ->
             "SELECT commitment_mention FROM commitments WHERE commitment_id = ?", (node_id,)
         ).fetchone()
         return row["commitment_mention"] if row else None
+    if node_type == "preference":
+        row = conn.execute(
+            "SELECT preference_text FROM preferences WHERE preference_id = ?", (node_id,)
+        ).fetchone()
+        return row["preference_text"] if row else None
     return None
 
 
@@ -357,6 +387,32 @@ def get_node_history(conn: sqlite3.Connection, node_id: str) -> dict:
             (node_id,),
         ).fetchall()
         return {"node_type": "commitment", "history": [dict(r) for r in rows]}
+
+    if node_type == "preference":
+        anchor = conn.execute(
+            "SELECT entity_id, category FROM preferences WHERE preference_id = ?", (node_id,)
+        ).fetchone()
+        if not anchor:
+            return {"error": f"no preference found with id '{node_id}'"}
+        if anchor["entity_id"] is None or anchor["category"] is None:
+            # Unscoped preferences (no entity_id/category) are never
+            # superseded -- each is its own standalone row, mirroring
+            # kivi/ingestion/writer.py's append-only rule for that case --
+            # so "history" here is just this one row, not an error.
+            row = conn.execute(
+                "SELECT preference_id, preference_text, is_active, superseded_by_id, "
+                "       deleted_at, source_capture_id, created_at "
+                "FROM preferences WHERE preference_id = ?",
+                (node_id,),
+            ).fetchone()
+            return {"node_type": "preference", "history": [dict(row)]}
+        rows = conn.execute(
+            "SELECT preference_id, preference_text, is_active, superseded_by_id, "
+            "       deleted_at, source_capture_id, created_at "
+            "FROM preferences WHERE entity_id = ? AND category = ? ORDER BY created_at ASC",
+            (anchor["entity_id"], anchor["category"]),
+        ).fetchall()
+        return {"node_type": "preference", "history": [dict(r) for r in rows]}
 
     if node_type in ("event", "entity"):
         return {"node_type": node_type, "history": [], "note": f"{node_type} nodes are not versioned in this schema"}

@@ -37,14 +37,32 @@ Known entities already on file (snap a mention to one of these entity_id/canonic
 pairs whenever it clearly refers to the same thing, rather than treating it as new):
 {entity_context}
 
-Rules:
-- Set extraction_status to something other than 'processed' (and explain why in \
-discard_reason) if the content is casual chatter, a secret/credential, or clearly \
-truncated. In that case, facts/events/commitments/relationships must all be empty.
-- Never set a commitment's status to 'done' unless the user explicitly confirmed \
-completion in this capture -- hedged language stays 'open' or 'in_progress'.
-- A commitment with status 'blocked' must include a blocking_reason.
-- Only extract a relationship between two things this same capture actually mentions.
+Categories -- put each piece of durable signal in exactly one:
+- facts: a ground truth ABOUT something in the world (a budget, a role, a spec, a deadline).
+- events: something that happened, anchored in time.
+- commitments: something planned, promised, or owed.
+- preferences: an enduring HABIT or operational constraint about HOW the user wants things \
+done ("always summarize in bullet points", "David prefers async updates over meetings") -- \
+never a one-off fact. Only set entity_mention/category on a preference when the text actually \
+scopes it to a specific thing; a general standing instruction gets neither.
+
+Reject (set extraction_status to something other than 'processed', explain why in \
+discard_reason, and leave facts/events/commitments/preferences/relationships ALL empty) when \
+the content is:
+- transient small talk with no durable signal ("feeling tired", "grabbing coffee", casual chatter);
+- a counterfactual, hypothetical, or "what-if" musing ("Suppose the budget dropped...", \
+"What if Sarah leaves?") -- these describe a possibility, not something true or decided, and \
+must never be recorded as a fact or commitment;
+- a secret/credential, or clearly truncated.
+
+Never set a commitment's status to 'done' unless the user explicitly confirmed completion in \
+this capture -- hedged language stays 'open' or 'in_progress'. A commitment with status \
+'blocked' must include a blocking_reason. Only extract a relationship between two things this \
+same capture actually mentions.
+
+inferred_foreground_app: set this ONLY if the text itself explicitly names an application \
+("In Slack...", "From Chrome...", "this Notion doc"). If no application is named in the text, \
+leave it null -- never guess or infer one from context, tone, or subject matter.
 """
 
 

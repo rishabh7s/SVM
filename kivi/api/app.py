@@ -26,10 +26,10 @@ from kivi.api.session_store import SESSION_STORE, PendingClarification
 from kivi.ingestion.extractor import ExtractionFailed, extract_capture
 from kivi.ingestion.triage import triage
 from kivi.ingestion.vocab_log import VocabLogger
-from kivi.ingestion.writer import apply_extraction_result
+from kivi.ingestion.writer import apply_extraction_result, log_decision
 from kivi.llm import LIGHT_MODEL, RETRIEVAL_MODEL, get_client
 from kivi.retrieval import agent as agent_module
-from kivi.retrieval.condensation import condense_query, enrich_with_clarification
+from kivi.retrieval.condensation import condense_query, condense_statement, enrich_with_clarification
 from kivi.retrieval.tools import get_node_details
 
 DB_PATH = Path(__file__).resolve().parents[2] / "db" / "kivi.db"
@@ -145,6 +145,18 @@ class IngestRequest(BaseModel):
             "the truth about whether a record came from external content or an in-app edit."
         ),
     )
+    session_id: Optional[str] = Field(
+        default=None,
+        description=(
+            "Optional. When given and that session already has turns (from prior /query calls "
+            "or prior /ingest calls in the same session), `content` is run through a "
+            "declarative-preserving condensation pass (kivi.retrieval.condensation."
+            "condense_statement) before extraction, so an implicit update like 'Update the "
+            "budget to $400k' right after a conversation about Project Meridian resolves to "
+            "'Update Project Meridian's budget to $400,000'. Omit for a fully self-contained "
+            "note with no conversational context to resolve against."
+        ),
+    )
 
 
 class IngestResponse(BaseModel):
@@ -158,10 +170,19 @@ class IngestResponse(BaseModel):
     commitments_created: int = 0
     commitment_status_changed: int = 0
     commitment_status_unchanged: int = 0
+    preferences_inserted: int = 0
+    preferences_superseded: int = 0
+    preferences_unchanged: int = 0
     relationships_resolved: int = 0
     relationships_skipped: int = 0
     entity_resolutions: list[dict[str, Any]] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
+    condensed_content: Optional[str] = Field(
+        default=None,
+        description="What was actually sent to extraction, if condensation ran and changed it "
+        "(session_id given, session had prior turns, and used_history was true). None otherwise "
+        "-- absence means 'content' was used exactly as given.",
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -239,6 +260,32 @@ def ingest(body: IngestRequest) -> IngestResponse:
     window_title = metadata.get("window_title")
     source_modality = body.source_type or "selected_text"
 
+    # Flow 1 ("Put Info"): if a session_id is given AND that session already
+    # has turns, resolve implicit references (e.g. "Update the budget to
+    # $400k" right after a chat about Project Meridian) into a standalone
+    # declarative statement BEFORE extraction -- using condense_statement,
+    # never condense_query, so the rewrite can never drift into a question.
+    # A session with no turns yet, or no session_id at all, ingests
+    # body.content exactly as given (condense_statement's own no-history
+    # short-circuit makes this a no-op call, but we skip the call entirely
+    # when there's no session_id to avoid depending on GEMINI_API_KEY for
+    # ingestion that doesn't need it).
+    resolved_content = body.content
+    condensed_content_for_response: Optional[str] = None
+    if body.session_id:
+        session = SESSION_STORE.get_or_create(body.session_id)
+        if session.turns:
+            condensation_client = get_client()
+            condensation_result = condense_statement(condensation_client, LIGHT_MODEL, session, body.content)
+            if condensation_result.used_history:
+                resolved_content = condensation_result.standalone_query
+                condensed_content_for_response = resolved_content
+        # Record this ingestion as a turn too, so a /query in the same
+        # session moments later can resolve references against it (e.g.
+        # asking "what's its budget now?" right after this Put Info call).
+        session.add_turn("user", resolved_content)
+        SESSION_STORE.save(session)
+
     conn = get_db()
     try:
         existing = conn.execute("SELECT 1 FROM captures WHERE capture_id = ?", (capture_id,)).fetchone()
@@ -250,26 +297,30 @@ def ingest(body: IngestRequest) -> IngestResponse:
             "(capture_id, raw_asr_text, formatted_text, source_modality, foreground_app, window_title, "
             " captured_at, extraction_status) "
             "VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')",
-            (capture_id, body.content, body.content, source_modality, foreground_app, window_title, captured_at),
+            (capture_id, body.content, resolved_content, source_modality, foreground_app, window_title, captured_at),
         )
         conn.commit()
 
         # --- Pre-LLM triage, identical to the batch pipeline: a flagged
         # secret is quarantined directly with NO extraction call, so it
         # never leaves the machine at all. ---
-        triage_result = triage(body.content, body.content)
+        triage_result = triage(body.content, resolved_content)
         if triage_result.flagged:
             discard_reason = f"pre-LLM triage: {triage_result.reason}"
             conn.execute(
                 "UPDATE captures SET extraction_status = 'pii_detected', discard_reason = ? WHERE capture_id = ?",
                 (discard_reason, capture_id),
             )
+            log_decision(conn, capture_id, "rejected", reason=discard_reason)
             conn.commit()
-            return IngestResponse(capture_id=capture_id, extraction_status="pii_detected", discard_reason=discard_reason)
+            return IngestResponse(
+                capture_id=capture_id, extraction_status="pii_detected", discard_reason=discard_reason,
+                condensed_content=condensed_content_for_response,
+            )
 
         client = get_client()  # raises RuntimeError -> FastAPI 500 if GEMINI_API_KEY is missing
         try:
-            result = extract_capture(conn, client, capture_id, body.content, body.content, captured_at)
+            result = extract_capture(conn, client, capture_id, body.content, resolved_content, captured_at)
         except ExtractionFailed as e:
             conn.rollback()
             discard_reason = f"extraction failed after retries: {e.underlying}"
@@ -277,9 +328,11 @@ def ingest(body: IngestRequest) -> IngestResponse:
                 "UPDATE captures SET extraction_status = 'incomplete_capture', discard_reason = ? WHERE capture_id = ?",
                 (discard_reason, capture_id),
             )
+            log_decision(conn, capture_id, "rejected", reason=discard_reason)
             conn.commit()
             return IngestResponse(
-                capture_id=capture_id, extraction_status="incomplete_capture", discard_reason=discard_reason
+                capture_id=capture_id, extraction_status="incomplete_capture", discard_reason=discard_reason,
+                condensed_content=condensed_content_for_response,
             )
 
         vocab_logger = VocabLogger()
@@ -288,6 +341,11 @@ def ingest(body: IngestRequest) -> IngestResponse:
         conn.execute(
             "UPDATE captures SET extraction_status = ?, discard_reason = ? WHERE capture_id = ?",
             (result.extraction_status, result.discard_reason, capture_id),
+        )
+        log_decision(
+            conn, capture_id, "memorized" if result.extraction_status == "processed" else "rejected",
+            reason=None if result.extraction_status == "processed" else result.discard_reason,
+            summary=summary,
         )
         conn.commit()
 
@@ -302,6 +360,9 @@ def ingest(body: IngestRequest) -> IngestResponse:
             commitments_created=summary.commitments_created,
             commitment_status_changed=summary.commitment_status_changed,
             commitment_status_unchanged=summary.commitment_status_unchanged,
+            preferences_inserted=summary.preferences_inserted,
+            preferences_superseded=summary.preferences_superseded,
+            preferences_unchanged=summary.preferences_unchanged,
             relationships_resolved=summary.relationships_resolved,
             relationships_skipped=summary.relationships_skipped,
             entity_resolutions=[
@@ -309,6 +370,7 @@ def ingest(body: IngestRequest) -> IngestResponse:
                 for r in summary.entity_resolutions
             ],
             warnings=summary.warnings,
+            condensed_content=condensed_content_for_response,
         )
     except HTTPException:
         raise

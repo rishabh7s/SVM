@@ -1,0 +1,4502 @@
+[
+  {
+    "capture_id": "cap_0001",
+    "captured_at": "2026-01-06T00:45:27Z",
+    "source_modality": "speech",
+    "raw_asr_text": "someone should probably look at the onboarding flow soon-ish",
+    "formatted_text": "Someone should probably look at the onboarding flow soon-ish.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0002",
+    "captured_at": "2026-01-06T16:22:24Z",
+    "source_modality": "speech",
+    "raw_asr_text": "according you know to yara haddad the budget for the talon onboarding flow got cut by fifteen percent",
+    "formatted_text": "According to Yara Haddad, the budget for the Talon onboarding flow got cut by fifteen percent.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0003",
+    "captured_at": "2026-01-06T17:56:22Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i prefer tabs so over spaces for this codebase",
+    "formatted_text": "I prefer tabs over spaces for this codebase.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0004",
+    "captured_at": "2026-01-08T09:08:54Z",
+    "source_modality": "speech",
+    "raw_asr_text": "for the uh quokka mobile app use two-space indentation in the config files",
+    "formatted_text": "For the Quokka mobile app, use two-space indentation in the config files.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0005",
+    "captured_at": "2026-01-08T17:22:34Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hana Sato: decision from today's sync — we're moving the Quokka mobile app to Retool starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0006",
+    "captured_at": "2026-01-08T23:35:25Z",
+    "source_modality": "speech",
+    "raw_asr_text": "default actually to metric units in all the reports going forward",
+    "formatted_text": "Default to metric units in all the reports going forward.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0007",
+    "captured_at": "2026-01-09T02:09:09Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Talon onboarding flow scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0008",
+    "captured_at": "2026-01-10T11:50:41Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "the Beacon analytics pipeline — Status: In Progress. Owner: Yara Haddad. Target date: end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0009",
+    "captured_at": "2026-01-12T16:46:41Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Ben Okafor: budget approved for the Helix migration — $72,400 total, effective this sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0010",
+    "captured_at": "2026-01-14T12:56:25Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we hit a like major bug in the compass redesign where the sync job duplicates records",
+    "formatted_text": "We hit a major bug in the Compass redesign where the sync job duplicates records.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0011",
+    "captured_at": "2026-01-15T14:36:33Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi still blocked i mean on the beacon analytics pipeline because we're waiting on vendor access from ridgeline data",
+    "formatted_text": "Still blocked on the Beacon analytics pipeline because we're waiting on vendor access from Ridgeline Data.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0012",
+    "captured_at": "2026-01-15T15:31:47Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi actually scratch actually that the the nimbus dashboard deadline moved to next wednesday not friday",
+    "formatted_text": "Actually scratch that, the the Nimbus dashboard deadline moved to next wednesday, not friday.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0013",
+    "captured_at": "2026-01-15T16:14:47Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0014",
+    "captured_at": "2026-01-16T14:47:41Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Ravi Menon: can you own the migration doc for the Atlas redesign? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0015",
+    "captured_at": "2026-01-17T09:13:13Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Kestrel Analytics about the overdue invoice for the Beacon analytics pipeline.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0016",
+    "captured_at": "2026-01-17T13:49:44Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright yeah so um okay never mind",
+    "formatted_text": "Yeah so um okay never mind.",
+    "foreground_app": "Chrome",
+    "window_title": "Linear - Backlog"
+  },
+  {
+    "capture_id": "cap_0017",
+    "captured_at": "2026-01-17T15:07:02Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Sofia Conti: decision from today's sync — we're moving the Beacon analytics pipeline to Figma starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0018",
+    "captured_at": "2026-01-17T15:52:10Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Fenwick integration scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0019",
+    "captured_at": "2026-01-18T09:20:18Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay never mind i mean what i said earlier about the talon onboarding flow the launch is back on track",
+    "formatted_text": "Never mind what I said earlier about the Talon onboarding flow, the launch is back on track.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0020",
+    "captured_at": "2026-01-18T10:58:47Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Sam Okoye: budget approved for the Ember backend — $72,400 total, effective this sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0021",
+    "captured_at": "2026-01-19T14:12:19Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the cascade rollout needs to launch by end of quarter that's a hard deadline from leadership",
+    "formatted_text": "The Cascade rollout needs to launch by end of quarter, that's a hard deadline from leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0022",
+    "captured_at": "2026-01-19T17:49:55Z",
+    "source_modality": "speech",
+    "raw_asr_text": "still blocked on like the cascade rollout because we're waiting on vendor access from glasswing consulting",
+    "formatted_text": "Still blocked on the Cascade rollout because we're waiting on vendor access from Glasswing Consulting.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0023",
+    "captured_at": "2026-01-20T10:12:10Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi okay recap felix basically nowak owns the ember backend the deadline is before the client call we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team before the client call",
+    "formatted_text": "Okay recap: Felix Nowak owns the Ember backend, the deadline is before the client call, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team before the client call.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0024",
+    "captured_at": "2026-01-20T14:34:58Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright we decided to you know postpone the the marigold campaign launch after the client raised concerns about scope",
+    "formatted_text": "We decided to postpone the the Marigold campaign launch after the client raised concerns about scope.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0025",
+    "captured_at": "2026-01-20T15:49:51Z",
+    "source_modality": "speech",
+    "raw_asr_text": "please schedule okay so my focus blocks in the morning not after lunch",
+    "formatted_text": "Please schedule my focus blocks in the morning, not after lunch.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0026",
+    "captured_at": "2026-01-21T15:44:24Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the budget for the helix migration is roughly eighty five thousand",
+    "formatted_text": "The budget for the Helix migration is roughly eighty five thousand.",
+    "foreground_app": "Chrome",
+    "window_title": "Linear - Backlog"
+  },
+  {
+    "capture_id": "cap_0027",
+    "captured_at": "2026-01-22T16:28:34Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so just finished the migration steps for project solstice marking that as done",
+    "formatted_text": "Just finished the migration steps for Project Solstice, marking that as done.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0028",
+    "captured_at": "2026-01-22T22:39:46Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Felix Nowak: budget approved for the Helix migration — $72,400 total, effective this sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0029",
+    "captured_at": "2026-01-23T02:40:58Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright actually you know scratch that the northwind api deadline moved to next wednesday not friday",
+    "formatted_text": "Actually scratch that, the Northwind API deadline moved to next wednesday, not friday.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0030",
+    "captured_at": "2026-01-23T15:13:08Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Marco Diaz: decision from today's sync — we're moving the Compass redesign to Slack starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0031",
+    "captured_at": "2026-01-24T12:25:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the team agreed to switch project solstice over to asana after the client raised concerns about scope",
+    "formatted_text": "The team agreed to switch Project Solstice over to Asana after the client raised concerns about scope.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0032",
+    "captured_at": "2026-01-24T14:43:12Z",
+    "source_modality": "speech",
+    "raw_asr_text": "someone should probably look at the onboarding flow soon-ish",
+    "formatted_text": "Someone should probably look at the onboarding flow soon-ish.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0033",
+    "captured_at": "2026-01-25T02:00:25Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Cascade rollout scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0034",
+    "captured_at": "2026-01-25T10:39:53Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hi team, confirming that the Glasswing Consulting contract renews on the 30th at $18,500/year, a 6% increase from last cycle.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0035",
+    "captured_at": "2026-01-25T16:56:24Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i need to finish the draft proposal for the helix migration tomorrow morning",
+    "formatted_text": "I need to finish the draft proposal for the Helix migration tomorrow morning.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0036",
+    "captured_at": "2026-01-26T13:13:07Z",
+    "source_modality": "speech",
+    "raw_asr_text": "testing one two three",
+    "formatted_text": "Testing one two three.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0037",
+    "captured_at": "2026-01-26T14:01:19Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi actually you know the quokka mobile app is done i confirmed it shipped this morning",
+    "formatted_text": "Actually the Quokka mobile app is done, I confirmed it shipped this morning.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0038",
+    "captured_at": "2026-01-27T15:07:38Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i need basically to finish the draft proposal for the marigold campaign by the fifteenth",
+    "formatted_text": "I need to finish the draft proposal for the Marigold campaign by the fifteenth.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0039",
+    "captured_at": "2026-01-28T09:25:20Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: Project Solstice scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0040",
+    "captured_at": "2026-01-30T12:16:33Z",
+    "source_modality": "speech",
+    "raw_asr_text": "according you know to ben okafor the budget for the marigold campaign got cut by fifteen percent",
+    "formatted_text": "According to Ben Okafor, the budget for the Marigold campaign got cut by fifteen percent.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0041",
+    "captured_at": "2026-01-30T15:49:00Z",
+    "source_modality": "speech",
+    "raw_asr_text": "actually scratch uh that the the nimbus dashboard deadline moved to next wednesday not friday",
+    "formatted_text": "Actually scratch that, the the Nimbus dashboard deadline moved to next wednesday, not friday.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0042",
+    "captured_at": "2026-01-30T16:31:08Z",
+    "source_modality": "speech",
+    "raw_asr_text": "sam okoye like mentioned that harborlight design is raising their rates next renewal",
+    "formatted_text": "Sam Okoye mentioned that Harborlight Design is raising their rates next renewal.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0043",
+    "captured_at": "2026-01-30T18:14:29Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "the Atlas redesign — Status: In Progress. Owner: Owen Barrett. Target date: end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0044",
+    "captured_at": "2026-01-31T18:39:37Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0045",
+    "captured_at": "2026-02-01T03:18:18Z",
+    "source_modality": "speech",
+    "raw_asr_text": "please okay so schedule my focus blocks in the morning not after lunch",
+    "formatted_text": "Please schedule my focus blocks in the morning, not after lunch.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0046",
+    "captured_at": "2026-02-01T12:26:36Z",
+    "source_modality": "speech",
+    "raw_asr_text": "uh hold on let me find the doc",
+    "formatted_text": "Uh hold on let me find the doc.",
+    "foreground_app": "Obsidian",
+    "window_title": "daily-2026-08-10.md - Obsidian"
+  },
+  {
+    "capture_id": "cap_0047",
+    "captured_at": "2026-02-01T18:34:59Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi remind me i mean to follow up with jasmine cole about the marigold campaign before the client call",
+    "formatted_text": "Remind me to follow up with Jasmine Cole about the Marigold campaign before the client call.",
+    "foreground_app": "Google Meet",
+    "window_title": "Design Review - Google Meet"
+  },
+  {
+    "capture_id": "cap_0048",
+    "captured_at": "2026-02-02T09:19:59Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Nadia Petrov: decision from today's sync — we're moving the Atlas redesign to Linear starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0049",
+    "captured_at": "2026-02-03T09:51:45Z",
+    "source_modality": "speech",
+    "raw_asr_text": "ran into actually an outage on project driftwood this morning root cause still unclear",
+    "formatted_text": "Ran into an outage on Project Driftwood this morning, root cause still unclear.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0050",
+    "captured_at": "2026-02-03T09:54:26Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so wait no i like meant lena fischer is the owner for project driftwood not the other person i mentioned earlier",
+    "formatted_text": "Wait no, I meant Lena Fischer is the owner for Project Driftwood, not the other person I mentioned earlier.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0051",
+    "captured_at": "2026-02-03T11:50:27Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for the Beacon analytics pipeline pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0052",
+    "captured_at": "2026-02-04T13:12:37Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the you know talon onboarding flow needs to launch by next wednesday that's a hard deadline from leadership",
+    "formatted_text": "The Talon onboarding flow needs to launch by next wednesday, that's a hard deadline from leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0053",
+    "captured_at": "2026-02-04T17:45:15Z",
+    "source_modality": "speech",
+    "raw_asr_text": "for actually northwind api use two-space indentation in the config files",
+    "formatted_text": "For Northwind API, use two-space indentation in the config files.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0054",
+    "captured_at": "2026-02-04T18:01:39Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so could be basically worth checking on that later not urgent though",
+    "formatted_text": "Could be worth checking on that later, not urgent though.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0055",
+    "captured_at": "2026-02-05T12:35:34Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay recap aroha ngata owns the beacon analytics pipeline the deadline is by end of quarter we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team by end of quarter",
+    "formatted_text": "Okay recap: Aroha Ngata owns the Beacon analytics pipeline, the deadline is by end of quarter, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team by end of quarter.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0056",
+    "captured_at": "2026-02-05T14:02:18Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi okay that's not like what i meant to say disregard",
+    "formatted_text": "Okay that's not what I meant to say, disregard.",
+    "foreground_app": "Calendar",
+    "window_title": "Sprint Planning - Calendar"
+  },
+  {
+    "capture_id": "cap_0057",
+    "captured_at": "2026-02-05T15:36:27Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi here's the temp password for the staging box hunter two exclamation mark please don't share it",
+    "formatted_text": "Here's the temp password for the staging box: hunter two exclamation mark, please don't share it.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0058",
+    "captured_at": "2026-02-05T18:03:06Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Note to self: Lena Fischer is the point of contact for the Talon onboarding flow, not Idris Bello.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0059",
+    "captured_at": "2026-02-06T08:37:04Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we decided like to postpone the the compass redesign launch because of the payment gateway bug",
+    "formatted_text": "We decided to postpone the the Compass redesign launch because of the payment gateway bug.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0060",
+    "captured_at": "2026-02-06T11:32:45Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Reminder — Project Solstice retro is now Thursday instead of Wednesday.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0061",
+    "captured_at": "2026-02-06T12:18:15Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i uh promised priya raman i'd have the report ready by the fifteenth",
+    "formatted_text": "I promised Priya Raman I'd have the report ready by the fifteenth.",
+    "foreground_app": "Google Meet",
+    "window_title": "Design Review - Google Meet"
+  },
+  {
+    "capture_id": "cap_0062",
+    "captured_at": "2026-02-06T16:16:58Z",
+    "source_modality": "speech",
+    "raw_asr_text": "yeah so uh um okay never mind",
+    "formatted_text": "Yeah so um okay never mind.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0063",
+    "captured_at": "2026-02-07T15:45:24Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we onboarded like close to two hundred new users for the trellis rewrite last month",
+    "formatted_text": "We onboarded close to two hundred new users for the Trellis rewrite last month.",
+    "foreground_app": "Chrome",
+    "window_title": "Linear - Backlog"
+  },
+  {
+    "capture_id": "cap_0064",
+    "captured_at": "2026-02-07T16:51:00Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0065",
+    "captured_at": "2026-02-07T17:15:17Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay that's not what i meant to say disregard",
+    "formatted_text": "Okay that's not what I meant to say, disregard.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0066",
+    "captured_at": "2026-02-08T01:26:01Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for the Ember backend pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0067",
+    "captured_at": "2026-02-08T10:37:26Z",
+    "source_modality": "speech",
+    "raw_asr_text": "ran into an outage on the atlas redesign this morning root cause still unclear",
+    "formatted_text": "Ran into an outage on the Atlas redesign this morning, root cause still unclear.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0068",
+    "captured_at": "2026-02-08T13:46:36Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Claire Dubois: decision from today's sync — we're moving the Beacon analytics pipeline to Linear starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0069",
+    "captured_at": "2026-02-09T08:02:16Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Felix Nowak: decision from today's sync — we're moving the Helix migration to Figma starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0070",
+    "captured_at": "2026-02-09T18:13:41Z",
+    "source_modality": "speech",
+    "raw_asr_text": "maybe i should look into that vendor thing at some point",
+    "formatted_text": "Maybe I should look into that vendor thing at some point.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0071",
+    "captured_at": "2026-02-09T18:47:01Z",
+    "source_modality": "speech",
+    "raw_asr_text": "according to sofia you know conti the budget for project solstice got cut by fifteen percent",
+    "formatted_text": "According to Sofia Conti, the budget for Project Solstice got cut by fifteen percent.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0072",
+    "captured_at": "2026-02-09T22:49:56Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the budget basically for the beacon analytics pipeline is about a dozen",
+    "formatted_text": "The budget for the Beacon analytics pipeline is about a dozen.",
+    "foreground_app": "Chrome",
+    "window_title": "Notion - Roadmap"
+  },
+  {
+    "capture_id": "cap_0073",
+    "captured_at": "2026-02-10T14:29:16Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Struck the wrong owner name from the doc — Tom Alder owns this now.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0074",
+    "captured_at": "2026-02-11T10:54:12Z",
+    "source_modality": "speech",
+    "raw_asr_text": "still blocked i mean on project solstice because we're waiting on vendor access from vertex cloud",
+    "formatted_text": "Still blocked on Project Solstice because we're waiting on vendor access from Vertex Cloud.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0075",
+    "captured_at": "2026-02-11T13:08:12Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright could be worth checking on that later not urgent though",
+    "formatted_text": "Could be worth checking on that later, not urgent though.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0076",
+    "captured_at": "2026-02-11T13:15:51Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay here's actually the temp password for the staging box hunter two exclamation mark please don't share it",
+    "formatted_text": "Here's the temp password for the staging box: hunter two exclamation mark, please don't share it.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0077",
+    "captured_at": "2026-02-11T15:37:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "maybe i basically should look into that vendor thing at some point",
+    "formatted_text": "Maybe I should look into that vendor thing at some point.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0078",
+    "captured_at": "2026-02-12T18:56:54Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "the Nimbus dashboard — Status: In Progress. Owner: Nadia Petrov. Target date: end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0079",
+    "captured_at": "2026-02-13T13:17:56Z",
+    "source_modality": "speech",
+    "raw_asr_text": "never mind what actually i said earlier about the compass redesign the launch is back on track",
+    "formatted_text": "Never mind what I said earlier about the Compass redesign, the launch is back on track.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0080",
+    "captured_at": "2026-02-13T15:22:49Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i'll send i mean aiko tanaka the updated timeline for the nimbus dashboard by end of month",
+    "formatted_text": "I'll send Aiko Tanaka the updated timeline for the Nimbus dashboard by end of month.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0081",
+    "captured_at": "2026-02-13T15:54:45Z",
+    "source_modality": "speech",
+    "raw_asr_text": "just finished the migration steps for the talon onboarding flow marking that as done",
+    "formatted_text": "Just finished the migration steps for the Talon onboarding flow, marking that as done.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0082",
+    "captured_at": "2026-02-14T08:42:18Z",
+    "source_modality": "speech",
+    "raw_asr_text": "maybe i should look into that vendor thing at some point",
+    "formatted_text": "Maybe I should look into that vendor thing at some point.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0083",
+    "captured_at": "2026-02-14T10:40:58Z",
+    "source_modality": "speech",
+    "raw_asr_text": "started working on so the talon onboarding flow today should be in progress through next week",
+    "formatted_text": "Started working on the Talon onboarding flow today, should be in progress through next week.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0084",
+    "captured_at": "2026-02-14T12:54:28Z",
+    "source_modality": "speech",
+    "raw_asr_text": "still blocked on um the nimbus dashboard because we're waiting on vendor access from kestrel analytics",
+    "formatted_text": "Still blocked on the Nimbus dashboard because we're waiting on vendor access from Kestrel Analytics.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0085",
+    "captured_at": "2026-02-15T21:27:55Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: Northwind API is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0086",
+    "captured_at": "2026-02-16T10:42:01Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Yara Haddad will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0087",
+    "captured_at": "2026-02-20T18:41:22Z",
+    "source_modality": "speech",
+    "raw_asr_text": "",
+    "formatted_text": "...",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0088",
+    "captured_at": "2026-02-21T13:35:39Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi still blocked on actually the marigold campaign because we're waiting on vendor access from harborlight design",
+    "formatted_text": "Still blocked on the Marigold campaign because we're waiting on vendor access from Harborlight Design.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0089",
+    "captured_at": "2026-02-21T15:02:26Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Ben Okafor: decision from today's sync — we're moving the Compass redesign to Confluence starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0090",
+    "captured_at": "2026-02-21T18:16:41Z",
+    "source_modality": "speech",
+    "raw_asr_text": "please schedule my focus blocks in the morning not after lunch",
+    "formatted_text": "Please schedule my focus blocks in the morning, not after lunch.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0091",
+    "captured_at": "2026-02-23T05:41:44Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the i mean helix migration conversion rate came in at twelve percent",
+    "formatted_text": "The Helix migration conversion rate came in at twelve percent.",
+    "foreground_app": "Chrome",
+    "window_title": "Northwind API Docs - Chrome"
+  },
+  {
+    "capture_id": "cap_0092",
+    "captured_at": "2026-02-24T16:31:32Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the deadline for so the talon onboarding flow is in two weeks",
+    "formatted_text": "The deadline for the Talon onboarding flow is in two weeks.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0093",
+    "captured_at": "2026-02-25T08:05:50Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the helix migration needs to launch by end of quarter that's a hard deadline from leadership",
+    "formatted_text": "The Helix migration needs to launch by end of quarter, that's a hard deadline from leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0094",
+    "captured_at": "2026-02-25T10:35:28Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i need to finish the draft proposal for the talon onboarding flow in two weeks",
+    "formatted_text": "I need to finish the draft proposal for the Talon onboarding flow in two weeks.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0095",
+    "captured_at": "2026-02-25T12:17:22Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the like team agreed to switch the compass redesign over to airtable after the client raised concerns about scope",
+    "formatted_text": "The team agreed to switch the Compass redesign over to Airtable after the client raised concerns about scope.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0096",
+    "captured_at": "2026-02-26T15:33:49Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Beacon analytics pipeline scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0097",
+    "captured_at": "2026-02-27T14:24:41Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: the Talon onboarding flow is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0098",
+    "captured_at": "2026-02-28T16:26:02Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay recap jasmine cole owns the marigold campaign the deadline is before the client call we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team before the client call",
+    "formatted_text": "Okay recap: Jasmine Cole owns the Marigold campaign, the deadline is before the client call, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team before the client call.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0099",
+    "captured_at": "2026-03-01T10:56:45Z",
+    "source_modality": "speech",
+    "raw_asr_text": "still um blocked on the fenwick integration because we're waiting on vendor access from anchorpoint legal",
+    "formatted_text": "Still blocked on the Fenwick integration because we're waiting on vendor access from Anchorpoint Legal.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0100",
+    "captured_at": "2026-03-02T09:27:20Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi let's get you know the the nimbus dashboard spec reviewed by end of quarter",
+    "formatted_text": "Let's get the the Nimbus dashboard spec reviewed by end of quarter.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0101",
+    "captured_at": "2026-03-03T12:52:55Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Meiling Zhou: can you own the migration doc for the Nimbus dashboard? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0102",
+    "captured_at": "2026-03-04T17:20:42Z",
+    "source_modality": "speech",
+    "raw_asr_text": "yeah so um okay never mind",
+    "formatted_text": "Yeah so um okay never mind.",
+    "foreground_app": null,
+    "window_title": null
+  },
+  {
+    "capture_id": "cap_0103",
+    "captured_at": "2026-03-05T09:14:53Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright the nimbus um dashboard deploy failed twice today because of a stale cache issue",
+    "formatted_text": "The Nimbus dashboard deploy failed twice today because of a stale cache issue.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0104",
+    "captured_at": "2026-03-05T11:34:38Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright we hit a i mean major bug in the cascade rollout where the sync job duplicates records",
+    "formatted_text": "We hit a major bug in the Cascade rollout where the sync job duplicates records.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0105",
+    "captured_at": "2026-03-05T17:47:34Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we decided to postpone the the nimbus dashboard launch given the budget constraints this quarter",
+    "formatted_text": "We decided to postpone the the Nimbus dashboard launch given the budget constraints this quarter.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0106",
+    "captured_at": "2026-03-07T15:40:08Z",
+    "source_modality": "speech",
+    "raw_asr_text": "actually scratch that the the beacon analytics pipeline deadline moved to next wednesday not friday",
+    "formatted_text": "Actually scratch that, the the Beacon analytics pipeline deadline moved to next wednesday, not friday.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0107",
+    "captured_at": "2026-03-07T18:51:22Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "the Ember backend — Status: In Progress. Owner: Tom Alder. Target date: end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0108",
+    "captured_at": "2026-03-08T16:43:50Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so ran into an outage on northwind api this morning root cause still unclear",
+    "formatted_text": "Ran into an outage on Northwind API this morning, root cause still unclear.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0109",
+    "captured_at": "2026-03-09T06:29:29Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright yeah so um okay never mind",
+    "formatted_text": "Yeah so um okay never mind.",
+    "foreground_app": "Figma",
+    "window_title": "Atlas Redesign - Figma"
+  },
+  {
+    "capture_id": "cap_0110",
+    "captured_at": "2026-03-09T14:24:25Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Reminder — the Beacon analytics pipeline retro is now Thursday instead of Wednesday.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0111",
+    "captured_at": "2026-03-09T17:08:45Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for the Talon onboarding flow pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0112",
+    "captured_at": "2026-03-10T14:53:07Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Meridian Logistics about the overdue invoice for Project Solstice.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0113",
+    "captured_at": "2026-03-11T10:31:10Z",
+    "source_modality": "speech",
+    "raw_asr_text": "correction — the budget for the trellis rewrite is sixty thousand not forty thousand",
+    "formatted_text": "Correction — the budget for the Trellis rewrite is sixty thousand, not forty thousand.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0114",
+    "captured_at": "2026-03-12T14:24:38Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Struck the wrong owner name from the doc — Marco Diaz owns this now.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0115",
+    "captured_at": "2026-03-13T15:39:55Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Aiko Tanaka: heads up, Northwind API is now blocked on the Anchorpoint Legal API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0116",
+    "captured_at": "2026-03-13T16:41:11Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Compass redesign scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0117",
+    "captured_at": "2026-03-13T17:06:48Z",
+    "source_modality": "speech",
+    "raw_asr_text": "leadership actually decided to deprioritize the trellis rewrite given the budget constraints this quarter",
+    "formatted_text": "Leadership decided to deprioritize the Trellis rewrite given the budget constraints this quarter.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0118",
+    "captured_at": "2026-03-14T02:49:11Z",
+    "source_modality": "speech",
+    "raw_asr_text": "according to ravi menon the budget for the ember backend got cut by fifteen percent",
+    "formatted_text": "According to Ravi Menon, the budget for the Ember backend got cut by fifteen percent.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0119",
+    "captured_at": "2026-03-14T10:08:18Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: Project Solstice scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0120",
+    "captured_at": "2026-03-14T13:01:19Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright someone should probably look at the onboarding flow soon-ish",
+    "formatted_text": "Someone should probably look at the onboarding flow soon-ish.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0121",
+    "captured_at": "2026-03-14T14:21:34Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Felix Nowak will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0122",
+    "captured_at": "2026-03-15T06:02:45Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we decided to postpone the project solstice launch because of the payment gateway bug",
+    "formatted_text": "We decided to postpone the Project Solstice launch because of the payment gateway bug.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0123",
+    "captured_at": "2026-03-15T07:41:57Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the team agreed to switch the quokka mobile app over to figma after the client raised concerns about scope",
+    "formatted_text": "The team agreed to switch the Quokka mobile app over to Figma after the client raised concerns about scope.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0124",
+    "captured_at": "2026-03-15T13:36:27Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Idris Bello: decision from today's sync — we're moving the Quokka mobile app to Figma starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0125",
+    "captured_at": "2026-03-15T18:20:04Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for the Marigold campaign pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0126",
+    "captured_at": "2026-03-16T16:16:59Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Ben Okafor: heads up, the Marigold campaign is now blocked on the Anchorpoint Legal API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0127",
+    "captured_at": "2026-03-16T17:41:20Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Preference: all design specs for the Atlas redesign should follow the 8px grid system.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0128",
+    "captured_at": "2026-03-17T18:12:54Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i prefer tabs over spaces for this codebase",
+    "formatted_text": "I prefer tabs over spaces for this codebase.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0129",
+    "captured_at": "2026-03-19T08:48:12Z",
+    "source_modality": "speech",
+    "raw_asr_text": "maybe i you know should look into that vendor thing at some point",
+    "formatted_text": "Maybe I should look into that vendor thing at some point.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0130",
+    "captured_at": "2026-03-21T13:18:25Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so the basically deadline for the quokka mobile app is by friday",
+    "formatted_text": "The deadline for the Quokka mobile app is by friday.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0131",
+    "captured_at": "2026-03-22T10:38:29Z",
+    "source_modality": "speech",
+    "raw_asr_text": "priya raman actually mentioned that anchorpoint legal is raising their rates next renewal",
+    "formatted_text": "Priya Raman mentioned that Anchorpoint Legal is raising their rates next renewal.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0132",
+    "captured_at": "2026-03-22T10:42:23Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "the Trellis rewrite — Status: In Progress. Owner: Jasmine Cole. Target date: end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0133",
+    "captured_at": "2026-03-23T11:01:37Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the uh atlas redesign conversion rate came in at roughly eighty five thousand",
+    "formatted_text": "The Atlas redesign conversion rate came in at roughly eighty five thousand.",
+    "foreground_app": "Chrome",
+    "window_title": "Notion - Roadmap"
+  },
+  {
+    "capture_id": "cap_0134",
+    "captured_at": "2026-03-23T19:11:36Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay the team agreed you know to switch the compass redesign over to retool because the design review flagged accessibility issues",
+    "formatted_text": "The team agreed to switch the Compass redesign over to Retool because the design review flagged accessibility issues.",
+    "foreground_app": "Google Meet",
+    "window_title": "Design Review - Google Meet"
+  },
+  {
+    "capture_id": "cap_0135",
+    "captured_at": "2026-03-24T09:01:41Z",
+    "source_modality": "speech",
+    "raw_asr_text": "picking project driftwood back up now moving it from blocked to in progress",
+    "formatted_text": "Picking Project Driftwood back up now, moving it from blocked to in progress.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0136",
+    "captured_at": "2026-03-24T12:25:19Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Struck the wrong owner name from the doc — Aiko Tanaka owns this now.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0137",
+    "captured_at": "2026-03-26T18:21:05Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i promised sam like okoye i'd have the report ready by next wednesday",
+    "formatted_text": "I promised Sam Okoye I'd have the report ready by next wednesday.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0138",
+    "captured_at": "2026-03-28T08:50:36Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright we onboarded around fifty new users for the quokka mobile app last month",
+    "formatted_text": "We onboarded around fifty new users for the Quokka mobile app last month.",
+    "foreground_app": "Chrome",
+    "window_title": "Gmail - Inbox"
+  },
+  {
+    "capture_id": "cap_0139",
+    "captured_at": "2026-03-28T17:26:08Z",
+    "source_modality": "speech",
+    "raw_asr_text": "wait no i meant marco diaz is the owner for northwind api not the other person i mentioned earlier",
+    "formatted_text": "Wait no, I meant Marco Diaz is the owner for Northwind API, not the other person I mentioned earlier.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0140",
+    "captured_at": "2026-03-28T18:54:11Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay we hit a like major bug in project solstice where the sync job duplicates records",
+    "formatted_text": "We hit a major bug in Project Solstice where the sync job duplicates records.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0141",
+    "captured_at": "2026-03-29T13:53:41Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: the Cascade rollout is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0142",
+    "captured_at": "2026-03-30T08:59:14Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0143",
+    "captured_at": "2026-03-30T15:47:49Z",
+    "source_modality": "speech",
+    "raw_asr_text": "always format meeting notes with bullet points not paragraphs",
+    "formatted_text": "Always format meeting notes with bullet points, not paragraphs.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0144",
+    "captured_at": "2026-03-30T21:56:00Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the budget for the talon onboarding flow is around fifty",
+    "formatted_text": "The budget for the Talon onboarding flow is around fifty.",
+    "foreground_app": "Chrome",
+    "window_title": "Notion - Roadmap"
+  },
+  {
+    "capture_id": "cap_0145",
+    "captured_at": "2026-03-31T17:16:12Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the talon onboarding um flow conversion rate came in at twelve percent",
+    "formatted_text": "The Talon onboarding flow conversion rate came in at twelve percent.",
+    "foreground_app": "Chrome",
+    "window_title": "Notion - Roadmap"
+  },
+  {
+    "capture_id": "cap_0146",
+    "captured_at": "2026-04-01T14:09:54Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hi team, confirming that the Harborlight Design contract renews on the 30th at $18,500/year, a 6% increase from last cycle.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0147",
+    "captured_at": "2026-04-01T18:34:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay i basically like commit messages written in imperative mood keep them under fifty characters",
+    "formatted_text": "I like commit messages written in imperative mood, keep them under fifty characters.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0148",
+    "captured_at": "2026-04-02T09:35:00Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Note to self: Priya Raman is the point of contact for the Quokka mobile app, not Hana Sato.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0149",
+    "captured_at": "2026-04-02T13:48:09Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Priya Raman: heads up, Project Solstice is now blocked on the Meridian Logistics API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0150",
+    "captured_at": "2026-04-02T14:38:03Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi hm",
+    "formatted_text": "Hm.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0151",
+    "captured_at": "2026-04-03T03:57:19Z",
+    "source_modality": "speech",
+    "raw_asr_text": "maybe i should look into that vendor thing at some point",
+    "formatted_text": "Maybe I should look into that vendor thing at some point.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0152",
+    "captured_at": "2026-04-03T12:59:25Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so please so schedule my focus blocks in the morning not after lunch",
+    "formatted_text": "Please schedule my focus blocks in the morning, not after lunch.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0153",
+    "captured_at": "2026-04-04T13:59:00Z",
+    "source_modality": "speech",
+    "raw_asr_text": "",
+    "formatted_text": "",
+    "foreground_app": null,
+    "window_title": null
+  },
+  {
+    "capture_id": "cap_0154",
+    "captured_at": "2026-04-04T17:34:44Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i prefer tabs over spaces for this codebase",
+    "formatted_text": "I prefer tabs over spaces for this codebase.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0155",
+    "captured_at": "2026-04-06T06:32:36Z",
+    "source_modality": "speech",
+    "raw_asr_text": "",
+    "formatted_text": "...",
+    "foreground_app": "Terminal",
+    "window_title": "zsh - kivi-service"
+  },
+  {
+    "capture_id": "cap_0156",
+    "captured_at": "2026-04-06T14:51:48Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Aiko Tanaka: heads up, the Trellis rewrite is now blocked on the Kestrel Analytics API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0157",
+    "captured_at": "2026-04-06T18:44:51Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay picking the compass redesign back up now moving it from blocked to in progress",
+    "formatted_text": "Picking the Compass redesign back up now, moving it from blocked to in progress.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0158",
+    "captured_at": "2026-04-08T09:55:59Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so okay recap diego uh reyes owns the quokka mobile app the deadline is next tuesday we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team next tuesday",
+    "formatted_text": "Okay recap: Diego Reyes owns the Quokka mobile app, the deadline is next tuesday, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team next tuesday.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0159",
+    "captured_at": "2026-04-09T08:45:24Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay someone should probably look at the onboarding flow soon-ish",
+    "formatted_text": "Someone should probably look at the onboarding flow soon-ish.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0160",
+    "captured_at": "2026-04-09T09:26:08Z",
+    "source_modality": "speech",
+    "raw_asr_text": "project solstice needs you know to launch tomorrow morning that's a hard deadline from leadership",
+    "formatted_text": "Project Solstice needs to launch tomorrow morning, that's a hard deadline from leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0161",
+    "captured_at": "2026-04-09T12:09:36Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: the Atlas redesign is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0162",
+    "captured_at": "2026-04-09T17:46:06Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi leadership decided actually to deprioritize the fenwick integration because the design review flagged accessibility issues",
+    "formatted_text": "Leadership decided to deprioritize the Fenwick integration because the design review flagged accessibility issues.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0163",
+    "captured_at": "2026-04-09T18:51:42Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the quokka mobile app conversion rate came in at forty two thousand dollars",
+    "formatted_text": "The Quokka mobile app conversion rate came in at forty two thousand dollars.",
+    "foreground_app": "Chrome",
+    "window_title": "Northwind API Docs - Chrome"
+  },
+  {
+    "capture_id": "cap_0164",
+    "captured_at": "2026-04-10T08:05:59Z",
+    "source_modality": "speech",
+    "raw_asr_text": "still blocked on basically the trellis rewrite because we're waiting on vendor access from glasswing consulting",
+    "formatted_text": "Still blocked on the Trellis rewrite because we're waiting on vendor access from Glasswing Consulting.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0165",
+    "captured_at": "2026-04-10T14:05:15Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i like like commit messages written in imperative mood keep them under fifty characters",
+    "formatted_text": "I like commit messages written in imperative mood, keep them under fifty characters.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0166",
+    "captured_at": "2026-04-10T14:42:59Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Yara Haddad: can you own the migration doc for the Cascade rollout? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0167",
+    "captured_at": "2026-04-11T14:18:26Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright uh hold on let me find the doc",
+    "formatted_text": "Uh hold on let me find the doc.",
+    "foreground_app": "Calendar",
+    "window_title": "Sprint Planning - Calendar"
+  },
+  {
+    "capture_id": "cap_0168",
+    "captured_at": "2026-04-12T02:41:46Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Yara Haddad: can you own the migration doc for Northwind API? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0169",
+    "captured_at": "2026-04-12T08:23:52Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "the Trellis rewrite — Status: In Progress. Owner: Sam Okoye. Target date: end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0170",
+    "captured_at": "2026-04-12T17:14:51Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i'll send actually claire dubois the updated timeline for the helix migration by end of month",
+    "formatted_text": "I'll send Claire Dubois the updated timeline for the Helix migration by end of month.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0171",
+    "captured_at": "2026-04-13T11:57:19Z",
+    "source_modality": "speech",
+    "raw_asr_text": "wait no um i meant ravi menon is the owner for the nimbus dashboard not the other person i mentioned earlier",
+    "formatted_text": "Wait no, I meant Ravi Menon is the owner for the Nimbus dashboard, not the other person I mentioned earlier.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0172",
+    "captured_at": "2026-04-13T12:26:57Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay recap nadia petrov owns the marigold campaign the deadline is by end of quarter we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team by end of quarter",
+    "formatted_text": "Okay recap: Nadia Petrov owns the Marigold campaign, the deadline is by end of quarter, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team by end of quarter.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0173",
+    "captured_at": "2026-04-13T12:47:53Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay basically recap sofia conti owns project driftwood the deadline is by end of quarter we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team by end of quarter",
+    "formatted_text": "Okay recap: Sofia Conti owns Project Driftwood, the deadline is by end of quarter, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team by end of quarter.",
+    "foreground_app": "Google Meet",
+    "window_title": "Design Review - Google Meet"
+  },
+  {
+    "capture_id": "cap_0174",
+    "captured_at": "2026-04-13T18:46:15Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Beacon analytics pipeline scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0175",
+    "captured_at": "2026-04-14T16:07:40Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Note to self: Tom Alder is the point of contact for the Cascade rollout, not Marco Diaz.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0176",
+    "captured_at": "2026-04-15T00:13:31Z",
+    "source_modality": "speech",
+    "raw_asr_text": "uh",
+    "formatted_text": "",
+    "foreground_app": "Outlook",
+    "window_title": "Meeting recap - Outlook"
+  },
+  {
+    "capture_id": "cap_0177",
+    "captured_at": "2026-04-15T03:08:05Z",
+    "source_modality": "speech",
+    "raw_asr_text": "default to metric units in all the reports going forward",
+    "formatted_text": "Default to metric units in all the reports going forward.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0178",
+    "captured_at": "2026-04-15T15:46:25Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: the Nimbus dashboard is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0179",
+    "captured_at": "2026-04-15T17:01:08Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright okay uh recap nadia petrov owns the compass redesign the deadline is before the client call we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team before the client call",
+    "formatted_text": "Okay recap: Nadia Petrov owns the Compass redesign, the deadline is before the client call, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team before the client call.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0180",
+    "captured_at": "2026-04-16T02:01:41Z",
+    "source_modality": "speech",
+    "raw_asr_text": "ran into an you know outage on the nimbus dashboard this morning root cause still unclear",
+    "formatted_text": "Ran into an outage on the Nimbus dashboard this morning, root cause still unclear.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0181",
+    "captured_at": "2026-04-16T16:41:54Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Aroha Ngata: can you own the migration doc for the Helix migration? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0182",
+    "captured_at": "2026-04-17T09:35:49Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: the Talon onboarding flow is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0183",
+    "captured_at": "2026-04-17T09:36:55Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: the Beacon analytics pipeline is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0184",
+    "captured_at": "2026-04-17T12:05:46Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Vertex Cloud about the overdue invoice for the Beacon analytics pipeline.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0185",
+    "captured_at": "2026-04-17T17:17:01Z",
+    "source_modality": "speech",
+    "raw_asr_text": "our contract with anchorpoint legal renews by end of quarter",
+    "formatted_text": "Our contract with Anchorpoint Legal renews by end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0186",
+    "captured_at": "2026-04-17T18:31:29Z",
+    "source_modality": "speech",
+    "raw_asr_text": "let's get the the compass redesign spec reviewed by friday",
+    "formatted_text": "Let's get the the Compass redesign spec reviewed by friday.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0187",
+    "captured_at": "2026-04-18T11:02:02Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we onboarded twelve percent new users for the quokka mobile app last month",
+    "formatted_text": "We onboarded twelve percent new users for the Quokka mobile app last month.",
+    "foreground_app": "Chrome",
+    "window_title": "Notion - Roadmap"
+  },
+  {
+    "capture_id": "cap_0188",
+    "captured_at": "2026-04-19T00:34:02Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay idris bello you know said the the marigold campaign launch is pushed to next quarter",
+    "formatted_text": "Idris Bello said the the Marigold campaign launch is pushed to next quarter.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0189",
+    "captured_at": "2026-04-19T09:43:57Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Fixed typo: budget should read $54,000, not $45,000.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0190",
+    "captured_at": "2026-04-19T12:47:36Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay like recap sam okoye owns the trellis rewrite the deadline is in two weeks we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team in two weeks",
+    "formatted_text": "Okay recap: Sam Okoye owns the Trellis rewrite, the deadline is in two weeks, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team in two weeks.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0191",
+    "captured_at": "2026-04-20T17:41:44Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so ",
+    "formatted_text": "...",
+    "foreground_app": "Linear",
+    "window_title": "ENG-482 - Linear"
+  },
+  {
+    "capture_id": "cap_0192",
+    "captured_at": "2026-04-21T10:05:11Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay recap ben okafor owns project driftwood the deadline is tomorrow morning we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team tomorrow morning",
+    "formatted_text": "Okay recap: Ben Okafor owns Project Driftwood, the deadline is tomorrow morning, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team tomorrow morning.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0193",
+    "captured_at": "2026-04-21T13:33:48Z",
+    "source_modality": "speech",
+    "raw_asr_text": "default to i mean metric units in all the reports going forward",
+    "formatted_text": "Default to metric units in all the reports going forward.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0194",
+    "captured_at": "2026-04-21T16:05:58Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Ravi Menon: decision from today's sync — we're moving the Nimbus dashboard to Asana starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0195",
+    "captured_at": "2026-04-22T09:14:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "remind um me to follow up with owen barrett about the cascade rollout by friday",
+    "formatted_text": "Remind me to follow up with Owen Barrett about the Cascade rollout by friday.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0196",
+    "captured_at": "2026-04-22T11:14:23Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Struck the wrong owner name from the doc — Claire Dubois owns this now.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0197",
+    "captured_at": "2026-04-22T16:41:50Z",
+    "source_modality": "speech",
+    "raw_asr_text": "claire dubois actually said the the atlas redesign launch is pushed to next quarter",
+    "formatted_text": "Claire Dubois said the the Atlas redesign launch is pushed to next quarter.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0198",
+    "captured_at": "2026-04-22T17:20:05Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0199",
+    "captured_at": "2026-04-23T00:23:19Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so the like deadline for northwind api is before the client call",
+    "formatted_text": "The deadline for Northwind API is before the client call.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0200",
+    "captured_at": "2026-04-23T11:36:44Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for the Talon onboarding flow pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0201",
+    "captured_at": "2026-04-24T15:28:56Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so correction — the budget for the ember backend is sixty thousand not forty thousand",
+    "formatted_text": "Correction — the budget for the Ember backend is sixty thousand, not forty thousand.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0202",
+    "captured_at": "2026-04-26T08:49:04Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay recap so felix nowak owns the compass redesign the deadline is tomorrow morning we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team tomorrow morning",
+    "formatted_text": "Okay recap: Felix Nowak owns the Compass redesign, the deadline is tomorrow morning, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team tomorrow morning.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0203",
+    "captured_at": "2026-04-26T09:45:06Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Cascade rollout scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0204",
+    "captured_at": "2026-04-26T16:15:35Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Preference: all design specs for the Nimbus dashboard should follow the 8px grid system.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0205",
+    "captured_at": "2026-04-27T09:18:04Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so i'll send basically diego reyes the updated timeline for the nimbus dashboard tomorrow morning",
+    "formatted_text": "I'll send Diego Reyes the updated timeline for the Nimbus dashboard tomorrow morning.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0206",
+    "captured_at": "2026-04-27T15:13:25Z",
+    "source_modality": "speech",
+    "raw_asr_text": "testing one two three",
+    "formatted_text": "Testing one two three.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0207",
+    "captured_at": "2026-04-28T00:58:18Z",
+    "source_modality": "speech",
+    "raw_asr_text": "testing one two three",
+    "formatted_text": "Testing one two three.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0208",
+    "captured_at": "2026-04-28T11:24:13Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so remind me to follow up with owen barrett about the talon onboarding flow tomorrow morning",
+    "formatted_text": "Remind me to follow up with Owen Barrett about the Talon onboarding flow tomorrow morning.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0209",
+    "captured_at": "2026-04-28T17:38:16Z",
+    "source_modality": "speech",
+    "raw_asr_text": "my employee i mean id is zero zero zero one two three use that on the reimbursement form",
+    "formatted_text": "My employee id is zero zero zero one two three, use that on the reimbursement form.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0210",
+    "captured_at": "2026-04-28T17:51:06Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay leadership decided to deprioritize the atlas redesign because of the payment gateway bug",
+    "formatted_text": "Leadership decided to deprioritize the Atlas redesign because of the payment gateway bug.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0211",
+    "captured_at": "2026-04-29T14:23:09Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Diego Reyes: budget approved for Project Driftwood — $72,400 total, effective this sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0212",
+    "captured_at": "2026-04-29T17:38:46Z",
+    "source_modality": "speech",
+    "raw_asr_text": "default to metric basically units in all the reports going forward",
+    "formatted_text": "Default to metric units in all the reports going forward.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0213",
+    "captured_at": "2026-04-29T18:56:06Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Fixed typo: budget should read $54,000, not $45,000.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0214",
+    "captured_at": "2026-04-30T19:31:55Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Struck the wrong owner name from the doc — Idris Bello owns this now.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0215",
+    "captured_at": "2026-05-01T07:16:17Z",
+    "source_modality": "speech",
+    "raw_asr_text": "ran into an outage on project driftwood this morning root cause still unclear",
+    "formatted_text": "Ran into an outage on Project Driftwood this morning, root cause still unclear.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0216",
+    "captured_at": "2026-05-01T14:19:10Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright okay recap actually yara haddad owns the quokka mobile app the deadline is next tuesday we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team next tuesday",
+    "formatted_text": "Okay recap: Yara Haddad owns the Quokka mobile app, the deadline is next tuesday, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team next tuesday.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0217",
+    "captured_at": "2026-05-01T16:56:06Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the um compass redesign conversion rate came in at close to two hundred",
+    "formatted_text": "The Compass redesign conversion rate came in at close to two hundred.",
+    "foreground_app": "Chrome",
+    "window_title": "Linear - Backlog"
+  },
+  {
+    "capture_id": "cap_0218",
+    "captured_at": "2026-05-02T12:38:54Z",
+    "source_modality": "speech",
+    "raw_asr_text": "call me um back at five five five zero one zero zero if the deploy fails",
+    "formatted_text": "Call me back at five five five, zero one zero zero if the deploy fails.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0219",
+    "captured_at": "2026-05-02T17:34:32Z",
+    "source_modality": "speech",
+    "raw_asr_text": "wait no i meant claire dubois is the owner for the atlas redesign not the other person i mentioned earlier",
+    "formatted_text": "Wait no, I meant Claire Dubois is the owner for the Atlas redesign, not the other person I mentioned earlier.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0220",
+    "captured_at": "2026-05-04T14:12:50Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Ridgeline Data about the overdue invoice for the Beacon analytics pipeline.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0221",
+    "captured_at": "2026-05-04T18:38:32Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Struck the wrong owner name from the doc — Sam Okoye owns this now.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0222",
+    "captured_at": "2026-05-05T14:40:37Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Project Solstice — Status: In Progress. Owner: Priya Raman. Target date: end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0223",
+    "captured_at": "2026-05-05T16:42:14Z",
+    "source_modality": "speech",
+    "raw_asr_text": "never mind what i said earlier about the fenwick integration the launch is back on track",
+    "formatted_text": "Never mind what I said earlier about the Fenwick integration, the launch is back on track.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0224",
+    "captured_at": "2026-05-08T09:39:18Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i like need to finish the draft proposal for the fenwick integration in two weeks",
+    "formatted_text": "I need to finish the draft proposal for the Fenwick integration in two weeks.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0225",
+    "captured_at": "2026-05-08T16:02:02Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hm",
+    "formatted_text": "Hm.",
+    "foreground_app": "Outlook",
+    "window_title": "Meeting recap - Outlook"
+  },
+  {
+    "capture_id": "cap_0226",
+    "captured_at": "2026-05-09T09:20:59Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi ran into an outage on the quokka mobile app this morning root cause still unclear",
+    "formatted_text": "Ran into an outage on the Quokka mobile app this morning, root cause still unclear.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0227",
+    "captured_at": "2026-05-09T12:16:52Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i'm going basically to schedule a review with jasmine cole before the client call",
+    "formatted_text": "I'm going to schedule a review with Jasmine Cole before the client call.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0228",
+    "captured_at": "2026-05-10T10:52:47Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Struck the wrong owner name from the doc — Felix Nowak owns this now.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0229",
+    "captured_at": "2026-05-11T12:46:07Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Note to self: Owen Barrett is the point of contact for Northwind API, not Meiling Zhou.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0230",
+    "captured_at": "2026-05-11T13:40:52Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Meiling Zhou will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0231",
+    "captured_at": "2026-05-11T17:03:31Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i you know prefer tabs over spaces for this codebase",
+    "formatted_text": "I prefer tabs over spaces for this codebase.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0232",
+    "captured_at": "2026-05-12T12:03:03Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright always format okay so meeting notes with bullet points not paragraphs",
+    "formatted_text": "Always format meeting notes with bullet points, not paragraphs.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0233",
+    "captured_at": "2026-05-12T18:16:40Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Struck the wrong owner name from the doc — Lena Fischer owns this now.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0234",
+    "captured_at": "2026-05-12T18:29:52Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so actually um northwind api is done i confirmed it shipped this morning",
+    "formatted_text": "Actually Northwind API is done, I confirmed it shipped this morning.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0235",
+    "captured_at": "2026-05-13T18:41:14Z",
+    "source_modality": "speech",
+    "raw_asr_text": "picking the i mean marigold campaign back up now moving it from blocked to in progress",
+    "formatted_text": "Picking the Marigold campaign back up now, moving it from blocked to in progress.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0236",
+    "captured_at": "2026-05-14T02:23:26Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Yara Haddad will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0237",
+    "captured_at": "2026-05-14T08:27:08Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the compass redesign conversion rate came in at around fifty",
+    "formatted_text": "The Compass redesign conversion rate came in at around fifty.",
+    "foreground_app": "Chrome",
+    "window_title": "Gmail - Inbox"
+  },
+  {
+    "capture_id": "cap_0238",
+    "captured_at": "2026-05-14T13:17:53Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0239",
+    "captured_at": "2026-05-16T06:06:47Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i don't know okay so we might want to revisit the pricing eventually",
+    "formatted_text": "I don't know, we might want to revisit the pricing eventually.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0240",
+    "captured_at": "2026-05-18T14:53:00Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the deadline for actually the marigold campaign is by next wednesday",
+    "formatted_text": "The deadline for the Marigold campaign is by next wednesday.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0241",
+    "captured_at": "2026-05-18T18:55:46Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay correction — you know the budget for northwind api is sixty thousand not forty thousand",
+    "formatted_text": "Correction — the budget for Northwind API is sixty thousand, not forty thousand.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0242",
+    "captured_at": "2026-05-19T08:53:17Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Northwind API — Status: In Progress. Owner: Sam Okoye. Target date: end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0243",
+    "captured_at": "2026-05-21T11:40:17Z",
+    "source_modality": "speech",
+    "raw_asr_text": "here's the you know temp password for the staging box hunter two exclamation mark please don't share it",
+    "formatted_text": "Here's the temp password for the staging box: hunter two exclamation mark, please don't share it.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0244",
+    "captured_at": "2026-05-21T20:32:58Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Aiko Tanaka will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0245",
+    "captured_at": "2026-05-24T06:00:24Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Reminder — the Quokka mobile app retro is now Thursday instead of Wednesday.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0246",
+    "captured_at": "2026-05-24T12:04:23Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Tom Alder: decision from today's sync — we're moving Project Driftwood to Figma starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0247",
+    "captured_at": "2026-05-24T12:44:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "let's get the the quokka mobile app spec reviewed by friday",
+    "formatted_text": "Let's get the the Quokka mobile app spec reviewed by friday.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0248",
+    "captured_at": "2026-05-24T18:29:15Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for Northwind API pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0249",
+    "captured_at": "2026-05-24T18:46:14Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the budget i mean for the helix migration is around fifty",
+    "formatted_text": "The budget for the Helix migration is around fifty.",
+    "foreground_app": "Chrome",
+    "window_title": "Linear - Backlog"
+  },
+  {
+    "capture_id": "cap_0250",
+    "captured_at": "2026-05-24T20:27:39Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Meridian Logistics about the overdue invoice for the Compass redesign.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0251",
+    "captured_at": "2026-05-25T05:26:38Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hi team, confirming that the Brightline Payments contract renews on the 30th at $18,500/year, a 6% increase from last cycle.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0252",
+    "captured_at": "2026-05-25T11:55:41Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Preference: all design specs for the Talon onboarding flow should follow the 8px grid system.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0253",
+    "captured_at": "2026-05-25T17:35:52Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Ravi Menon: heads up, Northwind API is now blocked on the Sparrow Hosting API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0254",
+    "captured_at": "2026-05-26T10:35:50Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Yara Haddad: can you own the migration doc for the Ember backend? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0255",
+    "captured_at": "2026-05-26T11:39:18Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we basically decided to postpone the the trellis rewrite launch because the design review flagged accessibility issues",
+    "formatted_text": "We decided to postpone the the Trellis rewrite launch because the design review flagged accessibility issues.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0256",
+    "captured_at": "2026-05-27T09:17:40Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: Project Solstice is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0257",
+    "captured_at": "2026-05-27T17:40:36Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "the Beacon analytics pipeline — Status: In Progress. Owner: Sam Okoye. Target date: end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0258",
+    "captured_at": "2026-05-28T03:35:44Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0259",
+    "captured_at": "2026-05-29T08:13:13Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright i don't know we might want to revisit the pricing eventually",
+    "formatted_text": "I don't know, we might want to revisit the pricing eventually.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0260",
+    "captured_at": "2026-05-29T08:40:18Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we you know decided to postpone the the helix migration launch since the vendor missed their sla",
+    "formatted_text": "We decided to postpone the the Helix migration launch since the vendor missed their SLA.",
+    "foreground_app": "Google Meet",
+    "window_title": "Design Review - Google Meet"
+  },
+  {
+    "capture_id": "cap_0261",
+    "captured_at": "2026-05-29T09:52:36Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay maybe i should okay so look into that vendor thing at some point",
+    "formatted_text": "Maybe I should look into that vendor thing at some point.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0262",
+    "captured_at": "2026-05-29T12:19:52Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hi team, confirming that the Ridgeline Data contract renews on the 30th at $18,500/year, a 6% increase from last cycle.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0263",
+    "captured_at": "2026-05-29T15:35:22Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the beacon analytics pipeline conversion rate came in at about a dozen",
+    "formatted_text": "The Beacon analytics pipeline conversion rate came in at about a dozen.",
+    "foreground_app": "Chrome",
+    "window_title": "Northwind API Docs - Chrome"
+  },
+  {
+    "capture_id": "cap_0264",
+    "captured_at": "2026-05-29T18:50:06Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Tom Alder: decision from today's sync — we're moving the Nimbus dashboard to Figma starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0265",
+    "captured_at": "2026-05-30T18:07:06Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Idris Bello will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0266",
+    "captured_at": "2026-05-31T11:08:08Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hm",
+    "formatted_text": "Hm.",
+    "foreground_app": "Linear",
+    "window_title": "Backlog - Linear"
+  },
+  {
+    "capture_id": "cap_0267",
+    "captured_at": "2026-05-31T17:48:32Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Struck the wrong owner name from the doc — Claire Dubois owns this now.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0268",
+    "captured_at": "2026-06-01T09:11:07Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay i uh promised lena fischer i'd have the report ready before the client call",
+    "formatted_text": "I promised Lena Fischer I'd have the report ready before the client call.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0269",
+    "captured_at": "2026-06-01T14:42:44Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the beacon you know analytics pipeline conversion rate came in at around fifty",
+    "formatted_text": "The Beacon analytics pipeline conversion rate came in at around fifty.",
+    "foreground_app": "Chrome",
+    "window_title": "Northwind API Docs - Chrome"
+  },
+  {
+    "capture_id": "cap_0270",
+    "captured_at": "2026-06-02T08:37:07Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so the team agreed actually to switch the marigold campaign over to confluence since the vendor missed their sla",
+    "formatted_text": "The team agreed to switch the Marigold campaign over to Confluence since the vendor missed their SLA.",
+    "foreground_app": "Google Meet",
+    "window_title": "Design Review - Google Meet"
+  },
+  {
+    "capture_id": "cap_0271",
+    "captured_at": "2026-06-02T12:33:33Z",
+    "source_modality": "speech",
+    "raw_asr_text": "actually the trellis rewrite is done i confirmed it shipped this morning",
+    "formatted_text": "Actually the Trellis rewrite is done, I confirmed it shipped this morning.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0272",
+    "captured_at": "2026-06-02T15:50:20Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Preference: all design specs for Northwind API should follow the 8px grid system.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0273",
+    "captured_at": "2026-06-02T18:01:55Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Meridian Logistics about the overdue invoice for the Fenwick integration.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0274",
+    "captured_at": "2026-06-03T14:10:40Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Sofia Conti will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0275",
+    "captured_at": "2026-06-03T14:40:39Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we hit a major bug in the trellis rewrite where the sync job duplicates records",
+    "formatted_text": "We hit a major bug in the Trellis rewrite where the sync job duplicates records.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0276",
+    "captured_at": "2026-06-04T13:35:37Z",
+    "source_modality": "speech",
+    "raw_asr_text": "someone should probably like look at the onboarding flow soon-ish",
+    "formatted_text": "Someone should probably look at the onboarding flow soon-ish.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0277",
+    "captured_at": "2026-06-04T16:05:25Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0278",
+    "captured_at": "2026-06-05T10:44:24Z",
+    "source_modality": "speech",
+    "raw_asr_text": "someone should basically probably look at the onboarding flow soon-ish",
+    "formatted_text": "Someone should probably look at the onboarding flow soon-ish.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0279",
+    "captured_at": "2026-06-05T15:17:23Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i'll send tom alder the updated timeline for the talon onboarding flow in two weeks",
+    "formatted_text": "I'll send Tom Alder the updated timeline for the Talon onboarding flow in two weeks.",
+    "foreground_app": "Google Meet",
+    "window_title": "Design Review - Google Meet"
+  },
+  {
+    "capture_id": "cap_0280",
+    "captured_at": "2026-06-05T16:29:02Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Reminder — the Quokka mobile app retro is now Thursday instead of Wednesday.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0281",
+    "captured_at": "2026-06-06T17:14:10Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Quokka mobile app scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0282",
+    "captured_at": "2026-06-06T22:36:07Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hm",
+    "formatted_text": "Hm.",
+    "foreground_app": null,
+    "window_title": null
+  },
+  {
+    "capture_id": "cap_0283",
+    "captured_at": "2026-06-07T16:42:05Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so started working on i mean the fenwick integration today should be in progress through next week",
+    "formatted_text": "Started working on the Fenwick integration today, should be in progress through next week.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0284",
+    "captured_at": "2026-06-08T09:05:14Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Jasmine Cole: can you own the migration doc for the Cascade rollout? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0285",
+    "captured_at": "2026-06-08T09:55:49Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi default to metric um units in all the reports going forward",
+    "formatted_text": "Default to metric units in all the reports going forward.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0286",
+    "captured_at": "2026-06-08T14:58:50Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we actually onboarded about a dozen new users for the fenwick integration last month",
+    "formatted_text": "We onboarded about a dozen new users for the Fenwick integration last month.",
+    "foreground_app": "Chrome",
+    "window_title": "Northwind API Docs - Chrome"
+  },
+  {
+    "capture_id": "cap_0287",
+    "captured_at": "2026-06-09T12:42:26Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the team agreed basically to switch the trellis rewrite over to jira because of the payment gateway bug",
+    "formatted_text": "The team agreed to switch the Trellis rewrite over to Jira because of the payment gateway bug.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0288",
+    "captured_at": "2026-06-09T18:36:08Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Claire Dubois: budget approved for the Marigold campaign — $72,400 total, effective this sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0289",
+    "captured_at": "2026-06-11T15:30:16Z",
+    "source_modality": "speech",
+    "raw_asr_text": "just finished the migration steps for the cascade rollout marking that as done",
+    "formatted_text": "Just finished the migration steps for the Cascade rollout, marking that as done.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0290",
+    "captured_at": "2026-06-11T16:07:36Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the compass redesign conversion rate came in at about a dozen",
+    "formatted_text": "The Compass redesign conversion rate came in at about a dozen.",
+    "foreground_app": "Chrome",
+    "window_title": "Gmail - Inbox"
+  },
+  {
+    "capture_id": "cap_0291",
+    "captured_at": "2026-06-12T15:39:08Z",
+    "source_modality": "speech",
+    "raw_asr_text": "please schedule my um focus blocks in the morning not after lunch",
+    "formatted_text": "Please schedule my focus blocks in the morning, not after lunch.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0292",
+    "captured_at": "2026-06-13T10:42:44Z",
+    "source_modality": "speech",
+    "raw_asr_text": "please schedule my focus blocks in the morning not after lunch",
+    "formatted_text": "Please schedule my focus blocks in the morning, not after lunch.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0293",
+    "captured_at": "2026-06-13T11:28:47Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so default to metric units in all the reports going forward",
+    "formatted_text": "Default to metric units in all the reports going forward.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0294",
+    "captured_at": "2026-06-14T04:21:17Z",
+    "source_modality": "speech",
+    "raw_asr_text": "aiko tanaka you know said the the marigold campaign launch is pushed to next quarter",
+    "formatted_text": "Aiko Tanaka said the the Marigold campaign launch is pushed to next quarter.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0295",
+    "captured_at": "2026-06-14T10:26:19Z",
+    "source_modality": "speech",
+    "raw_asr_text": "actually the atlas redesign is done i confirmed it shipped this morning",
+    "formatted_text": "Actually the Atlas redesign is done, I confirmed it shipped this morning.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0296",
+    "captured_at": "2026-06-14T12:48:37Z",
+    "source_modality": "speech",
+    "raw_asr_text": "my employee id is zero zero zero one two three use that on the reimbursement form",
+    "formatted_text": "My employee id is zero zero zero one two three, use that on the reimbursement form.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0297",
+    "captured_at": "2026-06-15T06:52:12Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i don't know we might want to revisit the pricing eventually",
+    "formatted_text": "I don't know, we might want to revisit the pricing eventually.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0298",
+    "captured_at": "2026-06-15T16:32:37Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Priya Raman: budget approved for the Quokka mobile app — $72,400 total, effective this sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0299",
+    "captured_at": "2026-06-16T09:36:12Z",
+    "source_modality": "speech",
+    "raw_asr_text": "our contract with i mean glasswing consulting renews by the fifteenth",
+    "formatted_text": "Our contract with Glasswing Consulting renews by the fifteenth.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0300",
+    "captured_at": "2026-06-16T09:37:47Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Struck the wrong owner name from the doc — Felix Nowak owns this now.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0301",
+    "captured_at": "2026-06-16T13:50:42Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay okay i mean recap aroha ngata owns the compass redesign the deadline is by next wednesday we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team by next wednesday",
+    "formatted_text": "Okay recap: Aroha Ngata owns the Compass redesign, the deadline is by next wednesday, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team by next wednesday.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0302",
+    "captured_at": "2026-06-17T07:27:05Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the fenwick uh integration deploy failed twice today because of a stale cache issue",
+    "formatted_text": "The Fenwick integration deploy failed twice today because of a stale cache issue.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0303",
+    "captured_at": "2026-06-17T11:13:52Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Fixed typo: budget should read $54,000, not $45,000.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0304",
+    "captured_at": "2026-06-18T17:36:52Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we hit you know a major bug in the beacon analytics pipeline where the sync job duplicates records",
+    "formatted_text": "We hit a major bug in the Beacon analytics pipeline where the sync job duplicates records.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0305",
+    "captured_at": "2026-06-18T18:51:26Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Aroha Ngata will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0306",
+    "captured_at": "2026-06-20T10:22:42Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Reminder — Northwind API retro is now Thursday instead of Wednesday.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0307",
+    "captured_at": "2026-06-20T12:58:56Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi started working like on northwind api today should be in progress through next week",
+    "formatted_text": "Started working on Northwind API today, should be in progress through next week.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0308",
+    "captured_at": "2026-06-20T22:48:25Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we hit a i mean major bug in project solstice where the sync job duplicates records",
+    "formatted_text": "We hit a major bug in Project Solstice where the sync job duplicates records.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0309",
+    "captured_at": "2026-06-21T09:35:42Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Idris Bello: decision from today's sync — we're moving the Talon onboarding flow to Slack starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0310",
+    "captured_at": "2026-06-21T11:32:32Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for the Ember backend pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0311",
+    "captured_at": "2026-06-21T13:50:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i'm going to schedule a review with meiling zhou by the fifteenth",
+    "formatted_text": "I'm going to schedule a review with Meiling Zhou by the fifteenth.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0312",
+    "captured_at": "2026-06-21T18:13:10Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Sam Okoye will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0313",
+    "captured_at": "2026-06-22T13:22:51Z",
+    "source_modality": "speech",
+    "raw_asr_text": "picking project driftwood back up now moving it from blocked to in progress",
+    "formatted_text": "Picking Project Driftwood back up now, moving it from blocked to in progress.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0314",
+    "captured_at": "2026-06-23T18:16:58Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Sam Okoye will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0315",
+    "captured_at": "2026-06-24T07:47:41Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Jasmine Cole: heads up, the Ember backend is now blocked on the Anchorpoint Legal API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0316",
+    "captured_at": "2026-06-24T09:57:28Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0317",
+    "captured_at": "2026-06-24T11:20:21Z",
+    "source_modality": "speech",
+    "raw_asr_text": "actually northwind so api is done i confirmed it shipped this morning",
+    "formatted_text": "Actually Northwind API is done, I confirmed it shipped this morning.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0318",
+    "captured_at": "2026-06-25T09:09:11Z",
+    "source_modality": "speech",
+    "raw_asr_text": "correction i mean — the budget for the talon onboarding flow is sixty thousand not forty thousand",
+    "formatted_text": "Correction — the budget for the Talon onboarding flow is sixty thousand, not forty thousand.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0319",
+    "captured_at": "2026-06-25T11:01:26Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Marigold campaign scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0320",
+    "captured_at": "2026-06-26T03:18:59Z",
+    "source_modality": "speech",
+    "raw_asr_text": "still blocked on the compass redesign because we're waiting on vendor access from brightline payments",
+    "formatted_text": "Still blocked on the Compass redesign because we're waiting on vendor access from Brightline Payments.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0321",
+    "captured_at": "2026-06-26T09:18:02Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: the Cascade rollout is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0322",
+    "captured_at": "2026-06-26T16:04:59Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hi team, confirming that the Ridgeline Data contract renews on the 30th at $18,500/year, a 6% increase from last cycle.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0323",
+    "captured_at": "2026-06-27T13:33:01Z",
+    "source_modality": "speech",
+    "raw_asr_text": "testing one two three",
+    "formatted_text": "Testing one two three.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0324",
+    "captured_at": "2026-06-28T09:16:07Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Nadia Petrov: decision from today's sync — we're moving the Atlas redesign to Retool starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0325",
+    "captured_at": "2026-06-28T10:13:40Z",
+    "source_modality": "speech",
+    "raw_asr_text": "never mind what um i said earlier about the cascade rollout the launch is back on track",
+    "formatted_text": "Never mind what I said earlier about the Cascade rollout, the launch is back on track.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0326",
+    "captured_at": "2026-06-28T10:21:13Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so we onboarded around okay so fifty new users for the trellis rewrite last month",
+    "formatted_text": "We onboarded around fifty new users for the Trellis rewrite last month.",
+    "foreground_app": "Chrome",
+    "window_title": "Linear - Backlog"
+  },
+  {
+    "capture_id": "cap_0327",
+    "captured_at": "2026-06-28T12:40:08Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0328",
+    "captured_at": "2026-06-29T00:19:01Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Aroha Ngata: can you own the migration doc for the Marigold campaign? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0329",
+    "captured_at": "2026-06-29T10:59:40Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright i promised aiko uh tanaka i'd have the report ready by the fifteenth",
+    "formatted_text": "I promised Aiko Tanaka I'd have the report ready by the fifteenth.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0330",
+    "captured_at": "2026-06-29T12:57:02Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we decided you know to postpone the the ember backend launch given the budget constraints this quarter",
+    "formatted_text": "We decided to postpone the the Ember backend launch given the budget constraints this quarter.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0331",
+    "captured_at": "2026-06-29T13:10:47Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Preference: all design specs for the Helix migration should follow the 8px grid system.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0332",
+    "captured_at": "2026-06-29T17:00:25Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: Northwind API is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0333",
+    "captured_at": "2026-06-30T16:15:58Z",
+    "source_modality": "speech",
+    "raw_asr_text": "ran into an outage on the cascade rollout this morning root cause still unclear",
+    "formatted_text": "Ran into an outage on the Cascade rollout this morning, root cause still unclear.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0334",
+    "captured_at": "2026-06-30T18:54:29Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Reminder — Project Solstice retro is now Thursday instead of Wednesday.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0335",
+    "captured_at": "2026-07-01T04:00:27Z",
+    "source_modality": "speech",
+    "raw_asr_text": "never mind what actually i said earlier about the fenwick integration the launch is back on track",
+    "formatted_text": "Never mind what I said earlier about the Fenwick integration, the launch is back on track.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0336",
+    "captured_at": "2026-07-01T14:33:30Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Note to self: Sofia Conti is the point of contact for the Compass redesign, not Meiling Zhou.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0337",
+    "captured_at": "2026-07-01T15:32:39Z",
+    "source_modality": "speech",
+    "raw_asr_text": "maybe i basically should look into that vendor thing at some point",
+    "formatted_text": "Maybe I should look into that vendor thing at some point.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0338",
+    "captured_at": "2026-07-01T19:58:39Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hana Sato: heads up, the Helix migration is now blocked on the Glasswing Consulting API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0339",
+    "captured_at": "2026-07-01T21:41:54Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Idris Bello: can you own the migration doc for the Ember backend? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0340",
+    "captured_at": "2026-07-02T08:17:21Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Note to self: Tom Alder is the point of contact for the Helix migration, not Ben Okafor.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0341",
+    "captured_at": "2026-07-02T20:22:28Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0342",
+    "captured_at": "2026-07-03T09:18:11Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Jasmine Cole: decision from today's sync — we're moving the Quokka mobile app to Figma starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0343",
+    "captured_at": "2026-07-03T12:40:41Z",
+    "source_modality": "speech",
+    "raw_asr_text": "",
+    "formatted_text": "",
+    "foreground_app": "Jira",
+    "window_title": "PROJ-1042 - Jira"
+  },
+  {
+    "capture_id": "cap_0344",
+    "captured_at": "2026-07-04T17:54:52Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the ember basically backend needs to launch in two weeks that's a hard deadline from leadership",
+    "formatted_text": "The Ember backend needs to launch in two weeks, that's a hard deadline from leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0345",
+    "captured_at": "2026-07-04T18:00:14Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so project driftwood conversion i mean rate came in at roughly eighty five thousand",
+    "formatted_text": "Project Driftwood conversion rate came in at roughly eighty five thousand.",
+    "foreground_app": "Chrome",
+    "window_title": "Linear - Backlog"
+  },
+  {
+    "capture_id": "cap_0346",
+    "captured_at": "2026-07-06T11:32:32Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the ember backend needs to launch tomorrow morning that's a hard deadline from leadership",
+    "formatted_text": "The Ember backend needs to launch tomorrow morning, that's a hard deadline from leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0347",
+    "captured_at": "2026-07-06T12:39:40Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi idris bello actually mentioned that anchorpoint legal is raising their rates next renewal",
+    "formatted_text": "Idris Bello mentioned that Anchorpoint Legal is raising their rates next renewal.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0348",
+    "captured_at": "2026-07-06T14:58:35Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we decided to postpone the the quokka mobile app launch because of the payment gateway bug",
+    "formatted_text": "We decided to postpone the the Quokka mobile app launch because of the payment gateway bug.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0349",
+    "captured_at": "2026-07-07T11:40:53Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hm",
+    "formatted_text": "",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0350",
+    "captured_at": "2026-07-08T05:59:54Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Reminder — the Trellis rewrite retro is now Thursday instead of Wednesday.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0351",
+    "captured_at": "2026-07-08T11:17:11Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Quokka mobile app scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0352",
+    "captured_at": "2026-07-08T17:54:32Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Yara Haddad: budget approved for the Marigold campaign — $72,400 total, effective this sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0353",
+    "captured_at": "2026-07-08T18:19:11Z",
+    "source_modality": "speech",
+    "raw_asr_text": "leadership decided to deprioritize the ember backend after the client raised concerns about scope",
+    "formatted_text": "Leadership decided to deprioritize the Ember backend after the client raised concerns about scope.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0354",
+    "captured_at": "2026-07-08T18:30:05Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Preference: all design specs for the Trellis rewrite should follow the 8px grid system.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0355",
+    "captured_at": "2026-07-09T09:45:31Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi we hit a um major bug in the fenwick integration where the sync job duplicates records",
+    "formatted_text": "We hit a major bug in the Fenwick integration where the sync job duplicates records.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0356",
+    "captured_at": "2026-07-09T14:05:10Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Ferrous Systems about the overdue invoice for Project Driftwood.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0357",
+    "captured_at": "2026-07-10T10:14:01Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Yara Haddad: heads up, Project Solstice is now blocked on the Sparrow Hosting API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0358",
+    "captured_at": "2026-07-10T18:22:19Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay recap aroha ngata owns the nimbus dashboard the deadline is next tuesday we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team next tuesday",
+    "formatted_text": "Okay recap: Aroha Ngata owns the Nimbus dashboard, the deadline is next tuesday, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team next tuesday.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0359",
+    "captured_at": "2026-07-12T03:45:26Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Preference: all design specs for the Ember backend should follow the 8px grid system.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0360",
+    "captured_at": "2026-07-13T14:37:42Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Priya Raman will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0361",
+    "captured_at": "2026-07-13T14:38:02Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i prefer um tabs over spaces for this codebase",
+    "formatted_text": "I prefer tabs over spaces for this codebase.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0362",
+    "captured_at": "2026-07-14T08:11:55Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the budget for you know the cascade rollout is close to two hundred",
+    "formatted_text": "The budget for the Cascade rollout is close to two hundred.",
+    "foreground_app": "Chrome",
+    "window_title": "Linear - Backlog"
+  },
+  {
+    "capture_id": "cap_0363",
+    "captured_at": "2026-07-14T08:19:15Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay could be i mean worth checking on that later not urgent though",
+    "formatted_text": "Could be worth checking on that later, not urgent though.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0364",
+    "captured_at": "2026-07-14T13:40:56Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the deadline for northwind api is before the client call",
+    "formatted_text": "The deadline for Northwind API is before the client call.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0365",
+    "captured_at": "2026-07-14T16:12:24Z",
+    "source_modality": "speech",
+    "raw_asr_text": "for the actually helix migration use two-space indentation in the config files",
+    "formatted_text": "For the Helix migration, use two-space indentation in the config files.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0366",
+    "captured_at": "2026-07-14T18:19:16Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the team like agreed to switch the cascade rollout over to confluence given the budget constraints this quarter",
+    "formatted_text": "The team agreed to switch the Cascade rollout over to Confluence given the budget constraints this quarter.",
+    "foreground_app": "Google Meet",
+    "window_title": "Design Review - Google Meet"
+  },
+  {
+    "capture_id": "cap_0367",
+    "captured_at": "2026-07-15T10:02:29Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Nadia Petrov: decision from today's sync — we're moving the Helix migration to Figma starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0368",
+    "captured_at": "2026-07-15T10:19:03Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Reminder — the Fenwick integration retro is now Thursday instead of Wednesday.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0369",
+    "captured_at": "2026-07-16T11:41:16Z",
+    "source_modality": "speech",
+    "raw_asr_text": "actually i mean scratch that the the talon onboarding flow deadline moved to next wednesday not friday",
+    "formatted_text": "Actually scratch that, the the Talon onboarding flow deadline moved to next wednesday, not friday.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0370",
+    "captured_at": "2026-07-16T16:37:05Z",
+    "source_modality": "speech",
+    "raw_asr_text": "could be worth like checking on that later not urgent though",
+    "formatted_text": "Could be worth checking on that later, not urgent though.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0371",
+    "captured_at": "2026-07-16T16:47:51Z",
+    "source_modality": "speech",
+    "raw_asr_text": "started working on project driftwood today should be in progress through next week",
+    "formatted_text": "Started working on Project Driftwood today, should be in progress through next week.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0372",
+    "captured_at": "2026-07-16T17:30:16Z",
+    "source_modality": "speech",
+    "raw_asr_text": "someone should probably look at the onboarding flow soon-ish",
+    "formatted_text": "Someone should probably look at the onboarding flow soon-ish.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0373",
+    "captured_at": "2026-07-17T16:15:14Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Fixed typo: budget should read $54,000, not $45,000.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0374",
+    "captured_at": "2026-07-17T21:11:46Z",
+    "source_modality": "speech",
+    "raw_asr_text": "according to meiling zhou the budget for the marigold campaign got cut by fifteen percent",
+    "formatted_text": "According to Meiling Zhou, the budget for the Marigold campaign got cut by fifteen percent.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0375",
+    "captured_at": "2026-07-18T00:46:38Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for Project Solstice pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0376",
+    "captured_at": "2026-07-18T14:48:23Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Please note the revised deadline for the audit deliverables is now the 22nd, moved up from the 30th.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0377",
+    "captured_at": "2026-07-18T14:52:24Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for the Ember backend pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0378",
+    "captured_at": "2026-07-18T15:44:19Z",
+    "source_modality": "speech",
+    "raw_asr_text": "actually the cascade rollout is done i confirmed it shipped this morning",
+    "formatted_text": "Actually the Cascade rollout is done, I confirmed it shipped this morning.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0379",
+    "captured_at": "2026-07-18T18:46:58Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the team agreed to switch the helix migration over to linear because the design review flagged accessibility issues",
+    "formatted_text": "The team agreed to switch the Helix migration over to Linear because the design review flagged accessibility issues.",
+    "foreground_app": "Google Meet",
+    "window_title": "Vendor Sync - Google Meet"
+  },
+  {
+    "capture_id": "cap_0380",
+    "captured_at": "2026-07-19T12:38:40Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Priya Raman: heads up, the Ember backend is now blocked on the Ferrous Systems API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0381",
+    "captured_at": "2026-07-19T18:24:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the um fenwick integration needs to launch by next wednesday that's a hard deadline from leadership",
+    "formatted_text": "The Fenwick integration needs to launch by next wednesday, that's a hard deadline from leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0382",
+    "captured_at": "2026-07-19T19:22:05Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Felix Nowak: heads up, the Talon onboarding flow is now blocked on the Kestrel Analytics API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0383",
+    "captured_at": "2026-07-20T11:36:09Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Sparrow Hosting about the overdue invoice for the Ember backend.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0384",
+    "captured_at": "2026-07-20T14:01:25Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for the Nimbus dashboard pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0385",
+    "captured_at": "2026-07-21T08:35:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the basically budget for project solstice is close to two hundred",
+    "formatted_text": "The budget for Project Solstice is close to two hundred.",
+    "foreground_app": "Chrome",
+    "window_title": "Notion - Roadmap"
+  },
+  {
+    "capture_id": "cap_0386",
+    "captured_at": "2026-07-21T08:45:33Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay lena fischer said the the ember backend launch is pushed to next quarter",
+    "formatted_text": "Lena Fischer said the the Ember backend launch is pushed to next quarter.",
+    "foreground_app": "Slack",
+    "window_title": "#random"
+  },
+  {
+    "capture_id": "cap_0387",
+    "captured_at": "2026-07-21T18:25:39Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi i prefer tabs i mean over spaces for this codebase",
+    "formatted_text": "I prefer tabs over spaces for this codebase.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0388",
+    "captured_at": "2026-07-22T18:08:27Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay recap tom i mean alder owns the quokka mobile app the deadline is by end of quarter we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team by end of quarter",
+    "formatted_text": "Okay recap: Tom Alder owns the Quokka mobile app, the deadline is by end of quarter, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team by end of quarter.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0389",
+    "captured_at": "2026-07-23T09:18:56Z",
+    "source_modality": "speech",
+    "raw_asr_text": "according so to marco diaz the budget for the trellis rewrite got cut by fifteen percent",
+    "formatted_text": "According to Marco Diaz, the budget for the Trellis rewrite got cut by fifteen percent.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0390",
+    "captured_at": "2026-07-23T09:26:22Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we like onboarded about a dozen new users for the talon onboarding flow last month",
+    "formatted_text": "We onboarded about a dozen new users for the Talon onboarding flow last month.",
+    "foreground_app": "Chrome",
+    "window_title": "Linear - Backlog"
+  },
+  {
+    "capture_id": "cap_0391",
+    "captured_at": "2026-07-23T12:47:27Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we onboarded forty two thousand dollars new users for the beacon analytics pipeline last month",
+    "formatted_text": "We onboarded forty two thousand dollars new users for the Beacon analytics pipeline last month.",
+    "foreground_app": "Chrome",
+    "window_title": "Gmail - Inbox"
+  },
+  {
+    "capture_id": "cap_0392",
+    "captured_at": "2026-07-23T16:10:43Z",
+    "source_modality": "speech",
+    "raw_asr_text": "wait no i meant idris bello is the owner for the beacon analytics pipeline not the other person i mentioned earlier",
+    "formatted_text": "Wait no, I meant Idris Bello is the owner for the Beacon analytics pipeline, not the other person I mentioned earlier.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0393",
+    "captured_at": "2026-07-23T18:07:40Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Note to self: Aiko Tanaka is the point of contact for the Fenwick integration, not Ben Okafor.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0394",
+    "captured_at": "2026-07-24T16:37:26Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Ridgeline Data about the overdue invoice for the Helix migration.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0395",
+    "captured_at": "2026-07-25T10:03:42Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hana Sato: can you own the migration doc for the Compass redesign? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0396",
+    "captured_at": "2026-07-25T16:08:41Z",
+    "source_modality": "speech",
+    "raw_asr_text": "uh okay so hold on let me find the doc",
+    "formatted_text": "Uh hold on let me find the doc.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0397",
+    "captured_at": "2026-07-25T17:21:34Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay actually the nimbus okay so dashboard is done i confirmed it shipped this morning",
+    "formatted_text": "Actually the Nimbus dashboard is done, I confirmed it shipped this morning.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0398",
+    "captured_at": "2026-07-26T06:00:31Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Lena Fischer will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0399",
+    "captured_at": "2026-07-26T18:16:39Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Tom Alder: heads up, the Fenwick integration is now blocked on the Glasswing Consulting API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0400",
+    "captured_at": "2026-07-26T23:01:55Z",
+    "source_modality": "speech",
+    "raw_asr_text": "according to sofia so conti the budget for the trellis rewrite got cut by fifteen percent",
+    "formatted_text": "According to Sofia Conti, the budget for the Trellis rewrite got cut by fifteen percent.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0401",
+    "captured_at": "2026-07-27T12:41:05Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Ember backend scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0402",
+    "captured_at": "2026-07-27T12:45:47Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Ravi Menon: heads up, Northwind API is now blocked on the Sparrow Hosting API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0403",
+    "captured_at": "2026-07-27T14:11:47Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi project solstice needs to launch by friday that's a hard deadline from leadership",
+    "formatted_text": "Project Solstice needs to launch by friday, that's a hard deadline from leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0404",
+    "captured_at": "2026-07-28T03:39:26Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i don't know we might want to revisit the pricing eventually",
+    "formatted_text": "I don't know, we might want to revisit the pricing eventually.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0405",
+    "captured_at": "2026-07-28T13:04:37Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so let's get the the helix migration spec reviewed by friday",
+    "formatted_text": "Let's get the the Helix migration spec reviewed by friday.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0406",
+    "captured_at": "2026-07-28T13:55:31Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Claire Dubois: decision from today's sync — we're moving the Helix migration to Confluence starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0407",
+    "captured_at": "2026-07-30T16:36:29Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so my new actually card number is four one one one one one one one one one one one one one one one just so you remember it for the vendor form",
+    "formatted_text": "My new card number is four one one one, one one one one, one one one one, one one one one, just so you remember it for the vendor form.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0408",
+    "captured_at": "2026-07-30T18:35:37Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i need basically to finish the draft proposal for the atlas redesign in two weeks",
+    "formatted_text": "I need to finish the draft proposal for the Atlas redesign in two weeks.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0409",
+    "captured_at": "2026-07-30T22:04:47Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hi team, confirming that the Brightline Payments contract renews on the 30th at $18,500/year, a 6% increase from last cycle.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0410",
+    "captured_at": "2026-07-31T08:34:47Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright let's get the the marigold campaign spec reviewed next tuesday",
+    "formatted_text": "Let's get the the Marigold campaign spec reviewed next tuesday.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0411",
+    "captured_at": "2026-07-31T14:20:50Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hm",
+    "formatted_text": "",
+    "foreground_app": "Outlook",
+    "window_title": "Meeting recap - Outlook"
+  },
+  {
+    "capture_id": "cap_0412",
+    "captured_at": "2026-08-01T11:10:43Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Sam Okoye will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0413",
+    "captured_at": "2026-08-01T17:31:07Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright okay that's not what i meant to say disregard",
+    "formatted_text": "Okay that's not what I meant to say, disregard.",
+    "foreground_app": "Linear",
+    "window_title": "ENG-482 - Linear"
+  },
+  {
+    "capture_id": "cap_0414",
+    "captured_at": "2026-08-02T04:13:57Z",
+    "source_modality": "speech",
+    "raw_asr_text": "wait",
+    "formatted_text": "Wait.",
+    "foreground_app": "Chrome",
+    "window_title": "Northwind API Docs - Chrome"
+  },
+  {
+    "capture_id": "cap_0415",
+    "captured_at": "2026-08-02T13:38:34Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Harborlight Design about the overdue invoice for Northwind API.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0416",
+    "captured_at": "2026-08-02T13:56:05Z",
+    "source_modality": "speech",
+    "raw_asr_text": "someone should you know probably look at the onboarding flow soon-ish",
+    "formatted_text": "Someone should probably look at the onboarding flow soon-ish.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0417",
+    "captured_at": "2026-08-02T19:38:40Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for Project Driftwood pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0418",
+    "captured_at": "2026-08-03T09:38:05Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Sam Okoye: heads up, the Atlas redesign is now blocked on the Brightline Payments API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0419",
+    "captured_at": "2026-08-03T20:12:37Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay i'm going to you know schedule a review with yara haddad by the fifteenth",
+    "formatted_text": "I'm going to schedule a review with Yara Haddad by the fifteenth.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0420",
+    "captured_at": "2026-08-04T08:24:46Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the deadline for okay so the compass redesign is in two weeks",
+    "formatted_text": "The deadline for the Compass redesign is in two weeks.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0421",
+    "captured_at": "2026-08-04T10:41:21Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Aiko Tanaka: can you own the migration doc for the Helix migration? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0422",
+    "captured_at": "2026-08-04T11:14:51Z",
+    "source_modality": "speech",
+    "raw_asr_text": "ran into an actually outage on the trellis rewrite this morning root cause still unclear",
+    "formatted_text": "Ran into an outage on the Trellis rewrite this morning, root cause still unclear.",
+    "foreground_app": "VS Code",
+    "window_title": "TODO.md - VS Code"
+  },
+  {
+    "capture_id": "cap_0423",
+    "captured_at": "2026-08-04T13:37:19Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for the Ember backend pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0424",
+    "captured_at": "2026-08-05T09:11:23Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright started working on okay so the ember backend today should be in progress through next week",
+    "formatted_text": "Started working on the Ember backend today, should be in progress through next week.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0425",
+    "captured_at": "2026-08-05T14:18:04Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the budget um for northwind api is close to two hundred",
+    "formatted_text": "The budget for Northwind API is close to two hundred.",
+    "foreground_app": "Chrome",
+    "window_title": "Northwind API Docs - Chrome"
+  },
+  {
+    "capture_id": "cap_0426",
+    "captured_at": "2026-08-05T18:31:14Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay our contract with vertex cloud renews in two weeks",
+    "formatted_text": "Our contract with Vertex Cloud renews in two weeks.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0427",
+    "captured_at": "2026-08-06T01:55:18Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Preference: all design specs for the Marigold campaign should follow the 8px grid system.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0428",
+    "captured_at": "2026-08-06T12:05:53Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i prefer tabs you know over spaces for this codebase",
+    "formatted_text": "I prefer tabs over spaces for this codebase.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0429",
+    "captured_at": "2026-08-06T12:27:22Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Sam Okoye will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0430",
+    "captured_at": "2026-08-06T13:51:52Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright actually scratch that the the atlas redesign deadline moved to next wednesday not friday",
+    "formatted_text": "Actually scratch that, the the Atlas redesign deadline moved to next wednesday, not friday.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0431",
+    "captured_at": "2026-08-06T14:42:28Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: the Nimbus dashboard is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0432",
+    "captured_at": "2026-08-07T10:48:09Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Fixed typo: budget should read $54,000, not $45,000.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0433",
+    "captured_at": "2026-08-07T14:11:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "actually the atlas redesign is done i confirmed it shipped this morning",
+    "formatted_text": "Actually the Atlas redesign is done, I confirmed it shipped this morning.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0434",
+    "captured_at": "2026-08-07T18:57:14Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hello hello can you hear me okay just testing this thing",
+    "formatted_text": "Hello hello can you hear me okay just testing this thing.",
+    "foreground_app": "Chrome",
+    "window_title": "Gmail - Inbox"
+  },
+  {
+    "capture_id": "cap_0435",
+    "captured_at": "2026-08-08T09:33:05Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Jasmine Cole: can you own the migration doc for the Ember backend? need it before Thursday's review.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0436",
+    "captured_at": "2026-08-08T13:11:07Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the deadline for actually the quokka mobile app is next tuesday",
+    "formatted_text": "The deadline for the Quokka mobile app is next tuesday.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0437",
+    "captured_at": "2026-08-08T14:29:55Z",
+    "source_modality": "speech",
+    "raw_asr_text": "my employee id is zero zero zero one two three use that on the reimbursement form",
+    "formatted_text": "My employee id is zero zero zero one two three, use that on the reimbursement form.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0438",
+    "captured_at": "2026-08-08T16:42:07Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the budget for basically the talon onboarding flow is roughly eighty five thousand",
+    "formatted_text": "The budget for the Talon onboarding flow is roughly eighty five thousand.",
+    "foreground_app": "Chrome",
+    "window_title": "Gmail - Inbox"
+  },
+  {
+    "capture_id": "cap_0439",
+    "captured_at": "2026-08-08T22:37:02Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so okay recap felix nowak owns the fenwick integration the deadline is tomorrow morning we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team tomorrow morning",
+    "formatted_text": "Okay recap: Felix Nowak owns the Fenwick integration, the deadline is tomorrow morning, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team tomorrow morning.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0440",
+    "captured_at": "2026-08-10T13:31:52Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Reminder — the Talon onboarding flow retro is now Thursday instead of Wednesday.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0441",
+    "captured_at": "2026-08-11T16:30:45Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay according to jasmine cole the budget for the nimbus dashboard got cut by fifteen percent",
+    "formatted_text": "According to Jasmine Cole, the budget for the Nimbus dashboard got cut by fifteen percent.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0442",
+    "captured_at": "2026-08-11T17:09:34Z",
+    "source_modality": "speech",
+    "raw_asr_text": "according to i mean sam okoye the budget for the talon onboarding flow got cut by fifteen percent",
+    "formatted_text": "According to Sam Okoye, the budget for the Talon onboarding flow got cut by fifteen percent.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0443",
+    "captured_at": "2026-08-12T16:28:03Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Aroha Ngata: decision from today's sync — we're moving Project Solstice to Figma starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "DM: Priya Raman"
+  },
+  {
+    "capture_id": "cap_0444",
+    "captured_at": "2026-08-13T08:21:19Z",
+    "source_modality": "speech",
+    "raw_asr_text": "northwind api actually needs to launch by friday that's a hard deadline from leadership",
+    "formatted_text": "Northwind API needs to launch by friday, that's a hard deadline from leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0445",
+    "captured_at": "2026-08-14T09:23:39Z",
+    "source_modality": "speech",
+    "raw_asr_text": "for the atlas redesign use two-space indentation in the config files",
+    "formatted_text": "For the Atlas redesign, use two-space indentation in the config files.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0446",
+    "captured_at": "2026-08-14T12:28:40Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi uh hold on so let me find the doc",
+    "formatted_text": "Uh hold on let me find the doc.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0447",
+    "captured_at": "2026-08-14T16:26:43Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i'm going to schedule a review with sam okoye by the fifteenth",
+    "formatted_text": "I'm going to schedule a review with Sam Okoye by the fifteenth.",
+    "foreground_app": "Google Meet",
+    "window_title": "Design Review - Google Meet"
+  },
+  {
+    "capture_id": "cap_0448",
+    "captured_at": "2026-08-15T14:32:25Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i promised hana sato i'd have the report ready tomorrow morning",
+    "formatted_text": "I promised Hana Sato I'd have the report ready tomorrow morning.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0449",
+    "captured_at": "2026-08-15T16:07:27Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hi team, confirming that the Sparrow Hosting contract renews on the 30th at $18,500/year, a 6% increase from last cycle.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0450",
+    "captured_at": "2026-08-15T18:03:27Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Update: deadline for Northwind API pushed from Friday to the following Tuesday per leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0451",
+    "captured_at": "2026-08-16T08:18:38Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi the nimbus dashboard needs to launch by end of month that's a hard deadline from leadership",
+    "formatted_text": "The Nimbus dashboard needs to launch by end of month, that's a hard deadline from leadership.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0452",
+    "captured_at": "2026-08-17T10:00:40Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Meiling Zhou will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0453",
+    "captured_at": "2026-08-17T10:50:06Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Fixed typo: budget should read $54,000, not $45,000.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0454",
+    "captured_at": "2026-08-17T11:26:00Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Preference: all design specs for Northwind API should follow the 8px grid system.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0455",
+    "captured_at": "2026-08-17T16:16:21Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Note to self: Hana Sato is the point of contact for the Ember backend, not Lena Fischer.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0456",
+    "captured_at": "2026-08-18T08:03:43Z",
+    "source_modality": "speech",
+    "raw_asr_text": "please schedule my focus blocks in the morning not after lunch",
+    "formatted_text": "Please schedule my focus blocks in the morning, not after lunch.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0457",
+    "captured_at": "2026-08-18T10:31:03Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Fixed typo: budget should read $54,000, not $45,000.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0458",
+    "captured_at": "2026-08-18T13:23:20Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi sorry wrong you know app ignore that",
+    "formatted_text": "Sorry wrong app, ignore that.",
+    "foreground_app": "Figma",
+    "window_title": "Atlas Redesign - Figma"
+  },
+  {
+    "capture_id": "cap_0459",
+    "captured_at": "2026-08-18T18:01:03Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay that's not what i meant to say disregard",
+    "formatted_text": "Okay that's not what I meant to say, disregard.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0460",
+    "captured_at": "2026-08-19T09:13:07Z",
+    "source_modality": "speech",
+    "raw_asr_text": "wait",
+    "formatted_text": "Wait.",
+    "foreground_app": "Zoom",
+    "window_title": "Retro - Zoom"
+  },
+  {
+    "capture_id": "cap_0461",
+    "captured_at": "2026-08-19T13:31:33Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Note to self: Claire Dubois is the point of contact for the Talon onboarding flow, not Aiko Tanaka.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0462",
+    "captured_at": "2026-08-19T17:18:34Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Fixed typo: budget should read $54,000, not $45,000.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0463",
+    "captured_at": "2026-08-20T04:00:52Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Note to self: Idris Bello is the point of contact for the Beacon analytics pipeline, not Claire Dubois.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0464",
+    "captured_at": "2026-08-20T15:40:03Z",
+    "source_modality": "speech",
+    "raw_asr_text": "actually the fenwick uh integration is done i confirmed it shipped this morning",
+    "formatted_text": "Actually the Fenwick integration is done, I confirmed it shipped this morning.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0465",
+    "captured_at": "2026-08-20T17:51:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi the okay so team agreed to switch the trellis rewrite over to confluence since the vendor missed their sla",
+    "formatted_text": "The team agreed to switch the Trellis rewrite over to Confluence since the vendor missed their SLA.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0466",
+    "captured_at": "2026-08-21T05:37:10Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hi team, confirming that the Sparrow Hosting contract renews on the 30th at $18,500/year, a 6% increase from last cycle.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0467",
+    "captured_at": "2026-08-21T17:50:52Z",
+    "source_modality": "speech",
+    "raw_asr_text": "so testing one two three",
+    "formatted_text": "Testing one two three.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0468",
+    "captured_at": "2026-08-22T01:24:47Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hi team, confirming that the Sparrow Hosting contract renews on the 30th at $18,500/year, a 6% increase from last cycle.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0469",
+    "captured_at": "2026-08-23T08:44:00Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay recap lena fischer owns the atlas redesign the deadline is next tuesday we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team next tuesday",
+    "formatted_text": "Okay recap: Lena Fischer owns the Atlas redesign, the deadline is next tuesday, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team next tuesday.",
+    "foreground_app": "Google Meet",
+    "window_title": "Sprint Planning - Google Meet"
+  },
+  {
+    "capture_id": "cap_0470",
+    "captured_at": "2026-08-24T13:08:36Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Decision log: the Marigold campaign scope reduced to core flows only; deferred items tracked in backlog.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0471",
+    "captured_at": "2026-08-25T09:16:42Z",
+    "source_modality": "speech",
+    "raw_asr_text": "my uh employee id is zero zero zero one two three use that on the reimbursement form",
+    "formatted_text": "My employee id is zero zero zero one two three, use that on the reimbursement form.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0472",
+    "captured_at": "2026-08-25T10:50:52Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi testing one two three",
+    "formatted_text": "Testing one two three.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0473",
+    "captured_at": "2026-08-25T18:42:00Z",
+    "source_modality": "speech",
+    "raw_asr_text": "here's basically the temp password for the staging box hunter two exclamation mark please don't share it",
+    "formatted_text": "Here's the temp password for the staging box: hunter two exclamation mark, please don't share it.",
+    "foreground_app": "Gmail",
+    "window_title": "Budget approval - Gmail"
+  },
+  {
+    "capture_id": "cap_0474",
+    "captured_at": "2026-08-26T11:53:02Z",
+    "source_modality": "speech",
+    "raw_asr_text": "yeah so um okay never mind",
+    "formatted_text": "Yeah so um okay never mind.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0475",
+    "captured_at": "2026-08-26T12:14:30Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hey kivi maybe i i mean should look into that vendor thing at some point",
+    "formatted_text": "Maybe I should look into that vendor thing at some point.",
+    "foreground_app": "Slack",
+    "window_title": "#infra"
+  },
+  {
+    "capture_id": "cap_0476",
+    "captured_at": "2026-08-28T09:43:26Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Fixed typo: budget should read $54,000, not $45,000.",
+    "foreground_app": "Notes",
+    "window_title": "Quick Note"
+  },
+  {
+    "capture_id": "cap_0477",
+    "captured_at": "2026-08-28T12:07:05Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Preference: all design specs for the Trellis rewrite should follow the 8px grid system.",
+    "foreground_app": "Notion",
+    "window_title": "Meeting Notes - Notion"
+  },
+  {
+    "capture_id": "cap_0478",
+    "captured_at": "2026-08-28T14:25:50Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Fixed typo: budget should read $54,000, not $45,000.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0479",
+    "captured_at": "2026-08-28T15:53:33Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Hi team, confirming that the Ridgeline Data contract renews on the 30th at $18,500/year, a 6% increase from last cycle.",
+    "foreground_app": "Gmail",
+    "window_title": "Follow up: vendor call - Gmail"
+  },
+  {
+    "capture_id": "cap_0480",
+    "captured_at": "2026-08-29T03:57:24Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay so recap ben okafor owns the helix migration the deadline is next tuesday we decided to cut the export feature for v1 because of time constraints and i'll send the updated scope doc to the team next tuesday",
+    "formatted_text": "Okay recap: Ben Okafor owns the Helix migration, the deadline is next tuesday, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team next tuesday.",
+    "foreground_app": "Google Meet",
+    "window_title": "All Hands - Google Meet"
+  },
+  {
+    "capture_id": "cap_0481",
+    "captured_at": "2026-08-29T20:13:57Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we like onboarded about a dozen new users for the quokka mobile app last month",
+    "formatted_text": "We onboarded about a dozen new users for the Quokka mobile app last month.",
+    "foreground_app": "Chrome",
+    "window_title": "Linear - Backlog"
+  },
+  {
+    "capture_id": "cap_0482",
+    "captured_at": "2026-08-30T02:10:18Z",
+    "source_modality": "speech",
+    "raw_asr_text": "okay still like blocked on the trellis rewrite because we're waiting on vendor access from meridian logistics",
+    "formatted_text": "Still blocked on the Trellis rewrite because we're waiting on vendor access from Meridian Logistics.",
+    "foreground_app": "Slack",
+    "window_title": "#product-launch"
+  },
+  {
+    "capture_id": "cap_0483",
+    "captured_at": "2026-08-30T13:56:41Z",
+    "source_modality": "speech",
+    "raw_asr_text": "hello hello can you hear me okay just testing this thing",
+    "formatted_text": "Hello hello can you hear me okay just testing this thing.",
+    "foreground_app": "Chrome",
+    "window_title": "Notion - Roadmap"
+  },
+  {
+    "capture_id": "cap_0484",
+    "captured_at": "2026-08-30T18:08:28Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright we hit a actually major bug in the trellis rewrite where the sync job duplicates records",
+    "formatted_text": "We hit a major bug in the Trellis rewrite where the sync job duplicates records.",
+    "foreground_app": "VS Code",
+    "window_title": "schema.sql - kivi - VS Code"
+  },
+  {
+    "capture_id": "cap_0485",
+    "captured_at": "2026-08-31T16:13:48Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Yara Haddad: decision from today's sync — we're moving Northwind API to Notion starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0486",
+    "captured_at": "2026-08-31T16:16:55Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Felix Nowak: decision from today's sync — we're moving the Ember backend to Airtable starting next sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0487",
+    "captured_at": "2026-08-31T18:24:38Z",
+    "source_modality": "speech",
+    "raw_asr_text": "still i mean blocked on the ember backend because we're waiting on vendor access from brightline payments",
+    "formatted_text": "Still blocked on the Ember backend because we're waiting on vendor access from Brightline Payments.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0488",
+    "captured_at": "2026-09-02T11:55:04Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "TODO: chase Glasswing Consulting about the overdue invoice for the Helix migration.",
+    "foreground_app": "Notes",
+    "window_title": "Untitled Note"
+  },
+  {
+    "capture_id": "cap_0489",
+    "captured_at": "2026-09-04T14:19:14Z",
+    "source_modality": "speech",
+    "raw_asr_text": "still blocked on uh the nimbus dashboard because we're waiting on vendor access from kestrel analytics",
+    "formatted_text": "Still blocked on the Nimbus dashboard because we're waiting on vendor access from Kestrel Analytics.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0490",
+    "captured_at": "2026-09-05T18:35:32Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright according to felix um nowak the budget for the atlas redesign got cut by fifteen percent",
+    "formatted_text": "According to Felix Nowak, the budget for the Atlas redesign got cut by fifteen percent.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0491",
+    "captured_at": "2026-09-07T10:33:55Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Lena Fischer: heads up, Project Driftwood is now blocked on the Ridgeline Data API keys — opened a ticket, ETA unclear.",
+    "foreground_app": "Slack",
+    "window_title": "#marketing"
+  },
+  {
+    "capture_id": "cap_0492",
+    "captured_at": "2026-09-08T09:57:28Z",
+    "source_modality": "speech",
+    "raw_asr_text": "default um to metric units in all the reports going forward",
+    "formatted_text": "Default to metric units in all the reports going forward.",
+    "foreground_app": "VS Code",
+    "window_title": "main.py - kivi-service - VS Code"
+  },
+  {
+    "capture_id": "cap_0493",
+    "captured_at": "2026-09-08T10:09:21Z",
+    "source_modality": "speech",
+    "raw_asr_text": "we onboarded three hundred users new users for the talon onboarding flow last month",
+    "formatted_text": "We onboarded three hundred users new users for the Talon onboarding flow last month.",
+    "foreground_app": "Chrome",
+    "window_title": "Northwind API Docs - Chrome"
+  },
+  {
+    "capture_id": "cap_0494",
+    "captured_at": "2026-09-09T01:24:34Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Following up per our call — Hana Sato will own the vendor transition and target completion is end of next month.",
+    "foreground_app": "Gmail",
+    "window_title": "Re: Contract renewal - Gmail"
+  },
+  {
+    "capture_id": "cap_0495",
+    "captured_at": "2026-09-09T02:23:37Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "the Quokka mobile app — Status: In Progress. Owner: Owen Barrett. Target date: end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  },
+  {
+    "capture_id": "cap_0496",
+    "captured_at": "2026-09-09T09:47:58Z",
+    "source_modality": "speech",
+    "raw_asr_text": "the deadline uh for the fenwick integration is by end of quarter",
+    "formatted_text": "The deadline for the Fenwick integration is by end of quarter.",
+    "foreground_app": "Notion",
+    "window_title": "Project Solstice - Notion"
+  },
+  {
+    "capture_id": "cap_0497",
+    "captured_at": "2026-09-09T16:02:51Z",
+    "source_modality": "speech",
+    "raw_asr_text": "alright uh",
+    "formatted_text": "Uh.",
+    "foreground_app": "Google Meet",
+    "window_title": "1:1 with Manager - Google Meet"
+  },
+  {
+    "capture_id": "cap_0498",
+    "captured_at": "2026-09-09T16:17:09Z",
+    "source_modality": "speech",
+    "raw_asr_text": "i don't know we might want to revisit the pricing eventually",
+    "formatted_text": "I don't know, we might want to revisit the pricing eventually.",
+    "foreground_app": "Slack",
+    "window_title": "#design-review"
+  },
+  {
+    "capture_id": "cap_0499",
+    "captured_at": "2026-09-10T09:13:15Z",
+    "source_modality": "selected_text",
+    "raw_asr_text": "",
+    "formatted_text": "Ravi Menon: budget approved for the Cascade rollout — $72,400 total, effective this sprint.",
+    "foreground_app": "Slack",
+    "window_title": "#eng-standup"
+  },
+  {
+    "capture_id": "cap_0500",
+    "captured_at": "2026-09-10T17:03:40Z",
+    "source_modality": "manual_edit",
+    "raw_asr_text": "",
+    "formatted_text": "Correcting earlier entry: the Talon onboarding flow is NOT blocked anymore, vendor access came through this morning.",
+    "foreground_app": "Notion",
+    "window_title": "Q3 Roadmap - Notion"
+  }
+]
