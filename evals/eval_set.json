@@ -1,0 +1,351 @@
+{
+  "name": "Kivi semantic memory -- candidate evaluation",
+  "description": "Cases chosen to exercise the behaviours this product actually claims: answering from current memory, refusing to answer what was never recorded, covering every part of a multi-part request, and making conversational deletion real in the database rather than only in the reply. Each case states why it matters, so a failure reads as a product regression rather than a number going down. retrieval_checks run with no model call; agent_expect requires GEMINI_API_KEY; post_checks assert database state AFTER the agent ran.",
+  "grounding": "Written against kivi_corpus.json (500 records, one user). Entity and value expectations are drawn from that corpus's own narrative; run with --ingest kivi_corpus.json to reproduce from scratch.",
+  "corpus_file": "kivi_corpus.json",
+  "requires_entities": [
+    "Project Driftwood",
+    "project Jinangxi",
+    "Helix migration"
+  ],
+  "cases": [
+    {
+      "case_id": "current_owner_after_handover",
+      "category": "factual_current",
+      "question": "Who currently owns Project Driftwood?",
+      "why": "Driftwood changed hands. The superseded owner's row is still in the FTS index forever, so quoting it is the single easiest way for this system to be confidently wrong.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "entity": "Project Driftwood",
+          "attribute": "owner",
+          "expect_value": "Sofia Conti",
+          "must_not_contain": [
+            "Lena Fischer"
+          ]
+        },
+        {
+          "kind": "no_duplicate_attribute",
+          "entity": "Project Driftwood"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_include": [
+          "Sofia"
+        ],
+        "must_not_include": [
+          "Lena Fischer"
+        ],
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "numeric_fact_readable",
+      "category": "factual_current",
+      "question": "What is the budget for project Jinangxi?",
+      "why": "The value lives in value_numeric with value_text NULL. Every display path has to reunite those columns; the one that didn't rendered this fact as 'None'.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "entity": "project Jinangxi",
+          "attribute": "budget",
+          "must_not_contain": [
+            "none"
+          ]
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_include": [
+          "40"
+        ],
+        "must_not_include": [
+          "none"
+        ],
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "abstain_on_unrecorded_topic",
+      "category": "abstention",
+      "question": "What did we decide about the Antarctic expedition permits?",
+      "why": "Nothing in this history is about this. The right answer is to say so. An OR'd keyword search that returns one incidentally-matching row is all it takes for the model to invent a confident answer around it.",
+      "retrieval_checks": [
+        {
+          "kind": "search_returns_nothing",
+          "query": "Antarctic expedition permits"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "abstain"
+      }
+    },
+    {
+      "case_id": "abstain_on_plausible_but_absent_detail",
+      "category": "abstention",
+      "question": "Was the coffee machine repair ever approved?",
+      "why": "Plausible-sounding office trivia the corpus never records. Abstention has to hold for questions that SOUND like they belong, not just obviously alien ones.",
+      "retrieval_checks": [
+        {
+          "kind": "search_returns_nothing",
+          "query": "coffee machine repair approved"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "abstain"
+      }
+    },
+    {
+      "case_id": "compound_two_preferences",
+      "category": "compound_query",
+      "question": "What are my preferences for focus blocks and for meeting note formatting?",
+      "why": "Two unrelated topics in one turn. The reported failure was searching the first, finding something, and answering as though the second half of the sentence wasn't there.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "query": "focus blocks",
+          "node_type": "preference"
+        },
+        {
+          "kind": "search_finds",
+          "query": "meeting notes formatting bullet points",
+          "node_type": "preference"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_include": [
+          "focus block",
+          "bullet"
+        ],
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "compound_two_entities",
+      "category": "compound_query",
+      "question": "What's the deadline for Project Driftwood, and who owns the Helix migration?",
+      "why": "Two entities, two different attributes, one turn. Tests decomposition across entities rather than across topics.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "entity": "Project Driftwood",
+          "attribute": "deadline"
+        },
+        {
+          "kind": "search_finds",
+          "query": "Helix migration owner"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "conversational_deletion_persists",
+      "category": "mutation",
+      "question": "Forget the budget for project Jinangxi.",
+      "why": "The headline failure: the agent said 'I have forgotten that' and the row kept is_active=1, deleted_at=NULL. The post_check is the whole point of this case -- a passing answer with a failing post_check is exactly the bug. Citing the record it just deleted is correct, not stale-data leakage.",
+      "agent_expect": {
+        "must_call_tools": [
+          "delete_memory"
+        ],
+        "allow_stale_citations": true
+      },
+      "post_checks": [
+        {
+          "kind": "fact_deleted",
+          "entity": "project Jinangxi",
+          "attribute": "budget"
+        }
+      ]
+    },
+    {
+      "case_id": "commitment_status_is_respected",
+      "category": "commitment_status",
+      "question": "What am I still waiting on for Project Driftwood?",
+      "why": "Completed and cancelled commitments must not be presented as outstanding work. A memory system that reminds you about things you already finished stops being trusted quickly.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "query": "Project Driftwood"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "history_available_on_request",
+      "category": "episodic",
+      "question": "What was Project Driftwood's owner before the current one?",
+      "why": "Superseded values are hidden from ordinary retrieval but must remain reachable when the question is explicitly about history -- otherwise 'never show stale data' has quietly become 'destroy the audit trail'. The citation here SHOULD be the superseded row -- that is the record being asked about.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "query": "Project Driftwood owner"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_cite": true,
+        "allow_stale_citations": true,
+        "must_include": [
+          "Lena"
+        ]
+      }
+    },
+    {
+      "case_id": "preference_recall",
+      "category": "preference",
+      "question": "How do I like my commit messages written?",
+      "why": "Preference-level recall, phrased nothing like the stored text. Tests that the preference layer is retrievable by intent, not just by matching words.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "query": "commit messages imperative mood",
+          "node_type": "preference"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_include": [
+          "imperative"
+        ],
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "distributed_across_dictations",
+      "category": "multi_hop",
+      "question": "Tell me everything currently true about the Helix migration.",
+      "why": "The answer is spread across several dictations recorded weeks apart. This is the case that proves memory is doing something a single transcript search cannot.",
+      "retrieval_checks": [
+        {
+          "kind": "no_duplicate_attribute",
+          "entity": "Helix migration"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "false_premise_is_corrected",
+      "category": "false_premise",
+      "question": "Since the Driftwood deadline was already agreed and signed off, what's the next step?",
+      "why": "The question smuggles in an assumption. Accepting a premise the history doesn't support is a subtler kind of hallucination than inventing a fact, and a more damaging one.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "entity": "Project Driftwood",
+          "attribute": "deadline"
+        }
+      ],
+      "agent_expect": {
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "what_should_i_do_first",
+      "category": "ordering",
+      "question": "What should I work on first?",
+      "why": "The product promises to 'look at their unfinished work and suggest the best order to tackle it'. The order must come from the deterministic tool, and blocked work must be reported as waiting-on rather than as today's work.",
+      "agent_expect": {
+        "response_type": "answer",
+        "must_call_tools": [
+          "get_open_commitments"
+        ],
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "what_am_i_waiting_on",
+      "category": "ordering",
+      "question": "What am I currently blocked on, and who am I waiting on?",
+      "why": "Blocked commitments carry the user's own blocking_reason. That text IS the answer to 'what am I waiting on' -- the agent must surface it rather than paraphrase it away or list blocked items as actionable work.",
+      "agent_expect": {
+        "response_type": "answer",
+        "must_call_tools": [
+          "get_open_commitments"
+        ],
+        "must_include": [
+          "vendor"
+        ],
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "solution_reuse_finds_past_fix",
+      "category": "solution_reuse",
+      "question": "The sync job is duplicating records again. How did we fix that last time?",
+      "why": "The product's central promise is that the user does not solve the same problem twice. This is a two-hop answer -- find the problem, then follow its 'resolves' edge to the fix -- and the fix has to come back with its actual technical substance (the upsert key), not a vague 'we fixed it'. Answering with the problem alone, or with a fix the graph does not link, is the failure this guards.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "relationship_type": "resolves",
+          "target_contains": "external ID"
+        },
+        {
+          "kind": "search_finds",
+          "query": "sync job duplicating records",
+          "node_type": "event"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_include": [
+          "external id"
+        ],
+        "must_call_tools": [
+          "get_connected_edges"
+        ],
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "past_fix_carries_technical_substance",
+      "category": "solution_reuse",
+      "question": "Why did the Nimbus dashboard deploy keep failing, and what did we do about it?",
+      "why": "A recorded fix is only worth storing if it is specific enough to reuse months later. 'Cleared the CDN cache and pinned the build hash' is reusable; 'fixed the deploy' is not. This checks the cause and the remedy both survive extraction.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "relationship_type": "resolves",
+          "source_contains": "stale cache"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_include": [
+          "cache"
+        ],
+        "must_cite": true
+      }
+    },
+    {
+      "case_id": "dependency_ordering_prerequisite_first",
+      "category": "ordering",
+      "question": "What do I need to do before I can start the Trellis rewrite migration?",
+      "why": "The vision's flagship ordering moment -- 'reminding them to ask a question before jumping into a meeting'. The prerequisite belongs to a different entity than the task being asked about, so a naive entity-scoped lookup returns the dependent task with its prerequisite invisible: the one thing the question was asking for.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "relationship_type": "must_precede",
+          "target_contains": "Trellis"
+        }
+      ],
+      "agent_expect": {
+        "response_type": "answer",
+        "must_include": [
+          "vendor access"
+        ],
+        "must_cite": true
+      }
+    }
+  ]
+}

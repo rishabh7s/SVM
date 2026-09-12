@@ -1,7 +1,7 @@
 """
 Tests for kivi/api/memory_ops.py -- the deterministic memory management
 layer shared by the REST API and the agent's conversational tools. No LLM,
-no network. Runs against a disposable temp copy of the seeded database.
+no network.
 """
 
 import shutil

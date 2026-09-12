@@ -1,0 +1,1795 @@
+{
+  "started_at": "2026-09-11T22:46:13+00:00",
+  "mode": "full pipeline (agent model: gemini-3.1-flash-lite)",
+  "database": "C:\\Users\\Rishabh Singh\\Downloads\\SVM_claude\\evals\\results\\20260912_041613\\eval.db",
+  "eval_set": "C:\\Users\\Rishabh Singh\\Downloads\\SVM_claude\\evals\\eval_set.json",
+  "totals": {
+    "cases": 17,
+    "retrieval_total": 18,
+    "retrieval_passed": 18,
+    "agent_total": 17,
+    "agent_passed": 15,
+    "post_total": 1,
+    "post_passed": 1
+  },
+  "performance": {
+    "agent_model_calls": 46,
+    "prompt_tokens": 283929,
+    "completion_tokens": 6725,
+    "total_tokens": 290654,
+    "estimated_cost_usd": "not configured -- set KIVI_EVAL_COST_PER_1M_INPUT / _OUTPUT to price a run",
+    "retrieval_check_latency_ms_mean": 2.87,
+    "agent_latency_ms_mean": 9354.4,
+    "agent_latency_ms_median": 5166.9,
+    "agent_latency_ms_max": 30796.4,
+    "ingestion_wall_clock_s": null,
+    "db_growth_bytes": 0
+  },
+  "db_before": {
+    "size_bytes": 798720,
+    "captures": 515,
+    "entities": 51,
+    "declarative_facts": 298,
+    "episodic_events": 161,
+    "commitments": 122,
+    "commitment_status_events": 163,
+    "preferences": 39,
+    "relationships": 9,
+    "decision_logs": 535,
+    "active_facts": 198,
+    "superseded_facts": 100,
+    "rejected_captures": 53
+  },
+  "db_after": {
+    "size_bytes": 798720,
+    "captures": 515,
+    "entities": 51,
+    "declarative_facts": 298,
+    "episodic_events": 161,
+    "commitments": 122,
+    "commitment_status_events": 163,
+    "preferences": 39,
+    "relationships": 9,
+    "decision_logs": 535,
+    "active_facts": 197,
+    "superseded_facts": 101,
+    "rejected_captures": 53
+  },
+  "ingestion": {
+    "decisions": {
+      "memorized": 460,
+      "rejected": 75
+    },
+    "deliberately_ignored_sample": [
+      {
+        "capture_id": "cap_0016",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is transient small talk/conversational filler with no durable signal."
+      },
+      {
+        "capture_id": "cap_0036",
+        "extraction_status": "transient_discard",
+        "discard_reason": "Testing audio check/small talk with no durable signal"
+      },
+      {
+        "capture_id": "cap_0046",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user is in the middle of searching for a document; there is no durable signal here."
+      },
+      {
+        "capture_id": "cap_0054",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, non-durable remark about checking on an unspecified 'that' at an unspecified 'later' time; it contains no actionable task or meaningful entity information."
+      },
+      {
+        "capture_id": "cap_0056",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user explicitly requested to disregard the previous input."
+      },
+      {
+        "capture_id": "cap_0057",
+        "extraction_status": "pii_detected",
+        "discard_reason": "pre-LLM triage: password-like pattern detected ('password is/: <value>')"
+      },
+      {
+        "capture_id": "cap_0062",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input contains only filler phrases with no durable or actionable information."
+      },
+      {
+        "capture_id": "cap_0065",
+        "extraction_status": "transient_discard",
+        "discard_reason": "User explicitly requested to disregard the capture."
+      },
+      {
+        "capture_id": "cap_0070",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, hypothetical musing ('Maybe I should...') rather than a grounded fact, event, or specific commitment."
+      },
+      {
+        "capture_id": "cap_0075",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is vague and contains no actionable or durable signal (it does not specify what 'that' refers to, nor does it provide a context for a commitment or task)."
+      },
+      {
+        "capture_id": "cap_0076",
+        "extraction_status": "pii_detected",
+        "discard_reason": "pre-LLM triage: password-like pattern detected ('password is/: <value>')"
+      },
+      {
+        "capture_id": "cap_0077",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague hypothetical statement ('Maybe I should...') with no actionable commitment, specific entity, or durable signal."
+      },
+      {
+        "capture_id": "cap_0082",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a speculative/hypothetical musing rather than a concrete commitment or fact."
+      },
+      {
+        "capture_id": "cap_0087",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input contains only '...' which is an incomplete capture and does not convey actionable information."
+      },
+      {
+        "capture_id": "cap_0102",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user stated \"never mind\", indicating the capture contains no durable or actionable information."
+      },
+      {
+        "capture_id": "cap_0109",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user indicated they did not want to record any information."
+      },
+      {
+        "capture_id": "cap_0129",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, hypothetical musing ('Maybe I should...') with no actionable commitment or durable fact."
+      },
+      {
+        "capture_id": "cap_0150",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains no actionable or durable information; 'Hm.' is transient conversational filler."
+      },
+      {
+        "capture_id": "cap_0155",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains only an ellipsis and no content to process."
+      },
+      {
+        "capture_id": "cap_0167",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user input 'Uh hold on let me find the doc' is a transient interaction regarding the process of locating a document, rather than a durable fact, event, commitment, or preference."
+      },
+      {
+        "capture_id": "cap_0176",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains only filler speech (uh) with no durable information or actionable content."
+      },
+      {
+        "capture_id": "cap_0191",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The content is empty or contains no actionable signal."
+      },
+      {
+        "capture_id": "cap_0206",
+        "extraction_status": "transient_discard",
+        "discard_reason": "Testing audio or text input with no durable information."
+      },
+      {
+        "capture_id": "cap_0207",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a test phrase and contains no durable information, facts, or commitments."
+      },
+      {
+        "capture_id": "cap_0225",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input provided is non-substantive/transient chatter with no actionable content."
+      }
+    ],
+    "ingestion_latency_ms": {
+      "count": 534,
+      "mean": 6444.3,
+      "median": 3523.5,
+      "p95": 16875.0,
+      "max": 65719.0
+    }
+  },
+  "cases": [
+    {
+      "case_id": "current_owner_after_handover",
+      "question": "Who currently owns Project Driftwood?",
+      "category": "factual_current",
+      "why": "Driftwood changed hands. The superseded owner's row is still in the FTS index forever, so quoting it is the single easiest way for this system to be confidently wrong.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "found": [
+            {
+              "fact_id": "fact_613b40b8cda5",
+              "value": "Sofia Conti"
+            }
+          ],
+          "provenance": [
+            {
+              "capture_id": "cap_0173",
+              "captured_at": "2026-04-13T12:47:53Z",
+              "foreground_app": "Google Meet",
+              "formatted_text": "Okay recap: Sofia Conti owns Project Driftwood, the deadline is by end of quarter, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team by end of quarter."
+            }
+          ],
+          "reason": "current owner = ['Sofia Conti']",
+          "latency_ms": 1.13,
+          "passed": true
+        },
+        {
+          "kind": "no_duplicate_attribute",
+          "duplicates": [],
+          "reason": "one active value per attribute",
+          "latency_ms": 0.18,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "Sofia Conti currently owns Project Driftwood.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "fact",
+            "source_id": "fact_613b40b8cda5",
+            "snippet": "Okay recap: Sofia Conti owns Project Driftwood, the deadline is by end of quarter, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team by end of quarter.",
+            "capture_id": "cap_0173",
+            "captured_at": "2026-04-13T12:47:53Z",
+            "foreground_app": "Google Meet",
+            "source_text": "Okay recap: Sofia Conti owns Project Driftwood, the deadline is by end of quarter, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team by end of quarter.",
+            "is_active": 1,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "I need to identify the current owner of Project Driftwood. I will search for the entity 'Project Driftwood' first to retrieve its ID, and then use that ID to fetch its facts.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Project Driftwood\"}"
+          },
+          {
+            "thought": "I have the entity ID 'ent_9dc358fcab45' for Project Driftwood. I will now retrieve its entity facts to identify the owner.",
+            "action": "call_tool",
+            "tool": "get_entity_facts",
+            "arguments": "{\"entity_id\": \"ent_9dc358fcab45\"}"
+          },
+          {
+            "thought": "I have identified the owner of Project Driftwood from the retrieved entity facts.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 8.7,
+          "generation_latency_ms": 4869.98,
+          "total_latency_ms": 4879.1,
+          "prompt_tokens": 18746,
+          "completion_tokens": 378,
+          "total_tokens": 19124
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "numeric_fact_readable",
+      "question": "What is the budget for project Jinangxi?",
+      "category": "factual_current",
+      "why": "The value lives in value_numeric with value_text NULL. Every display path has to reunite those columns; the one that didn't rendered this fact as 'None'.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "found": [
+            {
+              "fact_id": "fact_c53cf30ae7ea",
+              "value": "$40,000"
+            }
+          ],
+          "provenance": [
+            {
+              "capture_id": "cap_fb0c530ecc6e",
+              "captured_at": "2026-09-11T14:47:42.907246",
+              "foreground_app": null,
+              "formatted_text": "Hi, the budget for project Jinangxi is 40K"
+            }
+          ],
+          "reason": "current budget = ['$40,000']",
+          "latency_ms": 0.64,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "The budget for project Jinangxi is $40,000.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "fact",
+            "source_id": "fact_c53cf30ae7ea",
+            "snippet": "Hi, the budget for project Jinangxi is 40K",
+            "capture_id": "cap_fb0c530ecc6e",
+            "captured_at": "2026-09-11T14:47:42.907246",
+            "foreground_app": null,
+            "source_text": "Hi, the budget for project Jinangxi is 40K",
+            "is_active": 1,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "I need to find the budget for 'project Jinangxi'. I will first search for the entity to get its ID, then retrieve its facts.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Jinangxi\"}"
+          },
+          {
+            "thought": "I have found the entity for project Jinangxi and a fact that seems to be the budget. I will call get_entity_facts for the project to ensure I get the full and correct information.",
+            "action": "call_tool",
+            "tool": "get_entity_facts",
+            "arguments": "{\"entity_id\": \"ent_4e36119d6548\"}"
+          },
+          {
+            "thought": "I have successfully retrieved the budget for project Jinangxi from the entity facts.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 2.12,
+          "generation_latency_ms": 4056.38,
+          "total_latency_ms": 4058.87,
+          "prompt_tokens": 16687,
+          "completion_tokens": 350,
+          "total_tokens": 17037
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "abstain_on_unrecorded_topic",
+      "question": "What did we decide about the Antarctic expedition permits?",
+      "category": "abstention",
+      "why": "Nothing in this history is about this. The right answer is to say so. An OR'd keyword search that returns one incidentally-matching row is all it takes for the model to invent a confident answer around it.",
+      "retrieval_checks": [
+        {
+          "kind": "search_returns_nothing",
+          "results": [],
+          "reason": "no candidate cleared the relevance floor, so the agent is forced to abstain",
+          "latency_ms": 0.33,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "abstain",
+        "answer": null,
+        "abstain_reason": "no_matching_nodes: I couldn't find any records related to 'Antarctic expedition permits'. Are you sure that's the correct name, or could it be filed under a different project name?",
+        "disambiguation_options": null,
+        "citations": [],
+        "trace": [
+          {
+            "thought": "I need to find information regarding the 'Antarctic expedition permits' to see if there is a decision recorded.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Antarctic expedition permits\"}"
+          },
+          {
+            "thought": "The search for 'Antarctic expedition permits' returned no results, so I must abstain according to the rules.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 2,
+          "tool_calls": 1,
+          "retrieval_latency_ms": 0.44,
+          "generation_latency_ms": 2942.22,
+          "total_latency_ms": 2942.79,
+          "prompt_tokens": 10715,
+          "completion_tokens": 196,
+          "total_tokens": 10911
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "abstain_on_plausible_but_absent_detail",
+      "question": "Was the coffee machine repair ever approved?",
+      "category": "abstention",
+      "why": "Plausible-sounding office trivia the corpus never records. Abstention has to hold for questions that SOUND like they belong, not just obviously alien ones.",
+      "retrieval_checks": [
+        {
+          "kind": "search_returns_nothing",
+          "results": [],
+          "reason": "no candidate cleared the relevance floor, so the agent is forced to abstain",
+          "latency_ms": 3.89,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "abstain",
+        "answer": null,
+        "abstain_reason": "no_matching_nodes: I couldn't find any record of a coffee machine repair request in your history.",
+        "disambiguation_options": null,
+        "citations": [],
+        "trace": [
+          {
+            "thought": "I need to check if there is an approved status for a coffee machine repair commitment or fact.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"coffee machine repair\"}"
+          },
+          {
+            "thought": "The search for 'coffee machine repair' yielded no results, meaning there is no recorded information about this request in the system.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 2,
+          "tool_calls": 1,
+          "retrieval_latency_ms": 0.93,
+          "generation_latency_ms": 30795.36,
+          "total_latency_ms": 30796.44,
+          "prompt_tokens": 10707,
+          "completion_tokens": 176,
+          "total_tokens": 10883
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "compound_two_preferences",
+      "question": "What are my preferences for focus blocks and for meeting note formatting?",
+      "category": "compound_query",
+      "why": "Two unrelated topics in one turn. The reported failure was searching the first, finding something, and answering as though the second half of the sentence wasn't there.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "pref_265016527a5c",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_6037c67d92f0",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_decf91078dbb",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_c8296c589838",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_d3729f4ab995",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_7370500071ea",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "evt_8c3b31a5d165",
+              "node_type": "event"
+            },
+            {
+              "node_id": "fact_769db715a100",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_a897168b64ef",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_038e4cd43e7b",
+              "node_type": "fact"
+            }
+          ],
+          "reason": "6 matching result(s)",
+          "latency_ms": 3.63,
+          "passed": true
+        },
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "pref_ac39aa7f864e",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_bb1a5e4bd469",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "fact_74f4df19ebb2",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_d3add63328f1",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_578e032fee30",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_4721980bce18",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_063aed389b1b",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_7d2993ca8e17",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_caa045c60485",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "evt_c7de5d0b22a8",
+              "node_type": "event"
+            }
+          ],
+          "reason": "2 matching result(s)",
+          "latency_ms": 7.1,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "You prefer to schedule focus blocks in the morning rather than after lunch. Regarding meeting notes, your preference is to always use bullet points instead of paragraphs.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "fact",
+            "source_id": "pref_7370500071ea",
+            "snippet": "Schedule focus blocks in the morning rather than after lunch.",
+            "capture_id": "cap_0152",
+            "captured_at": "2026-04-03T12:59:25Z",
+            "foreground_app": "VS Code",
+            "source_text": "Please schedule my focus blocks in the morning, not after lunch.",
+            "is_active": 1,
+            "deleted_at": null
+          },
+          {
+            "source_type": "fact",
+            "source_id": "pref_ac39aa7f864e",
+            "snippet": "Always format meeting notes with bullet points, not paragraphs.",
+            "capture_id": "cap_0143",
+            "captured_at": "2026-03-30T15:47:49Z",
+            "foreground_app": "VS Code",
+            "source_text": "Always format meeting notes with bullet points, not paragraphs.",
+            "is_active": 1,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "The user is asking for two separate preferences. I will search for both 'focus blocks' and 'meeting note formatting' to retrieve the relevant preferences.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"focus blocks\"}"
+          },
+          {
+            "thought": "I have found the preference for focus blocks. Now I need to search for the meeting note formatting preference.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"meeting note formatting\"}"
+          },
+          {
+            "thought": "I have successfully retrieved preferences for both focus blocks and meeting note formatting. I will now synthesize these into a final answer.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 12.4,
+          "generation_latency_ms": 5787.23,
+          "total_latency_ms": 5799.86,
+          "prompt_tokens": 17324,
+          "completion_tokens": 388,
+          "total_tokens": 17712
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "compound_two_entities",
+      "question": "What's the deadline for Project Driftwood, and who owns the Helix migration?",
+      "category": "compound_query",
+      "why": "Two entities, two different attributes, one turn. Tests decomposition across entities rather than across topics.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "found": [
+            {
+              "fact_id": "fact_7cb905f4e1d3",
+              "value": "2026-08-11"
+            }
+          ],
+          "provenance": [
+            {
+              "capture_id": "cap_0417",
+              "captured_at": "2026-08-02T19:38:40Z",
+              "foreground_app": "Notion",
+              "formatted_text": "Update: deadline for Project Driftwood pushed from Friday to the following Tuesday per leadership."
+            }
+          ],
+          "reason": "current deadline = ['2026-08-11']",
+          "latency_ms": 0.91,
+          "passed": true
+        },
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "fact_49e4252a2d4f",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_4bbc50eb53df",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "ent_8aeec0ea2454",
+              "node_type": "entity"
+            },
+            {
+              "node_id": "com_aaaeab7891c8",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_d57822f961d5",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_8a0229daad56",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_88a11336e13d",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_14d1ab14567d",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_74fd2fb6ad2a",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "fact_c47d62109175",
+              "node_type": "fact"
+            }
+          ],
+          "reason": "10 matching result(s)",
+          "latency_ms": 7.57,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "The deadline for Project Driftwood is 2026-08-11. The owner of the Helix migration is Ben Okafor.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "fact",
+            "source_id": "fact_7cb905f4e1d3",
+            "snippet": "Update: deadline for Project Driftwood pushed from Friday to the following Tuesday per leadership. (2026-08-11)",
+            "capture_id": "cap_0417",
+            "captured_at": "2026-08-02T19:38:40Z",
+            "foreground_app": "Notion",
+            "source_text": "Update: deadline for Project Driftwood pushed from Friday to the following Tuesday per leadership.",
+            "is_active": 1,
+            "deleted_at": null
+          },
+          {
+            "source_type": "fact",
+            "source_id": "fact_84d184242d5d",
+            "snippet": "Okay recap: Ben Okafor owns the Helix migration, the deadline is next tuesday...",
+            "capture_id": "cap_0480",
+            "captured_at": "2026-08-29T03:57:24Z",
+            "foreground_app": "Google Meet",
+            "source_text": "Okay recap: Ben Okafor owns the Helix migration, the deadline is next tuesday, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team next tuesday.",
+            "is_active": 1,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "I need to find the deadline for 'Project Driftwood' and the owner of the 'Helix migration'. These are two distinct entity-based questions. I will search for the entity 'Driftwood' and 'Helix' to get their IDs and then use get_entity_facts for both.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Driftwood\"}"
+          },
+          {
+            "thought": "I have found the entity 'Project Driftwood' (ent_9dc358fcab45), but I still need to find the 'Helix' entity to address the second part of the user's request. I will call get_entity_facts for 'Project Driftwood' and search for 'Helix'.",
+            "action": "call_tool",
+            "tool": "get_entity_facts",
+            "arguments": "{\"entity_id\": \"ent_9dc358fcab45\"}"
+          },
+          {
+            "thought": "I have retrieved the deadline for Project Driftwood (2026-08-11). Now I need to search for 'Helix migration' to find the owner.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Helix migration\"}"
+          },
+          {
+            "thought": "I have found the deadline for Project Driftwood (2026-08-11). For the Helix migration owner, I have retrieved the entity 'Helix migration' (ent_8aeec0ea2454) and need to call get_entity_facts for it to find the 'owner' attribute.",
+            "action": "call_tool",
+            "tool": "get_entity_facts",
+            "arguments": "{\"entity_id\": \"ent_8aeec0ea2454\"}"
+          },
+          {
+            "thought": "I have identified the deadline for Project Driftwood and the owner of the Helix migration from the retrieved entity facts.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 5,
+          "tool_calls": 4,
+          "retrieval_latency_ms": 15.5,
+          "generation_latency_ms": 9223.17,
+          "total_latency_ms": 9239.42,
+          "prompt_tokens": 37718,
+          "completion_tokens": 725,
+          "total_tokens": 38443
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "conversational_deletion_persists",
+      "question": "Forget the budget for project Jinangxi.",
+      "category": "mutation",
+      "why": "The headline failure: the agent said 'I have forgotten that' and the row kept is_active=1, deleted_at=NULL. The post_check is the whole point of this case -- a passing answer with a failing post_check is exactly the bug. Citing the record it just deleted is correct, not stale-data leakage.",
+      "retrieval_checks": [],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "I have removed the budget record of 40K USD for project Jinangxi from your memory.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "fact",
+            "source_id": "fact_c53cf30ae7ea",
+            "snippet": "Hi, the budget for project Jinangxi is 40K",
+            "capture_id": "cap_fb0c530ecc6e",
+            "captured_at": "2026-09-11T14:47:42.907246",
+            "foreground_app": null,
+            "source_text": "Hi, the budget for project Jinangxi is 40K",
+            "is_active": 0,
+            "deleted_at": "2026-09-11T22:47:19.827690"
+          }
+        ],
+        "trace": [
+          {
+            "thought": "The user wants to delete the budget for project Jinangxi. I first need to find the node ID for this specific budget fact.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Jinangxi budget\"}"
+          },
+          {
+            "thought": "I have identified the fact node 'fact_c53cf30ae7ea' as the budget for project Jinangxi. I must now call get_node_details to verify it before deletion.",
+            "action": "call_tool",
+            "tool": "get_node_details",
+            "arguments": "{\"node_id\": \"fact_c53cf30ae7ea\"}"
+          },
+          {
+            "thought": "I have verified the fact node 'fact_c53cf30ae7ea' corresponds to the Jinangxi budget. I will now proceed to delete it.",
+            "action": "call_tool",
+            "tool": "delete_memory",
+            "arguments": "{\"node_id\": \"fact_c53cf30ae7ea\"}"
+          },
+          {
+            "thought": "The memory has been successfully deleted, and I have confirmed this via the tool result.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 4,
+          "tool_calls": 3,
+          "retrieval_latency_ms": 14.51,
+          "generation_latency_ms": 11971.73,
+          "total_latency_ms": 11986.59,
+          "prompt_tokens": 23848,
+          "completion_tokens": 457,
+          "total_tokens": 24305
+        }
+      },
+      "post_checks": [
+        {
+          "kind": "fact_deleted",
+          "passed": true,
+          "observed": {
+            "is_active": 0,
+            "deleted_at": "2026-09-11T22:47:19.827690"
+          },
+          "reason": "the delete is durable in the database, not just in the reply"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "commitment_status_is_respected",
+      "question": "What am I still waiting on for Project Driftwood?",
+      "category": "commitment_status",
+      "why": "Completed and cancelled commitments must not be presented as outstanding work. A memory system that reminds you about things you already finished stops being trusted quickly.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "com_c73a605ec62f",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "ent_9dc358fcab45",
+              "node_type": "entity"
+            },
+            {
+              "node_id": "com_929babf9e0dd",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "fact_fe669375efaa",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "evt_436f30f2a4c5",
+              "node_type": "event"
+            },
+            {
+              "node_id": "fact_f578ad507c45",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_7f8a5fee05db",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "evt_9bd64e6f199b",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_03f3b3e5a9e1",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_33ed889ffd5d",
+              "node_type": "event"
+            }
+          ],
+          "reason": "10 matching result(s)",
+          "latency_ms": 4.77,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "You are currently waiting on the Ridgeline Data API keys, which are blocking Project Driftwood. Additionally, you have three outstanding items: working on the project (which is overdue as of July 26th), moving the project to 'in progress' status, and chasing Ferrous Systems regarding an overdue invoice.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "commitment",
+            "source_id": "com_c6722ab01587",
+            "snippet": "Waiting for Ridgeline Data API keys to unblock Project Driftwood",
+            "capture_id": "cap_0491",
+            "captured_at": "2026-09-07T10:33:55Z",
+            "foreground_app": "Slack",
+            "source_text": "Lena Fischer: heads up, Project Driftwood is now blocked on the Ridgeline Data API keys \u00e2\u20ac\u201d opened a ticket, ETA unclear.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_c73a605ec62f",
+            "snippet": "Working on Project Driftwood (overdue)",
+            "capture_id": "cap_0371",
+            "captured_at": "2026-07-16T16:47:51Z",
+            "foreground_app": "Slack",
+            "source_text": "Started working on Project Driftwood today, should be in progress through next week.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_394745058f2c",
+            "snippet": "Follow up with Ferrous Systems regarding the overdue invoice for Project Driftwood.",
+            "capture_id": "cap_0356",
+            "captured_at": "2026-07-09T14:05:10Z",
+            "foreground_app": "Notes",
+            "source_text": "TODO: chase Ferrous Systems about the overdue invoice for Project Driftwood.",
+            "is_active": null,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "The user is asking for outstanding commitments related to 'Project Driftwood', specifically what they are waiting on. I need to first find the entity ID for 'Project Driftwood', then use get_open_commitments with that entity ID to see what is blocked or outstanding.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Project Driftwood\"}"
+          },
+          {
+            "thought": "I have the entity ID for 'Project Driftwood' (ent_9dc358fcab45). I will now call get_open_commitments for that entity to determine what is currently blocking the project or what the user is waiting on.",
+            "action": "call_tool",
+            "tool": "get_open_commitments",
+            "arguments": "{\"entity_id\": \"ent_9dc358fcab45\"}"
+          },
+          {
+            "thought": "I have identified the commitments associated with Project Driftwood. I can now report the blocking issue and the outstanding work.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 8.42,
+          "generation_latency_ms": 25139.39,
+          "total_latency_ms": 25148.09,
+          "prompt_tokens": 17776,
+          "completion_tokens": 553,
+          "total_tokens": 18329
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "history_available_on_request",
+      "question": "What was Project Driftwood's owner before the current one?",
+      "category": "episodic",
+      "why": "Superseded values are hidden from ordinary retrieval but must remain reachable when the question is explicitly about history -- otherwise 'never show stale data' has quietly become 'destroy the audit trail'. The citation here SHOULD be the superseded row -- that is the record being asked about.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "fact_613b40b8cda5",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_d1c7a630623c",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "com_c73a605ec62f",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "ent_9dc358fcab45",
+              "node_type": "entity"
+            },
+            {
+              "node_id": "com_929babf9e0dd",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "fact_fe669375efaa",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "evt_436f30f2a4c5",
+              "node_type": "event"
+            },
+            {
+              "node_id": "fact_f578ad507c45",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_7f8a5fee05db",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "evt_9bd64e6f199b",
+              "node_type": "event"
+            }
+          ],
+          "reason": "10 matching result(s)",
+          "latency_ms": 11.47,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "Before Sofia Conti took ownership, Lena Fischer was the owner of Project Driftwood.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "fact",
+            "source_id": "fact_e5bb7fa8c295",
+            "snippet": "Previous owner of Project Driftwood was Lena Fischer",
+            "capture_id": "cap_0050",
+            "captured_at": "2026-02-03T09:54:26Z",
+            "foreground_app": "Notion",
+            "source_text": "Wait no, I meant Lena Fischer is the owner for Project Driftwood, not the other person I mentioned earlier.",
+            "is_active": 0,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "I need to identify the current owner of Project Driftwood to locate the correct entity, then fetch its history to find the previous owner.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Project Driftwood\"}"
+          },
+          {
+            "thought": "I have identified the entity ID for Project Driftwood (ent_9dc358fcab45). I will now fetch its facts to find the current owner and then its history to identify the previous one.",
+            "action": "call_tool",
+            "tool": "get_entity_facts",
+            "arguments": "{\"entity_id\": \"ent_9dc358fcab45\"}"
+          },
+          {
+            "thought": "I have the current owner (Sofia Conti) and the fact_id (fact_613b40b8cda5). I will check its history to find who owned it before her.",
+            "action": "call_tool",
+            "tool": "get_node_history",
+            "arguments": "{\"node_id\": \"fact_613b40b8cda5\"}"
+          },
+          {
+            "thought": "I have found the history for the owner of Project Driftwood. Lena Fischer was the previous owner before Sofia Conti took over.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 4,
+          "tool_calls": 3,
+          "retrieval_latency_ms": 9.8,
+          "generation_latency_ms": 11656.37,
+          "total_latency_ms": 11666.7,
+          "prompt_tokens": 26627,
+          "completion_tokens": 475,
+          "total_tokens": 27102
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "preference_recall",
+      "question": "How do I like my commit messages written?",
+      "category": "preference",
+      "why": "Preference-level recall, phrased nothing like the stored text. Tests that the preference layer is retrievable by intent, not just by matching words.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "pref_e93988a94202",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_bdbc27690506",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_f31511b8b8f9",
+              "node_type": "preference"
+            }
+          ],
+          "reason": "3 matching result(s)",
+          "latency_ms": 3.72,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "You prefer your commit messages to be written in the imperative mood and kept under fifty characters.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "fact",
+            "source_id": "pref_bdbc27690506",
+            "snippet": "commit messages must be written in the imperative mood and be under fifty characters",
+            "capture_id": "cap_0147",
+            "captured_at": "2026-04-01T18:34:30Z",
+            "foreground_app": "VS Code",
+            "source_text": "I like commit messages written in imperative mood, keep them under fifty characters.",
+            "is_active": 1,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "The user is asking about their preferences for commit message formatting. I need to search the database for any stored preferences related to commit messages.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"commit message preference\"}"
+          },
+          {
+            "thought": "I have found the user's preferences regarding commit messages. I will now consolidate these into a single answer.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 2,
+          "tool_calls": 1,
+          "retrieval_latency_ms": 2.6,
+          "generation_latency_ms": 2648.24,
+          "total_latency_ms": 2651.02,
+          "prompt_tokens": 10874,
+          "completion_tokens": 241,
+          "total_tokens": 11115
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "distributed_across_dictations",
+      "question": "Tell me everything currently true about the Helix migration.",
+      "category": "multi_hop",
+      "why": "The answer is spread across several dictations recorded weeks apart. This is the case that proves memory is doing something a single transcript search cannot.",
+      "retrieval_checks": [
+        {
+          "kind": "no_duplicate_attribute",
+          "duplicates": [],
+          "reason": "one active value per attribute",
+          "latency_ms": 0.29,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "The Helix migration is currently blocked due to missing API keys from Glasswing Consulting. Key details include:\n\n- Owner: Ben Okafor\n- Deadline: 2026-09-01\n- Tooling: The team decided to use Linear, though there is a prior note about Figma. Aiko Tanaka is the owner for the migration documentation.\n- Budget: ~$50.\n- Conversion Rate: 12%.\n\nRegarding ongoing work, you have several open commitments:\n- In Progress: Finishing the draft proposal.\n- Outstanding: Performing the cutover, moving the project to Confluence and Figma, getting the spec reviewed, and sending an updated timeline to Claire Dubois.\n- Blocked: You are waiting on the Glasswing Consulting API keys to open a ticket.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "fact",
+            "source_id": "fact_038e4cd43e7b",
+            "snippet": "Hana Sato: heads up, the Helix migration is now blocked on the Glasswing Consulting API keys \u2013 opened a ticket, ETA unclear.",
+            "capture_id": "cap_0338",
+            "captured_at": "2026-07-01T19:58:39Z",
+            "foreground_app": "Slack",
+            "source_text": "Hana Sato: heads up, the Helix migration is now blocked on the Glasswing Consulting API keys \u00e2\u20ac\u201d opened a ticket, ETA unclear.",
+            "is_active": 1,
+            "deleted_at": null
+          },
+          {
+            "source_type": "fact",
+            "source_id": "fact_84d184242d5d",
+            "snippet": "Ben Okafor owns the Helix migration, the deadline is next tuesday",
+            "capture_id": "cap_0480",
+            "captured_at": "2026-08-29T03:57:24Z",
+            "foreground_app": "Google Meet",
+            "source_text": "Okay recap: Ben Okafor owns the Helix migration, the deadline is next tuesday, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team next tuesday.",
+            "is_active": 1,
+            "deleted_at": null
+          },
+          {
+            "source_type": "fact",
+            "source_id": "fact_b21694d61d16",
+            "snippet": "The team agreed to switch the Helix migration over to Linear",
+            "capture_id": "cap_0379",
+            "captured_at": "2026-07-18T18:46:58Z",
+            "foreground_app": "Google Meet",
+            "source_text": "The team agreed to switch the Helix migration over to Linear because the design review flagged accessibility issues.",
+            "is_active": 1,
+            "deleted_at": null
+          },
+          {
+            "source_type": "fact",
+            "source_id": "fact_49e4252a2d4f",
+            "snippet": "Aiko Tanaka: can you own the migration doc for the Helix migration?",
+            "capture_id": "cap_0421",
+            "captured_at": "2026-08-04T10:41:21Z",
+            "foreground_app": "Slack",
+            "source_text": "Aiko Tanaka: can you own the migration doc for the Helix migration? need it before Thursday's review.",
+            "is_active": 1,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "I need to find the entity 'Helix migration' to retrieve its current state.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Helix migration\"}"
+          },
+          {
+            "thought": "I have identified the entity for the Helix migration and will now retrieve its full state using get_entity_facts to provide a comprehensive answer.",
+            "action": "call_tool",
+            "tool": "get_entity_facts",
+            "arguments": "{\"entity_id\": \"ent_8aeec0ea2454\"}"
+          },
+          {
+            "thought": "I have retrieved the complete current state of the Helix migration project, including facts, open commitments, and preferences.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 11.65,
+          "generation_latency_ms": 4737.87,
+          "total_latency_ms": 4749.94,
+          "prompt_tokens": 19573,
+          "completion_tokens": 655,
+          "total_tokens": 20228
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "false_premise_is_corrected",
+      "question": "Since the Driftwood deadline was already agreed and signed off, what's the next step?",
+      "category": "false_premise",
+      "why": "The question smuggles in an assumption. Accepting a premise the history doesn't support is a subtler kind of hallucination than inventing a fact, and a more damaging one.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "found": [
+            {
+              "fact_id": "fact_7cb905f4e1d3",
+              "value": "2026-08-11"
+            }
+          ],
+          "provenance": [
+            {
+              "capture_id": "cap_0417",
+              "captured_at": "2026-08-02T19:38:40Z",
+              "foreground_app": "Notion",
+              "formatted_text": "Update: deadline for Project Driftwood pushed from Friday to the following Tuesday per leadership."
+            }
+          ],
+          "reason": "current deadline = ['2026-08-11']",
+          "latency_ms": 0.93,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "Project Driftwood is currently active with three actionable items. You are overdue on the project work (originally due 2026-07-26). Additionally, you are currently working on moving the project status to 'in-progress' and need to follow up with Ferrous Systems regarding an overdue invoice. Note that the project is currently blocked until you receive the Ridgeline Data API keys.\n\nCorrection: the question assumes this was agreed/confirmed, but the record for com_c73a605ec62f currently shows status='in_progress', not done.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "commitment",
+            "source_id": "com_c73a605ec62f",
+            "snippet": "Project Driftwood work: Working on Project Driftwood (Overdue)",
+            "capture_id": "cap_0371",
+            "captured_at": "2026-07-16T16:47:51Z",
+            "foreground_app": "Slack",
+            "source_text": "Started working on Project Driftwood today, should be in progress through next week.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_394745058f2c",
+            "snippet": "Chase Ferrous Systems about overdue invoice",
+            "capture_id": "cap_0356",
+            "captured_at": "2026-07-09T14:05:10Z",
+            "foreground_app": "Notes",
+            "source_text": "TODO: chase Ferrous Systems about the overdue invoice for Project Driftwood.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_c6722ab01587",
+            "snippet": "Blocked waiting for Ridgeline Data API keys",
+            "capture_id": "cap_0491",
+            "captured_at": "2026-09-07T10:33:55Z",
+            "foreground_app": "Slack",
+            "source_text": "Lena Fischer: heads up, Project Driftwood is now blocked on the Ridgeline Data API keys \u00e2\u20ac\u201d opened a ticket, ETA unclear.",
+            "is_active": null,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "The user is asking about the next step for the Driftwood project. I need to find the Driftwood entity first to identify its open commitments.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Driftwood\"}"
+          },
+          {
+            "thought": "I have identified the Driftwood project entity (ent_9dc358fcab45). To find the 'next step', I need to see the current list of outstanding commitments for this entity using get_open_commitments.",
+            "action": "call_tool",
+            "tool": "get_open_commitments",
+            "arguments": "{\"entity_id\": \"ent_9dc358fcab45\"}"
+          },
+          {
+            "thought": "I have successfully identified the outstanding tasks for Project Driftwood. I will now present these to the user, highlighting the overdue and in-progress items, while also noting the dependency that is currently blocking the project.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 6.34,
+          "generation_latency_ms": 5095.94,
+          "total_latency_ms": 5102.99,
+          "prompt_tokens": 17742,
+          "completion_tokens": 553,
+          "total_tokens": 18295
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "what_should_i_do_first",
+      "question": "What should I work on first?",
+      "category": "ordering",
+      "why": "The product promises to 'look at their unfinished work and suggest the best order to tackle it'. The order must come from the deterministic tool, and blocked work must be reported as waiting-on rather than as today's work.",
+      "retrieval_checks": [],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "You have several overdue tasks. Please focus on these in order: 1. Atlas redesign migration doc, 2. Draft proposal for the Helix migration (in progress), 3. Talon onboarding flow launch, 4. Finish draft proposal for the Marigold campaign, 5. Have the report ready for Priya Raman. There are also 14 items currently blocked, primarily due to pending vendor access or API keys.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "commitment",
+            "source_id": "com_c99493ee7113",
+            "snippet": "Create and own the migration documentation for the Atlas redesign.",
+            "capture_id": "cap_0014",
+            "captured_at": "2026-01-16T14:47:41Z",
+            "foreground_app": "Slack",
+            "source_text": "Ravi Menon: can you own the migration doc for the Atlas redesign? need it before Thursday's review.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_88a11336e13d",
+            "snippet": "Finish the draft proposal for the Helix migration",
+            "capture_id": "cap_0035",
+            "captured_at": "2026-01-25T16:56:24Z",
+            "foreground_app": "Google Meet",
+            "source_text": "I need to finish the draft proposal for the Helix migration tomorrow morning.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_bb0dd9ab0b20",
+            "snippet": "Talon onboarding flow launch",
+            "capture_id": "cap_0052",
+            "captured_at": "2026-02-04T13:12:37Z",
+            "foreground_app": "Notion",
+            "source_text": "The Talon onboarding flow needs to launch by next wednesday, that's a hard deadline from leadership.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_279cfe4e8211",
+            "snippet": "Finish draft proposal for the Marigold campaign",
+            "capture_id": "cap_0038",
+            "captured_at": "2026-01-27T15:07:38Z",
+            "foreground_app": "Google Meet",
+            "source_text": "I need to finish the draft proposal for the Marigold campaign by the fifteenth.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_12654802cc40",
+            "snippet": "Have the report ready for Priya Raman",
+            "capture_id": "cap_0061",
+            "captured_at": "2026-02-06T12:18:15Z",
+            "foreground_app": "Google Meet",
+            "source_text": "I promised Priya Raman I'd have the report ready by the fifteenth.",
+            "is_active": null,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "The user is asking for prioritization of their work, which is a direct use case for the get_open_commitments tool. This tool handles the ordering and categorization automatically, so I will call it without parameters to get the full scope.",
+            "action": "call_tool",
+            "tool": "get_open_commitments",
+            "arguments": "{}"
+          },
+          {
+            "thought": "I have retrieved the user's outstanding commitments and organized them according to the priority provided by the system, separating actionable tasks from those that are currently blocked.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 2,
+          "tool_calls": 1,
+          "retrieval_latency_ms": 9.37,
+          "generation_latency_ms": 5157.17,
+          "total_latency_ms": 5166.88,
+          "prompt_tokens": 15240,
+          "completion_tokens": 536,
+          "total_tokens": 15776
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "what_am_i_waiting_on",
+      "question": "What am I currently blocked on, and who am I waiting on?",
+      "category": "ordering",
+      "why": "Blocked commitments carry the user's own blocking_reason. That text IS the answer to 'what am I waiting on' -- the agent must surface it rather than paraphrase it away or list blocked items as actionable work.",
+      "retrieval_checks": [],
+      "agent": {
+        "passed": false,
+        "failures": [
+          "expected response_type='answer', got 'abstain'",
+          "answer does not mention 'vendor'",
+          "answer carries no citation"
+        ],
+        "response_type": "abstain",
+        "answer": null,
+        "abstain_reason": "agent call failed (transient provider error): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite\\nPlease retry in 48.393697296s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.1-flash-lite'}, 'quotaValue': '15'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '48s'}]}}",
+        "disambiguation_options": null,
+        "citations": [],
+        "trace": [
+          {
+            "thought": "The user is asking for blocked commitments and who they are waiting on. I will use `get_open_commitments` to retrieve all outstanding work and specifically look at the blocked items.",
+            "action": "call_tool",
+            "tool": "get_open_commitments",
+            "arguments": "{}"
+          }
+        ],
+        "metrics": {
+          "model_calls": 1,
+          "tool_calls": 1,
+          "retrieval_latency_ms": 23.89,
+          "generation_latency_ms": 13117.02,
+          "total_latency_ms": 13141.22,
+          "prompt_tokens": 5324,
+          "completion_tokens": 92,
+          "total_tokens": 5416
+        }
+      },
+      "post_checks": [],
+      "passed": false
+    },
+    {
+      "case_id": "solution_reuse_finds_past_fix",
+      "question": "The sync job is duplicating records again. How did we fix that last time?",
+      "category": "solution_reuse",
+      "why": "The product's central promise is that the user does not solve the same problem twice. This is a two-hop answer -- find the problem, then follow its 'resolves' edge to the fix -- and the fix has to come back with its actual technical substance (the upsert key), not a vague 'we fixed it'. Answering with the problem alone, or with a fix the graph does not link, is the failure this guards.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "edges_found": [
+            {
+              "source": "Sync job duplicating records due to upsert keying on email instead of external ID during address changes.",
+              "target": "Switched the upsert key to external ID and backfilled the duplicate records."
+            },
+            {
+              "source": "Compass redesign sync is duplicating records due to upsert keys on email.",
+              "target": "Switched to external ID as the upsert key to resolve record duplication."
+            }
+          ],
+          "reason": "2 matching 'resolves' edge(s) of 5 total",
+          "latency_ms": 1.0,
+          "passed": true
+        },
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "evt_b2f53a51e3e9",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_548a44a0c219",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_d6fd6b87e0fe",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_3be4776661ce",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_bcdd69963a4c",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_6b646471e98a",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_f094a0660d3b",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_77235d49fa9f",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_5ed00ddfc551",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_ac638236d588",
+              "node_type": "event"
+            }
+          ],
+          "reason": "10 matching result(s)",
+          "latency_ms": 3.17,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": false,
+        "failures": [
+          "expected response_type='answer', got 'abstain'",
+          "answer does not mention 'external id'",
+          "answer carries no citation",
+          "get_connected_edges was never called (called: none)"
+        ],
+        "response_type": "abstain",
+        "answer": null,
+        "abstain_reason": "agent call failed (transient provider error): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite\\nPlease retry in 35.792023487s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.1-flash-lite', 'location': 'global'}, 'quotaValue': '15'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '35s'}]}}",
+        "disambiguation_options": null,
+        "citations": [],
+        "trace": [],
+        "metrics": {
+          "model_calls": 0,
+          "tool_calls": 0,
+          "retrieval_latency_ms": 0.0,
+          "generation_latency_ms": 12601.64,
+          "total_latency_ms": 12601.68,
+          "prompt_tokens": null,
+          "completion_tokens": null,
+          "total_tokens": null
+        }
+      },
+      "post_checks": [],
+      "passed": false
+    },
+    {
+      "case_id": "past_fix_carries_technical_substance",
+      "question": "Why did the Nimbus dashboard deploy keep failing, and what did we do about it?",
+      "category": "solution_reuse",
+      "why": "A recorded fix is only worth storing if it is specific enough to reuse months later. 'Cleared the CDN cache and pinned the build hash' is reusable; 'fixed the deploy' is not. This checks the cause and the remedy both survive extraction.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "edges_found": [
+            {
+              "source": "Nimbus dashboard deploy failing due to stale cache",
+              "target": "Cleared the CDN cache and pinned the build hash in the deploy config to stop serving the old bundle"
+            }
+          ],
+          "reason": "1 matching 'resolves' edge(s) of 5 total",
+          "latency_ms": 0.56,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "The Nimbus dashboard deployment was failing because of a stale cache. To resolve this, we cleared the CDN cache and pinned the build hash in the deployment configuration to ensure the system stopped serving the old bundle.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "event",
+            "source_id": "evt_0669a9adf0b8",
+            "snippet": "Nimbus dashboard deploy failing due to stale cache",
+            "capture_id": "cap_0501",
+            "captured_at": "2026-09-11T09:12:04Z",
+            "foreground_app": "Terminal",
+            "source_text": "The Nimbus dashboard deploy failing twice was the stale cache issue again. I fixed it by clearing the CDN cache and pinning the build hash in the deploy config, so it stops serving the old bundle.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "event",
+            "source_id": "evt_f3eabdc0da44",
+            "snippet": "Cleared the CDN cache and pinned the build hash in the deploy config to stop serving the old bundle",
+            "capture_id": "cap_0501",
+            "captured_at": "2026-09-11T09:12:04Z",
+            "foreground_app": "Terminal",
+            "source_text": "The Nimbus dashboard deploy failing twice was the stale cache issue again. I fixed it by clearing the CDN cache and pinning the build hash in the deploy config, so it stops serving the old bundle.",
+            "is_active": null,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "I need to find the history of 'Nimbus dashboard' deployment failures and their resolutions. I will start by searching for 'Nimbus dashboard' to identify the entity or relevant events, then use get_connected_edges to find the resolution.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Nimbus dashboard\"}"
+          },
+          {
+            "thought": "I have found the event 'evt_0669a9adf0b8' which describes the failure as being due to a 'stale cache'. I will now check if there are any resolution edges connected to this event to explain what was done about it.",
+            "action": "call_tool",
+            "tool": "get_connected_edges",
+            "arguments": "{\"source_node_id\": \"evt_0669a9adf0b8\"}"
+          },
+          {
+            "thought": "I have successfully identified the cause of the failure and the corresponding resolution from the events and their connected edges. I will now synthesize this into a final answer.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 6.32,
+          "generation_latency_ms": 4851.71,
+          "total_latency_ms": 4858.66,
+          "prompt_tokens": 17341,
+          "completion_tokens": 487,
+          "total_tokens": 17828
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "dependency_ordering_prerequisite_first",
+      "question": "What do I need to do before I can start the Trellis rewrite migration?",
+      "category": "ordering",
+      "why": "The vision's flagship ordering moment -- 'reminding them to ask a question before jumping into a meeting'. The prerequisite belongs to a different entity than the task being asked about, so a naive entity-scoped lookup returns the dependent task with its prerequisite invisible: the one thing the question was asking for.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "edges_found": [
+            {
+              "source": "get vendor access from Meridian Logistics",
+              "target": "Trellis rewrite migration"
+            }
+          ],
+          "reason": "1 matching 'must_precede' edge(s) of 4 total",
+          "latency_ms": 0.28,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "You need to get vendor access from Meridian Logistics before you can start the Trellis rewrite migration.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "commitment",
+            "source_id": "com_20e54ad3587d",
+            "snippet": "get vendor access from Meridian Logistics",
+            "capture_id": "cap_0506",
+            "captured_at": "2026-09-12T09:15:44Z",
+            "foreground_app": "Slack",
+            "source_text": "I need to get the vendor access sorted from Meridian Logistics before I can start the Trellis rewrite migration. There is no point beginning that work until the credentials are in hand.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_95ec6d43d138",
+            "snippet": "Start the migration for the Trellis rewrite project.",
+            "capture_id": "cap_0506",
+            "captured_at": "2026-09-12T09:15:44Z",
+            "foreground_app": "Slack",
+            "source_text": "I need to get the vendor access sorted from Meridian Logistics before I can start the Trellis rewrite migration. There is no point beginning that work until the credentials are in hand.",
+            "is_active": null,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "I need to find the Trellis rewrite migration project or commitment to see what its dependencies are, specifically looking for what must happen first.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Trellis rewrite migration\"}"
+          },
+          {
+            "thought": "I have found the 'Trellis rewrite migration' commitment (com_95ec6d43d138). To find what needs to happen before starting it, I will check the open commitments related to the Trellis rewrite project to see if any are blocking this, and specifically use get_open_commitments scoped to the project entity (ent_b395a9c48625) to identify any dependencies.",
+            "action": "call_tool",
+            "tool": "get_open_commitments",
+            "arguments": "{\"entity_id\": \"ent_b395a9c48625\"}"
+          },
+          {
+            "thought": "I have identified that the 'Trellis rewrite migration' commitment explicitly must follow the completion of obtaining vendor access from Meridian Logistics.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 13.84,
+          "generation_latency_ms": 4220.71,
+          "total_latency_ms": 4234.85,
+          "prompt_tokens": 17687,
+          "completion_tokens": 463,
+          "total_tokens": 18150
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    }
+  ]
+}

@@ -1,32 +1,20 @@
-"""
-Writes a validated ExtractionResult into the database. This is factored out
-from the LLM call itself (see extractor.py) specifically so it can be
-tested with hand-crafted ExtractionResult objects, with no network call and
-no dependency on what the LLM actually returns -- the correctness of
-supersession/entity-resolution logic and the correctness of the LLM's
-extraction are two separate concerns and should be testable separately.
+"""Writes an ExtractionResult to the database.
 
-Supersession discipline:
-  - declarative_facts: identical to the pattern already enforced by the DB's
-    partial unique index -- a new active fact for an existing
-    (entity_id, attribute) always deactivates the old one in the same
-    transaction; an identical value is a no-op (skipped) to avoid churn.
-  - commitments: the exact same pattern, one level removed -- the
-    commitments row (identity) is created once and never touched again;
-    each status change is a new commitment_status_events row that
-    deactivates the previous active one.
+Split from the LLM call so supersession and entity resolution can be tested
+with hand-built ExtractionResult objects and no network.
 
-Relationship resolution is intentionally scoped to mentions produced within
-the SAME capture's extraction result. Resolving a relationship whose source
-or target was defined in an earlier capture would require applying the same
-kind of fuzzy mention-resolution used for entities to facts/events/
-commitments too -- a real capability, but out of scope for this narrower
-first version. Relationships that can't be resolved within-capture are
-logged and skipped, not silently dropped without a trace.
+Facts and preferences supersede: deactivate the old row, insert the new one,
+then point the old at the new. That order matters -- the partial unique
+index is checked immediately, not at commit. Commitments keep a stable
+identity row and version their status separately.
+
+Relationships are only resolved between mentions in the same capture. A fix
+described weeks after the problem it solves is never linked.
 """
 
 from __future__ import annotations
 
+import re
 import sqlite3
 import uuid
 from dataclasses import dataclass, field
@@ -62,11 +50,83 @@ def _values_equal(a: Fact, existing_row: sqlite3.Row) -> bool:
     )
 
 
-def _write_fact(conn: sqlite3.Connection, fact: Fact, entity_id: str, capture_id: str, summary: WriteSummary) -> str:
-    existing = conn.execute(
-        "SELECT * FROM declarative_facts WHERE entity_id = ? AND attribute = ? AND is_active = 1",
-        (entity_id, fact.attribute),
+# Supersession keys on the literal attribute string, so "owner" and
+# "project_owner" are two attributes and a project ends up with two live
+# owners. Collapse only the ones where a duplicate gives a contradictory
+# answer; everything else passes through normalised.
+_ATTRIBUTE_SYNONYMS: dict[str, str] = {
+    "owner": "owner",
+    "owned_by": "owner",
+    "project_owner": "owner",
+    "project_lead": "owner",
+    "lead": "owner",
+    "leader": "owner",
+    "responsible": "owner",
+    "responsible_party": "owner",
+    "dri": "owner",
+    "point_of_contact": "owner",
+    "poc": "owner",
+    "assignee": "owner",
+    "deadline": "deadline",
+    "due_date": "deadline",
+    "due": "deadline",
+    "target_date": "deadline",
+    "ship_date": "deadline",
+    "delivery_date": "deadline",
+    "budget": "budget",
+    "budget_amount": "budget",
+    "allocated_budget": "budget",
+    "budget_ceiling": "budget",
+    "status": "status",
+    "current_status": "status",
+    "project_status": "status",
+    "state": "status",
+    "start_date": "start_date",
+    "kickoff_date": "start_date",
+    "kickoff": "start_date",
+}
+
+
+def canonical_attribute(attribute: str) -> str:
+    """Normalizes an extracted attribute name to the form used as the
+    supersession key: lowercased, whitespace/hyphens collapsed to
+    underscores, then mapped through _ATTRIBUTE_SYNONYMS if it's one of the
+    attributes where a synonym would create a second 'current' value."""
+    if not attribute:
+        return attribute
+    normalized = re.sub(r"[\s\-]+", "_", attribute.strip().lower())
+    normalized = re.sub(r"_+", "_", normalized).strip("_")
+    return _ATTRIBUTE_SYNONYMS.get(normalized, normalized)
+
+
+def _find_existing_active_fact(
+    conn: sqlite3.Connection, entity_id: str, attribute: str
+) -> sqlite3.Row | None:
+    """Finds the live fact this one should supersede."""
+    exact = conn.execute(
+        "SELECT * FROM declarative_facts "
+        "WHERE entity_id = ? AND attribute = ? AND is_active = 1 AND deleted_at IS NULL",
+        (entity_id, attribute),
     ).fetchone()
+    if exact:
+        return exact
+
+    target = canonical_attribute(attribute)
+    candidates = conn.execute(
+        "SELECT * FROM declarative_facts "
+        "WHERE entity_id = ? AND is_active = 1 AND deleted_at IS NULL "
+        "ORDER BY created_at DESC, rowid DESC",
+        (entity_id,),
+    ).fetchall()
+    for row in candidates:
+        if canonical_attribute(row["attribute"]) == target:
+            return row
+    return None
+
+
+def _write_fact(conn: sqlite3.Connection, fact: Fact, entity_id: str, capture_id: str, summary: WriteSummary) -> str:
+    attribute = canonical_attribute(fact.attribute)
+    existing = _find_existing_active_fact(conn, entity_id, attribute)
 
     if existing and _values_equal(fact, existing):
         summary.facts_unchanged += 1
@@ -75,10 +135,7 @@ def _write_fact(conn: sqlite3.Connection, fact: Fact, entity_id: str, capture_id
     new_fact_id = f"fact_{uuid.uuid4().hex[:12]}"
 
     if existing:
-        # Deactivate the old row FIRST -- the partial unique index
-        # (one active fact per entity_id/attribute) is checked immediately,
-        # not deferred to transaction end, so the new active row cannot be
-        # inserted while the old one is still active=1.
+        # deactivate first -- the partial unique index is checked immediately
         conn.execute(
             "UPDATE declarative_facts SET is_active = 0 WHERE fact_id = ?",
             (existing["fact_id"],),
@@ -93,7 +150,9 @@ def _write_fact(conn: sqlite3.Connection, fact: Fact, entity_id: str, capture_id
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, NULL)
         """,
         (
-            new_fact_id, entity_id, fact.attribute, fact.value_text, fact.value_numeric, fact.unit,
+            # the CANONICAL attribute is what gets stored, so the next
+            # update for this attribute finds and supersedes this row
+            new_fact_id, entity_id, attribute, fact.value_text, fact.value_numeric, fact.unit,
             fact.precision_class, fact.asserter_role, fact.relative_time_expression, fact.resolved_time,
             capture_id,
         ),
@@ -127,7 +186,11 @@ def _write_commitment(
 ) -> str:
     existing_commitment = conn.execute(
         "SELECT commitment_id FROM commitments WHERE lower(commitment_mention) = lower(?) "
-        "AND (entity_id IS ? OR entity_id = ?)",
+        "AND (entity_id IS ? OR entity_id = ?) "
+        # skip deleted ones, or a later mention quietly resurrects a commitment
+        # the user asked to forget
+        "AND deleted_at IS NULL "
+        "ORDER BY created_at DESC, rowid DESC LIMIT 1",
         (commitment.commitment_mention, entity_id, entity_id),
     ).fetchone()
 
@@ -143,12 +206,31 @@ def _write_commitment(
         summary.commitments_created += 1
 
     existing_status = conn.execute(
-        "SELECT * FROM commitment_status_events WHERE commitment_id = ? AND is_active = 1",
+        "SELECT * FROM commitment_status_events WHERE commitment_id = ? AND is_active = 1 "
+        "ORDER BY created_at DESC, rowid DESC LIMIT 1",
         (commitment_id,),
     ).fetchone()
 
     if existing_status and _status_equal(commitment, existing_status):
         summary.commitment_status_unchanged += 1
+        return commitment_id
+
+    # Don't let the extractor's default status reopen finished work. A later
+    # capture that just mentions a done task arrives as status='open'. A real
+    # reopening says in_progress or blocked, so only the default is refused.
+    if (
+        existing_status
+        and existing_status["status"] == "done"
+        and existing_status["status_confirmed_by_user"]
+        and commitment.status == "open"
+        and not commitment.status_confirmed_by_user
+    ):
+        summary.commitment_status_unchanged += 1
+        summary.warnings.append(
+            f"commitment '{commitment.commitment_mention}' kept at status='done' -- this capture "
+            f"reported the default status='open' without an explicit reopening, which would have "
+            f"silently reverted a user-confirmed completion"
+        )
         return commitment_id
 
     new_status_id = f"cse_{uuid.uuid4().hex[:12]}"
@@ -183,6 +265,34 @@ def _write_commitment(
     return commitment_id
 
 
+def _normalized_preference_text(text: str) -> str:
+    """Text key for detecting a restatement of the same preference: lowercased,
+    punctuation dropped, whitespace collapsed."""
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9\s]", "", (text or "").lower())).strip()
+
+
+def _find_duplicate_preference(
+    conn: sqlite3.Connection, entity_id: str | None, preference: Preference
+) -> sqlite3.Row | None:
+    """An existing ACTIVE preference with the same scope and the same
+    normalized text, if one exists."""
+    candidates = conn.execute(
+        "SELECT * FROM preferences "
+        "WHERE is_active = 1 AND deleted_at IS NULL "
+        "  AND (entity_id IS ? OR entity_id = ?) "
+        "  AND (category IS ? OR category = ?) "
+        "ORDER BY created_at DESC, rowid DESC",
+        (entity_id, entity_id, preference.category, preference.category),
+    ).fetchall()
+    target = _normalized_preference_text(preference.preference_text)
+    if not target:
+        return None
+    for row in candidates:
+        if _normalized_preference_text(row["preference_text"]) == target:
+            return row
+    return None
+
+
 def _write_preference(
     conn: sqlite3.Connection,
     preference: Preference,
@@ -193,15 +303,14 @@ def _write_preference(
     """Mirrors _write_fact's supersession discipline, but ONLY when both
     entity_id and category are concrete -- matching db/schema.sql's partial
     unique index (idx_one_active_preference_per_entity_category), which is
-    the only case the DB itself can enforce as a hard uniqueness
-    constraint. An unscoped preference (missing entity_id or category) has
-    no reliable dedup key, so it is always appended as a fresh row rather
-    than compared against anything existing."""
+    the only case the DB itself can enforce as a hard uniqueness constraint."""
     scoped = entity_id is not None and preference.category is not None
 
     if scoped:
         existing = conn.execute(
-            "SELECT * FROM preferences WHERE entity_id = ? AND category = ? AND is_active = 1",
+            "SELECT * FROM preferences WHERE entity_id = ? AND category = ? "
+            "AND is_active = 1 AND deleted_at IS NULL "
+            "ORDER BY created_at DESC, rowid DESC LIMIT 1",
             (entity_id, preference.category),
         ).fetchone()
         if existing and existing["preference_text"] == preference.preference_text:
@@ -210,12 +319,19 @@ def _write_preference(
     else:
         existing = None
 
+    # Unscoped preferences have no supersession key, so a restatement used to
+    # append a new row every time -- four copies of the same focus-block rule.
+    # Normalised text is a reliable enough key; a genuinely reworded
+    # preference still differs and still appends.
+    duplicate = _find_duplicate_preference(conn, entity_id, preference)
+    if duplicate is not None:
+        summary.preferences_unchanged += 1
+        return duplicate["preference_id"]
+
     new_preference_id = f"pref_{uuid.uuid4().hex[:12]}"
 
     if existing:
-        # Same ordering constraint as _write_fact: deactivate the old
-        # active row before inserting the new one, since the partial
-        # unique index is checked immediately, not deferred to commit.
+        # deactivate first, same as _write_fact
         conn.execute("UPDATE preferences SET is_active = 0 WHERE preference_id = ?", (existing["preference_id"],))
 
     conn.execute(
@@ -250,18 +366,7 @@ def log_decision(
     """Records one row in decision_logs for a capture that has finished
     processing, whether that ended in a pre-LLM triage rejection, a
     model-decided rejection (extraction_status != 'processed'), or a
-    successful memorize. Called from the batch pipeline (pipeline.py) and
-    the synchronous /ingest route at every exit point. `summary` is the
-    WriteSummary from apply_extraction_result when one exists; omit it
-    (counts default to zero) for a pre-LLM triage rejection, which never
-    reaches extraction at all.
-
-    This is separate from captures.extraction_status/discard_reason --
-    that pair answers "what is this capture's current state," while
-    decision_logs answers "what did we decide and how much did it cost,"
-    which is what an auditor or a batch-run summary actually wants to
-    aggregate over. decision must be exactly 'memorized' or 'rejected',
-    matching db/schema.sql's CHECK constraint."""
+    successful memorize."""
     if decision not in ("memorized", "rejected"):
         raise ValueError(f"decision must be 'memorized' or 'rejected', got {decision!r}")
     decision_log_id = f"dlog_{uuid.uuid4().hex[:12]}"
@@ -294,17 +399,12 @@ def apply_extraction_result(
     vocab_logger: VocabLogger | None = None,
 ) -> WriteSummary:
     """Writes one ExtractionResult into the database inside a single
-    transaction. Caller is responsible for conn.commit() / conn.rollback()
-    around this call -- kept out of this function so a batch pipeline can
-    control transaction boundaries per-capture."""
+    transaction."""
 
     summary = WriteSummary()
 
     if result.extraction_status != "processed":
-        # Nothing to write for a quarantined/discarded capture -- the
-        # Pydantic model itself already guarantees facts/events/commitments
-        # are empty in this case (see extraction.py's leakage-guard
-        # validator), so this is a defensive no-op, not the primary guard.
+        # defensive -- the Pydantic validator already guarantees this is empty
         return summary
 
     # entity_mention -> entity_id, resolved once per unique mention in this result
@@ -356,16 +456,12 @@ def apply_extraction_result(
         commitment_id = _write_commitment(conn, commitment, entity_id, capture_id, summary)
         commitment_id_by_mention[commitment.commitment_mention] = commitment_id
 
-    # preferences -- entity_id resolved the same way as facts/commitments;
-    # scoped ones (entity + category) participate in supersession, unscoped
-    # ones are always appended (see _write_preference's own docstring)
+    # scoped preferences supersede, unscoped ones append
     for preference in result.preferences:
         entity_id = resolve(preference.entity_mention, "general") if preference.entity_mention else None
         _write_preference(conn, preference, entity_id, capture_id, summary)
 
-    # relationships -- resolved only against mentions produced by this same
-    # capture (see module docstring for why cross-capture resolution is
-    # out of scope for now)
+    # within-capture only, see module docstring
     all_mentions: dict[str, tuple[str, str]] = {}  # mention -> (source_type, id)
     for mention, cid in commitment_id_by_mention.items():
         all_mentions[mention] = ("commitment", cid)

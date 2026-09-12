@@ -1,6 +1,22 @@
 .venv/
+.venv*/
 .env
-*.db
-logs/
 __pycache__/
 *.pyc
+logs/
+
+# Working databases are NOT ignored: db/kivi.db ships pre-ingested with the
+# 509-record corpus, so `python run_evaluation.py --offline` reproduces the
+# reported results on a fresh clone in seconds instead of requiring ~500
+# extraction calls first. It is also the evidence for the ingestion numbers
+# quoted in README.md -- decision_logs, supersession chains and quarantined
+# captures are all inspectable in it.
+*.db-wal
+*.db-shm
+evals/results/*/eval.db
+/kivi.db
+
+# Internal engineering punch-list, not part of the submission. It tracks work
+# in progress and goes stale against the code; anything in it that a reviewer
+# genuinely needs to know lives in README.md's "Known limitations" instead.
+IMPROVEMENTS.md

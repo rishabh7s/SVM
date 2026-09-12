@@ -1,15 +1,9 @@
-"""
-Pydantic v2 models for the interrogation agent's response contract.
+"""The agent's response contract.
 
-The shape-matches-type validator is the important part of this file: it
-enforces at the model level that an 'answer' response must be cited (an
-uncited answer is a modeling bug, not a valid answer -- it should have been
-an abstention), an 'abstain' response must explain why, and a
-'needs_disambiguation' response must actually offer a choice. This makes it
-structurally impossible for the agent to return a confident-sounding answer
-with no backing citation, regardless of what the underlying LLM call
-produces -- the validation itself is the safety net, not a prompt
-instruction that the model might ignore.
+The validator is the point: response_type='answer' requires at least one
+citation, so an uncited answer can't be constructed at all and has to become
+an abstention instead. That's enforced by the model, not asked for in a
+prompt.
 """
 
 from __future__ import annotations

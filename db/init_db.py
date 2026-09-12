@@ -1,11 +1,10 @@
-"""
-Builds kivi.db from schema.sql + seed.sql using Python's stdlib sqlite3
-module -- no separate sqlite3 CLI binary required, so this works the same
-way on Windows/macOS/Linux inside the VS Code integrated terminal.
+"""Builds db/kivi.db from schema.sql + seed.sql.
 
-Usage:
-    python db/init_db.py            # creates ./db/kivi.db (fails if it exists)
-    python db/init_db.py --reset    # deletes any existing kivi.db first
+    python db/init_db.py            # fails if it already exists
+    python db/init_db.py --reset    # rebuild
+
+Note this gives you the small seed narrative, not the corpus. To get back to
+a corpus-loaded database, re-ingest.
 """
 
 import sqlite3

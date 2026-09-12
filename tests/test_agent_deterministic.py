@@ -101,12 +101,7 @@ def test_false_premise_check_ignores_non_commitment_citations(conn):
 
 
 # ---------------------------------------------------------------------------
-# headless_mode needs_disambiguation -> abstain collapse
-#
-# This specific transformation lives inline in agent.run() rather than a
-# standalone function (see agent.py), so it's exercised here directly rather
-# than through a unit under test -- this documents and locks in the exact
-# expected behavior.
+# headless mode collapses needs_disambiguation into an abstention
 # ---------------------------------------------------------------------------
 
 def test_headless_collapse_transformation_shape():

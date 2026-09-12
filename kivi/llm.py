@@ -10,13 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()  # picks up .env in the working directory if present; harmless if absent
 
 
-# NOTE: intentionally NOT read into a module-level constant here. Binding
-# `GEMINI_API_KEY = os.environ.get(...)` once at import time means anything
-# that sets the env var AFTER this module is first imported (a test's
-# monkeypatch.setenv, a .env loaded by a different entrypoint after this
-# import runs, a key rotated mid-process) has no effect -- get_client() would
-# keep raising "not set" against a stale snapshot. Reading it fresh inside
-# get_client() avoids that whole class of bug for one os.environ.get() call.
+# Read fresh each call. Snapshotting at import means a test's monkeypatch,
+# or a .env loaded later, is never seen.
 def _get_api_key() -> Optional[str]:
     return os.environ.get("GEMINI_API_KEY")
 
@@ -28,39 +23,18 @@ def _sanitize_model_name(raw: str) -> str:
     return raw.replace("gemini/", "").replace("google/", "").replace("models/", "")
 
 
-# Default model string for ingestion extraction. gemini-1.5-flash and
-# gemini-2.0-flash are both fully shut down as of 2026 (any call to them
-# 404s) -- gemini-3.6-flash is the current stable production Flash tier as
-# of this writing.
+# 1.5-flash and 2.0-flash are both shut down; 3.6-flash is the current tier.
 DEFAULT_EXTRACTION_MODEL = _sanitize_model_name(os.environ.get("KIVI_EXTRACTION_MODEL", "gemini-3.6-flash"))
 
-# Retrieval-side model tiering. LIGHT_MODEL is used for cheap, single-shot,
-# non-agentic calls -- currently just query condensation
-# (kivi/retrieval/condensation.py), which needs speed over deep reasoning:
-# rewriting "what was the budget for it?" into a self-contained query given
-# recent chat history is a much smaller task than the graph-detective loop
-# itself. RETRIEVAL_MODEL is the model driving that full tool-calling loop
-# (kivi/retrieval/agent.py). Both default to real, current models --
-# gemini-3.5-flash-lite is the fastest/cheapest current Flash-lite tier,
-# well suited to condensation; gemini-3.6-flash is the same default used for
-# extraction, kept as a SEPARATE env var from KIVI_EXTRACTION_MODEL even
-# though they currently default to the same string, since ingestion and
-# retrieval are conceptually separate concerns that may want to diverge later.
+# LIGHT_MODEL: condensation only -- wants speed, not depth.
+# RETRIEVAL_MODEL: the agent's tool loop.
+# Separate env vars even though they default to the same string today.
 LIGHT_MODEL = _sanitize_model_name(os.environ.get("KIVI_LIGHT_MODEL", "gemini-3.5-flash-lite"))
 RETRIEVAL_MODEL = _sanitize_model_name(os.environ.get("KIVI_RETRIEVAL_MODEL", "gemini-3.6-flash"))
 
 
 def get_client() -> instructor.Instructor:
-    """Returns an instructor-wrapped Gemini client. This ONE client serves
-    every model tier (extraction, light/condensation, retrieval/agent) --
-    the model string is chosen per-call via the `model=` kwarg passed to
-    client.chat.completions.create(...), not by constructing a separate
-    client per model. There's no need for multiple genai.Client objects
-    while everything sits behind one provider and one API key.
-
-    Raises a clear, actionable error immediately if the API key is missing,
-    rather than letting a cryptic auth error surface later from inside a
-    batch run."""
+    """Returns an instructor-wrapped Gemini client."""
     if not _get_api_key():
         raise RuntimeError(
             "GEMINI_API_KEY is not set. Copy .env.example to .env and set your key, "
@@ -74,19 +48,12 @@ def get_client() -> instructor.Instructor:
     )
 
 
-# Kept as an alias -- kivi/ingestion/extractor.py already imports this name.
-# get_client() above is the same implementation under a more accurate name
-# now that this client is used for retrieval and condensation too, not just
-# extraction.
+# extractor.py imports this name. Same function, older label.
 get_extraction_client = get_client
 
 
 if __name__ == "__main__":
-    # Manual smoke test -- NOT part of the automated test suite, since it
-    # makes a real network call and costs a token. Run directly with:
-    #     python -m kivi.llm
-    # after setting GEMINI_API_KEY, to confirm the client actually round-trips
-    # a structured extraction correctly against the real API.
+    # Manual smoke test -- real network call. python -m kivi.llm
     from kivi.models.extraction import ExtractionResult
 
     client = get_client()

@@ -1,30 +1,12 @@
-"""
-Query Condensation / Context Synthesis: a single lightweight model call
-(LIGHT_MODEL, see kivi/llm.py) that rewrites an ambiguous follow-up
-question into a fully self-contained standalone query BEFORE it ever
-reaches the graph-detective agent or any database tool.
+"""Rewrites a follow-up into a standalone query before it reaches the agent.
 
-This runs entirely outside the agent's tool-calling loop -- it never
-touches search_nodes, get_node_details, or any other tool, and it never
-sees the database. Its only inputs are the rolling conversation history
-and the new question; its only output is a rewritten question (or the
-original, unchanged, when no rewriting was needed). This keeps
-conversational context handling completely separate from the retrieval
-tools themselves, per the requirement that session awareness must not leak
-into the core retrieval layer -- kivi/retrieval/tools.py and
-kivi/retrieval/agent.py have no knowledge that sessions or condensation
-exist at all.
+Never touches the database or any tool -- its only inputs are the recent
+turns and the new message. Skips the model call entirely on a session's
+first turn, since there is nothing to resolve against.
 
-Two deliberate cost/latency optimizations, both checked before making any
-model call:
-  1. If the session has no prior turns, the question is condensed by
-     definition (there's nothing to resolve a reference against) --
-     skip the model call entirely and return the question as-is.
-  2. If the session has a pending_clarification, this module is called in
-     "enrichment" mode instead of "condensation" mode -- a different, more
-     targeted prompt that merges the original question with the user's
-     clarifying reply, rather than treating the reply as a fresh question
-     to condense against general history.
+Three prompts, not one: condense_query for questions, condense_statement for
+updates (so an update never drifts into a question), and
+enrich_with_clarification for merging a reply with the gap it fills.
 """
 
 from __future__ import annotations
@@ -35,6 +17,7 @@ import instructor
 from pydantic import BaseModel, Field
 
 from kivi.api.session_store import PendingClarification, SessionState
+from kivi.retry import call_with_backoff
 
 CONDENSE_SYSTEM_PROMPT = """You rewrite a user's follow-up question into a fully self-contained \
 standalone query, using the recent conversation history to resolve anaphora and implicit \
@@ -87,8 +70,7 @@ def condense_query(
     session: SessionState,
     new_question: str,
 ) -> CondensationResult:
-    """Standard condensation path: rewrite new_question using session
-    history. Skips the model call entirely for a session's first turn."""
+    """Standard condensation path: rewrite new_question using session history."""
     if not session.turns:
         return CondensationResult(
             standalone_query=new_question,
@@ -97,7 +79,8 @@ def condense_query(
         )
 
     history_text = _format_history(session)
-    return client.chat.completions.create(
+    # retry -- a throttled condensation kills the turn before retrieval starts
+    return call_with_backoff(lambda: client.chat.completions.create(
         model=model,
         response_model=CondensationResult,
         max_retries=2,
@@ -108,7 +91,7 @@ def condense_query(
                 "content": f"Recent conversation:\n{history_text}\n\nNew question: {new_question}",
             },
         ],
-    )
+    ))
 
 
 CONDENSE_STATEMENT_SYSTEM_PROMPT = """You rewrite a user's manual update/note into a fully self-contained \
@@ -140,15 +123,9 @@ def condense_statement(
     session: SessionState,
     new_statement: str,
 ) -> CondensationResult:
-    """Declarative-preserving counterpart to condense_query, used by the
-    manual ingestion path (POST /ingest's Flow 1 / "Put Info") instead of
-    condense_query itself. Reuses the same CondensationResult shape and the
-    same "skip the model call on a session's first turn" optimization, but
-    a DIFFERENT system prompt -- condense_query's own prompt talks about
-    "the user's follow-up question" throughout and has no instruction
-    against reframing a statement as a question, so reusing it here risks
-    silently turning a declarative update into a question. See this
-    module's CONDENSE_STATEMENT_SYSTEM_PROMPT for the exact guard."""
+    """Declarative-preserving counterpart to condense_query, used by the manual
+    ingestion path (POST /ingest's Flow 1 / "Put Info") instead of
+    condense_query itself."""
     if not session.turns:
         return CondensationResult(
             standalone_query=new_statement,
@@ -157,7 +134,7 @@ def condense_statement(
         )
 
     history_text = _format_history(session)
-    return client.chat.completions.create(
+    return call_with_backoff(lambda: client.chat.completions.create(
         model=model,
         response_model=CondensationResult,
         max_retries=2,
@@ -168,7 +145,7 @@ def condense_statement(
                 "content": f"Recent conversation:\n{history_text}\n\nNew update/note: {new_statement}",
             },
         ],
-    )
+    ))
 
 
 def enrich_with_clarification(
@@ -178,12 +155,8 @@ def enrich_with_clarification(
     clarifying_reply: str,
 ) -> CondensationResult:
     """Clarification-response path: merge the original (condensed) question
-    with the user's reply to the system's own clarifying question. This is
-    a DIFFERENT prompt from condense_query's, not a reuse of it -- the task
-    here is "merge a known gap with its answer," not "resolve a pronoun
-    against general history," and conflating the two prompts would make
-    both worse at their actual job."""
-    return client.chat.completions.create(
+    with the user's reply to the system's own clarifying question."""
+    return call_with_backoff(lambda: client.chat.completions.create(
         model=model,
         response_model=CondensationResult,
         max_retries=2,
@@ -198,4 +171,4 @@ def enrich_with_clarification(
                 ),
             },
         ],
-    )
+    ))

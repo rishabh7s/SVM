@@ -1,0 +1,26 @@
+# Kivi's visual identity: a light working canvas with a dark, anchored
+# sidebar. The kiwi green stays the single accent, deepened so it still
+# carries contrast against white cards instead of glowing off them.
+#
+# Main and sidebar are themed separately here rather than in CSS so that
+# Streamlit's own widget internals -- selectbox popovers, the file
+# uploader, checkboxes -- inherit the right colours natively.
+
+[theme]
+primaryColor = "#3F8F2E"
+backgroundColor = "#F4F4F2"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#16191D"
+font = "sans serif"
+
+[theme.sidebar]
+primaryColor = "#8BE04E"
+backgroundColor = "#17191D"
+secondaryBackgroundColor = "#202329"
+textColor = "#E6E8EA"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false

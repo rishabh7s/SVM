@@ -1,31 +1,25 @@
-"""
-Wraps the actual LLM call: builds the extraction prompt (including the L1
-entity context and the capture's own captured_at as the temporal anchor),
-calls the model via instructor, and returns a validated ExtractionResult.
+"""The extraction call: build the prompt, call the model, return a validated
+ExtractionResult.
 
-instructor's own max_retries handles "retry with the validation error fed
-back to the model" internally when response_model is set -- so the "single
-retry-with-error-message on validation failure" requirement is satisfied by
-instructor's built-in mechanism (max_retries=2 = one real attempt + one
-retry), not a hand-rolled retry loop. If both attempts fail, this raises
-ExtractionFailed, which pipeline.py catches and turns into an
-incomplete_capture record.
+instructor's max_retries handles a response that doesn't fit the schema;
+call_with_backoff handles the provider being unavailable. Different
+failures, both wanted.
 
-This module makes real network calls and is therefore NOT covered by the
-automated test suite -- kivi/ingestion/writer.py is what's unit-tested,
-using hand-crafted ExtractionResult objects as a stand-in for what this
-module would return.
+Not covered by the test suite -- it makes real network calls. writer.py is
+what's unit-tested, using hand-built results.
 """
 
 from __future__ import annotations
 
 import sqlite3
+from typing import Callable, Optional
 
 import instructor
 
 from kivi.ingestion.entity_resolution import get_l1_context
 from kivi.llm import DEFAULT_EXTRACTION_MODEL, get_extraction_client
 from kivi.models.extraction import ExtractionResult
+from kivi.retry import call_with_backoff
 
 SYSTEM_PROMPT_TEMPLATE = """You extract structured memory from a single dictation or selected-text capture.
 
@@ -46,6 +40,31 @@ done ("always summarize in bullet points", "David prefers async updates over mee
 never a one-off fact. Only set entity_mention/category on a preference when the text actually \
 scopes it to a specific thing; a general standing instruction gets neither.
 
+STRUCTURED SUMMARIES AND MEETING RECAPS -- read this whenever the capture looks like notes, \
+minutes, a standup summary, a bulleted recap, or a status roll-up rather than one continuous \
+spoken thought:
+- Extract EVERY entity-attribute assertion in it, not just the first one or the headline. A \
+recap listing four projects with a new owner each must produce four separate facts.
+- A line that reassigns, hands over, promotes, or replaces someone IS a fact about the entity, \
+not merely an event. "Driftwood now goes to Sofia", "Priya is taking over Helix", "Marcus is \
+stepping off Meridian and Lena is picking it up" each assert a CURRENT value for that project's \
+owner attribute. Emit the fact (the new value only -- never the person being replaced), and \
+additionally emit an event ONLY if the handover itself is worth remembering as something that \
+happened at a point in time.
+- Use these EXACT attribute names whenever the assertion is one of these kinds, regardless of \
+the wording in the text, so a later update lands on the same attribute and supersedes the \
+earlier value instead of sitting beside it as a second "current" answer:
+    owner       -- who owns / leads / is responsible for / is the DRI or point of contact for it
+                   ("project lead", "running it", "taking over", "reporting owner" all map here)
+    deadline    -- when it is due / ships / must land
+    budget      -- how much money is allocated to it
+    status      -- its current state (on track, blocked, paused, shipped, cancelled)
+    start_date  -- when it begins / kicked off
+- Record only the LATEST value asserted in this capture for a given entity+attribute. If a \
+recap says "Lena had it, now it's Sofia", the fact's value is Sofia -- one fact, not two.
+- Attribute names are lowercase snake_case. Never invent a near-duplicate of one of the names \
+above ("project_owner", "owned_by", "lead" are all wrong -- use "owner").
+
 Reject (set extraction_status to something other than 'processed', explain why in \
 discard_reason, and leave facts/events/commitments/preferences/relationships ALL empty) when \
 the content is:
@@ -59,6 +78,27 @@ Never set a commitment's status to 'done' unless the user explicitly confirmed c
 this capture -- hedged language stays 'open' or 'in_progress'. A commitment with status \
 'blocked' must include a blocking_reason. Only extract a relationship between two things this \
 same capture actually mentions.
+
+PROBLEMS AND THEIR FIXES -- this is the highest-value pattern in the whole extraction, because \
+it is what lets the user avoid solving the same problem twice months later:
+- When the capture describes something GOING WRONG (a bug, an outage, a failure, a deploy that \
+broke, a job producing bad data), emit an event with event_type EXACTLY 'problem_encountered'.
+- When it describes what FIXED it, what the ROOT CAUSE turned out to be, or a workaround that \
+got things moving, emit a SEPARATE event with event_type EXACTLY 'resolution_found'. The \
+description must carry the actual technical substance -- "cleared the CDN cache and pinned the \
+build hash" is useful next time; "fixed the issue" is not.
+- When the SAME capture contains both, ALWAYS emit a relationship linking them, with \
+source_mention = the problem's event_type, target_mention = the resolution's event_type, and \
+relationship_type EXACTLY 'resolves'. Do not skip this; the link is what makes the fix findable \
+from the problem later.
+- Use these exact two labels even when the wording differs ("it broke" / "turned out to be" / \
+"sorted it by"), so that a search for past fixes finds them all.
+
+ORDERING BETWEEN COMMITMENTS -- when the capture says one thing has to happen BEFORE another \
+("I need to X before I can Y", "Y is waiting on X", "once X lands I can start Y", "can't do Y \
+until X"), extract BOTH as commitments and emit a relationship with source_mention = the thing \
+that must happen FIRST, target_mention = the thing that must wait, and relationship_type \
+EXACTLY 'must_precede'. Getting the direction right matters: source is the prerequisite.
 
 inferred_foreground_app: set this ONLY if the text itself explicitly names an application \
 ("In Slack...", "From Chrome...", "this Notion doc"). If no application is named in the text, \
@@ -90,7 +130,9 @@ def extract_capture(
     raw_asr_text: str,
     formatted_text: str,
     captured_at: str,
+    on_retry: Optional[Callable[[int, float, BaseException], None]] = None,
 ) -> ExtractionResult:
+    """Runs one extraction call."""
     l1_context = get_l1_context(conn)
     system_prompt = SYSTEM_PROMPT_TEMPLATE.format(
         capture_id=capture_id,
@@ -98,7 +140,7 @@ def extract_capture(
         entity_context=_format_entity_context(l1_context),
     )
 
-    try:
+    def _call() -> ExtractionResult:
         return client.chat.completions.create(
             model=DEFAULT_EXTRACTION_MODEL,
             response_model=ExtractionResult,
@@ -108,5 +150,8 @@ def extract_capture(
                 {"role": "user", "content": formatted_text or raw_asr_text},
             ],
         )
+
+    try:
+        return call_with_backoff(_call, on_retry=on_retry)
     except Exception as e:  # noqa: BLE001 -- instructor raises several exception types across providers
         raise ExtractionFailed(capture_id, e) from e

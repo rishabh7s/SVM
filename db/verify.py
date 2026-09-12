@@ -1,11 +1,8 @@
 """
 Verification loop: runs a series of checks against kivi.db and prints
 PASS/FAIL for each. This is the sanity check that the schema and seed data
-actually behave the way they're supposed to, before any pipeline/LLM code
-is built on top of them.
-
-Usage:
-    python db/verify.py
+actually behave the way they're supposed to, before any pipeline/LLM code is
+built on top of them.
 """
 
 import sqlite3
@@ -180,9 +177,7 @@ def main() -> None:
         return f"com_002 blocked: {row['blocking_reason']}"
 
     # ---------------------------------------------------------------
-    # 6b. Commitment status history: the superseded 'open' status is
-    #     preserved, not deleted, and correctly points at its successor --
-    #     this is the actual point of this change.
+    # 6b. the superseded 'open' status is kept and points at its successor
     # ---------------------------------------------------------------
     @check("commitment status history: superseded 'open' status is preserved, not erased")
     def _():

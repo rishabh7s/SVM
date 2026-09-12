@@ -1,20 +1,9 @@
-"""
-Zero-dependency, headless database reset.
+"""Wipes db/kivi.db and rebuilds it from db/schema.sql. No seed data.
 
     python reset_db.py
 
-Deletes the local SQLite database file at db/kivi.db (if present) and
-re-executes db/schema.sql against a fresh file, recreating every table this
-project actually uses: captures, entities, entity_aliases, declarative_facts,
-episodic_events, commitments, commitment_status_events, preferences,
-relationships, decision_logs, plus the FTS5 search tables and their sync
-triggers.
-
-Runs with no prompts and no output beyond a one-line confirmation, and exits
-0 on success / non-zero on failure, so it is safe to call from a review
-script or CI step without a human at the keyboard. Uses only the standard
-library -- no project imports -- so it can never fail because an unrelated
-dependency (google-genai, instructor, fastapi, ...) isn't installed yet.
+Stdlib only, no prompts, exits non-zero on failure, so a review script can
+call it unattended.
 """
 
 from __future__ import annotations

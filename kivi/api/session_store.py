@@ -1,17 +1,9 @@
-"""
-In-memory session state for the conversational engine: rolling turn
-history per session_id, plus a pending-clarification slot for the
-active-clarification flow (see kivi/retrieval/condensation.py and
-kivi/api/app.py's /query handler).
+"""Rolling conversation history per session, plus the pending-clarification
+slot used when a search comes up empty and Kivi asks for a missing anchor.
 
-LIMITATION, stated plainly: this is a single-process, in-memory store.
-Sessions are lost on restart and are not shared across multiple server
-processes/workers. That's an acceptable scope boundary for this build (a
-narrow, inspectable demo backend, not a production multi-instance
-deployment) -- swapping this module's storage for Redis or a database table
-later would not require changing anything in app.py or condensation.py,
-since both only interact with the SessionStore interface below, never with
-a raw dict.
+In-memory and single-process: sessions are lost on restart. Swapping the
+storage would not touch app.py or condensation.py, which only go through
+SessionStore.
 """
 
 from __future__ import annotations
@@ -36,11 +28,9 @@ class SessionTurn(BaseModel):
 
 
 class PendingClarification(BaseModel):
-    """Set when the agent's search genuinely came up empty and the system
-    asked the user for a missing anchor (an entity name, a date, an app)
-    instead of just abstaining. Holds enough context that when the user's
-    next message arrives, it can be merged with the original question
-    rather than treated as a brand-new, unrelated query."""
+    """Set when the agent's search genuinely came up empty and the system asked
+    the user for a missing anchor (an entity name, a date, an app) instead
+    of just abstaining."""
 
     original_question: str
     condensed_question: str  # the question AFTER condensation, before the failed search
@@ -62,9 +52,8 @@ class SessionState(BaseModel):
 
 class SessionStore:
     """Deliberately the only object in the codebase that touches the raw
-    session dict -- everything else goes through get_or_create /
-    save methods, so the storage backend can change without touching
-    callers."""
+    session dict -- everything else goes through get_or_create / save
+    methods, so the storage backend can change without touching callers."""
 
     def __init__(self) -> None:
         self._sessions: dict[str, SessionState] = {}

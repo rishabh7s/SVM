@@ -1,20 +1,16 @@
--- Kivi semantic memory schema (SQLite)
--- Mirrors kivi_extraction_schema_v2.json: facts / events / commitments / relationships
--- as generic primitives. entity_type, event_type, and relationship_type are
--- deliberately open TEXT columns, not CHECK-constrained enums, per the
--- generalization decision -- the extractor should not be boxed into a fixed
--- vocabulary designed around one workflow.
+-- Kivi semantic memory schema (SQLite).
+--
+-- entity_type, attribute, event_type and relationship_type are open TEXT on
+-- purpose: a fixed vocabulary designed around one workflow would be wrong
+-- for the next user. Drift is managed in the writer, not by closing them.
 
 PRAGMA foreign_keys = ON;
 
 -- ============================================================
--- Raw captures: one row per ingested record, unmodified, ever.
--- 'manual_edit' is a third modality (alongside speech/selected_text) for
--- captures synthesized when a user edits or corrects a memory directly
--- through the UI or a REST call, rather than through dictation -- keeping
--- this as its own honest modality rather than mislabeling a manual edit as
--- 'selected_text' preserves accurate provenance for that memory going
--- forward (see kivi/api/memory_ops.py).
+-- Raw captures: one row per ingested record, never modified.
+--
+-- 'manual_edit' is its own modality for captures created by editing memory
+-- through the UI or a tool, rather than mislabelling those as dictation.
 -- ============================================================
 CREATE TABLE IF NOT EXISTS captures (
     capture_id          TEXT PRIMARY KEY,
@@ -81,24 +77,22 @@ CREATE TABLE IF NOT EXISTS declarative_facts (
     source_capture_id           TEXT NOT NULL REFERENCES captures(capture_id),
     is_active                   INTEGER NOT NULL DEFAULT 1 CHECK (is_active IN (0, 1)),
     superseded_by_id            TEXT REFERENCES declarative_facts(fact_id),
-    deleted_at                  TEXT,                    -- NULL unless explicitly deleted; distinct from
-                                                            -- supersession -- see module docstring above idx below
+    deleted_at                  TEXT,                    -- see the index comment below
     created_at                  TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
--- Hard database-level enforcement of supersession discipline: at most one
--- ACTIVE fact per (entity_id, attribute) at any time. Inserting a new active
--- fact without first deactivating the old one raises an integrity error --
--- this is deliberate; it forces the ingestion code to go through proper
--- supersession logic rather than silently accumulating duplicates.
+-- At most one ACTIVE fact per (entity_id, attribute), enforced by the
+-- database rather than by remembering to check. Inserting a new active fact
+-- without deactivating the old one is an integrity error, which forces the
+-- writer through proper supersession instead of silently accumulating two
+-- current answers.
 --
--- deleted_at is orthogonal to is_active/superseded_by_id: a fact can be
--- is_active=1 (still the current pointer in the supersession chain) AND
--- deleted_at set (a user explicitly asked to forget it) at the same time --
--- that combination means "the current value has been deleted, and nothing
--- has superseded it since." The row is never actually removed from the
--- table, so the full audit trail (what it said, when, and that it was later
--- deleted) stays inspectable via get_node_history even after deletion.
+-- Superseded and deleted are told apart by the pair of columns:
+--   superseded -> is_active=0, superseded_by_id set,  deleted_at NULL
+--   deleted    -> is_active=0, superseded_by_id NULL, deleted_at set
+-- A delete clears is_active as well, so every reader that already filters on
+-- is_active excludes forgotten memories for free. The row itself is never
+-- removed, so get_node_history still shows what it said.
 CREATE UNIQUE INDEX IF NOT EXISTS idx_one_active_fact_per_attribute
     ON declarative_facts (entity_id, attribute)
     WHERE is_active = 1;
@@ -126,16 +120,12 @@ CREATE INDEX IF NOT EXISTS idx_events_entity ON episodic_events (entity_id);
 CREATE INDEX IF NOT EXISTS idx_events_source_capture ON episodic_events (source_capture_id);
 
 -- ============================================================
--- Commitments: anything planned, promised, or owed.
+-- Commitments: anything planned, promised or owed.
 --
--- Split into a stable identity table (commitments) and a versioned status
--- table (commitment_status_events), mirroring the entities/declarative_facts
--- pattern exactly. A commitment's status is NEVER mutated in place -- a
--- status change always inserts a new commitment_status_events row and
--- deactivates the previous one, the same way a new declarative_facts row
--- deactivates the fact it supersedes. This preserves "what did I originally
--- think the status of this was" for free, and makes commitment status
--- auditable the same way fact history already is.
+-- Identity and status are split. A commitments row never changes; every
+-- status change inserts a new commitment_status_events row and deactivates
+-- the previous one, the same way a new fact deactivates the one it
+-- supersedes. "What did I originally think the status was" stays answerable.
 -- ============================================================
 CREATE TABLE IF NOT EXISTS commitments (
     commitment_id           TEXT PRIMARY KEY,
@@ -168,10 +158,7 @@ CREATE TABLE IF NOT EXISTS commitment_status_events (
     CHECK (status != 'done' OR status_confirmed_by_user = 1)
 );
 
--- Hard database-level enforcement of the exact same supersession discipline
--- used for declarative_facts: at most one ACTIVE status per commitment at
--- any time. Inserting a new active status without first deactivating the
--- old one raises an integrity error.
+-- Same discipline as facts: at most one active status per commitment.
 CREATE UNIQUE INDEX IF NOT EXISTS idx_one_active_status_per_commitment
     ON commitment_status_events (commitment_id)
     WHERE is_active = 1;
@@ -180,21 +167,13 @@ CREATE INDEX IF NOT EXISTS idx_commitment_status_commitment ON commitment_status
 CREATE INDEX IF NOT EXISTS idx_commitment_status_source_capture ON commitment_status_events (source_capture_id);
 
 -- ============================================================
--- Preferences: enduring user habits/operational constraints -- distinct
--- from declarative_facts (a fact is a ground truth ABOUT something in the
--- world; a preference is a standing instruction about HOW the user wants
--- things done, e.g. "always summarize in bullet points", "David prefers
--- async updates over meetings"). entity_id is nullable because most
--- preferences aren't about any one entity at all.
+-- Preferences: how the user wants things done, as opposed to a fact, which
+-- is something true about the world. entity_id is nullable because most
+-- preferences aren't about any one thing.
 --
--- Supersession mirrors declarative_facts' pattern (is_active/
--- superseded_by_id, same three-step write order enforced by the DB's own
--- partial unique index below) but keyed on (entity_id, category) instead
--- of (entity_id, attribute) -- and ONLY when both a resolved entity_id and
--- an explicit category are present. A general preference with no entity
--- and no category is simply appended each time rather than deduplicated,
--- since there's no reliable key to group repeats under; see
--- kivi/ingestion/writer.py's apply_structured_bundle for the exact rule.
+-- Supersession mirrors declarative_facts but keys on (entity_id, category),
+-- and only when both are present. An unscoped preference has no reliable
+-- key, so it is appended instead. See writer.py's _write_preference.
 -- ============================================================
 CREATE TABLE IF NOT EXISTS preferences (
     preference_id      TEXT PRIMARY KEY,
@@ -208,12 +187,9 @@ CREATE TABLE IF NOT EXISTS preferences (
     created_at              TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
--- Only enforceable as a hard uniqueness constraint when both keys are
--- concrete (SQLite partial-unique-index predicates can't express "treat
--- NULL entity_id as its own group" the way a plain UNIQUE constraint
--- would want to) -- so this index protects the entity-scoped+categorized
--- case, which is the only case apply_structured_bundle ever attempts to
--- supersede rather than append.
+-- Only enforceable when both keys are concrete -- a partial index can't
+-- treat NULL entity_id as its own group. That's fine: the entity+category
+-- case is the only one the writer ever tries to supersede.
 CREATE UNIQUE INDEX IF NOT EXISTS idx_one_active_preference_per_entity_category
     ON preferences (entity_id, category)
     WHERE is_active = 1 AND entity_id IS NOT NULL AND category IS NOT NULL;
@@ -222,12 +198,9 @@ CREATE INDEX IF NOT EXISTS idx_preferences_entity ON preferences (entity_id);
 CREATE INDEX IF NOT EXISTS idx_preferences_source_capture ON preferences (source_capture_id);
 
 -- ============================================================
--- Decision logs: one row per capture processed through triage+extraction,
--- independent of whether it was memorized or rejected. This is what makes
--- "why did/didn't this capture become memory" inspectable without having
--- to diff captures.extraction_status/discard_reason against the
--- facts/events/commitments/preferences tables by hand -- see
--- kivi/ingestion/writer.py's log_decision().
+-- One row per capture that finished processing, memorized or rejected. This
+-- is what makes "why didn't this become memory?" a query rather than a diff
+-- across five tables.
 -- ============================================================
 CREATE TABLE IF NOT EXISTS decision_logs (
     decision_log_id     TEXT PRIMARY KEY,
@@ -262,42 +235,22 @@ CREATE TABLE IF NOT EXISTS relationships (
 CREATE INDEX IF NOT EXISTS idx_relationships_source ON relationships (source_type, source_id);
 CREATE INDEX IF NOT EXISTS idx_relationships_target ON relationships (target_type, target_id);
 
--- NOTE: relationships reference commitments.commitment_id (the stable
--- identity), not a specific commitment_status_events row -- an ordering or
--- resolves relationship is about the commitment itself, not a snapshot of
--- its status at one point in time.
+-- Relationships point at commitment_id, not at a status row: an ordering
+-- edge is about the commitment, not a snapshot of its status.
 
 -- ============================================================
--- Unified search index: a single FTS5 table spanning declarative_facts,
--- episodic_events, and commitments, with Porter-stemmed tokenization.
+-- One FTS5 table over facts, events, commitments, preferences and entities,
+-- Porter-stemmed so 'converging' finds 'convergence'.
 --
--- Why this exists (replacing the earlier hand-rolled Python prefix/stopword
--- heuristic in kivi/text_match.py for this specific tool): that heuristic
--- worked, but it was a stopgap -- Porter stemming is the standard, correct
--- solution to "convergence" vs "converging" and every other word-form
--- mismatch, and SQLite provides it natively via tokenize='porter', so there
--- is no reason to keep re-deriving an approximation of it in Python for
--- this table search. kivi/text_match.py is left as-is for its other use
--- (entity alias fuzzy matching, and the standalone find_resolving_event /
--- get_ordering tools), which don't go through this index.
+-- Each row's content concatenates the entity name, the item's own text and
+-- the capture's foreground_app, so a query naming any of the three matches
+-- in one MATCH instead of needing the caller to pick a column first.
 --
--- Each row's `content` column concatenates THREE things that used to be
--- searched in isolation, one per tool: the entity's canonical_name, the
--- item's own core text (attribute+value / description / commitment_mention),
--- and the capture's foreground_app. A query mentioning any combination of
--- these (an entity name, a domain term, an app name) now matches in one
--- MATCH call instead of requiring the caller to already know which single
--- column to search.
---
--- Rows are inserted once, at creation, and never updated or deleted --
--- supersession/status changes (is_active flips, new commitment_status_events
--- rows) don't change the underlying text, only a flag on the source table,
--- so the index entry for the original row stays valid. Currency (never
--- serving a superseded fact, always joining current commitment status) is
--- guaranteed by ALWAYS re-resolving through the source tables after an FTS
--- match, never by trusting the matched row directly -- see
--- kivi/retrieval/tools.py (get_node_details / get_node_history for the
--- traversal logic that keeps this guarantee under the atomic-tools design).
+-- Rows are inserted once and never updated. Supersession only flips a flag
+-- on the source table, so the indexed text stays valid -- but it also means
+-- a retired row's text lives here forever. Currency comes from re-resolving
+-- through the source tables after a match, never from trusting the hit
+-- itself. See kivi/retrieval/tools.py.
 -- ============================================================
 CREATE VIRTUAL TABLE IF NOT EXISTS unified_search USING fts5(
     content,
@@ -307,12 +260,9 @@ CREATE VIRTUAL TABLE IF NOT EXISTS unified_search USING fts5(
     tokenize = 'porter'
 );
 
--- Entities are indexed too, as their own searchable node type -- the
--- atomic-tools design needs search_nodes() to be able to return an entity
--- itself as a starting point (e.g. a bare query like "Meridian"), not just
--- facts/events/commitments that happen to mention one. Both the canonical
--- name AND every alias get their own row, since an alias may be the only
--- text form a user's actual query resembles.
+-- Entities are indexed too, so a bare query like "Meridian" can return the
+-- entity itself as a starting point. Aliases get their own rows -- an alias
+-- may be the only form the query resembles.
 CREATE TRIGGER IF NOT EXISTS trg_index_entity AFTER INSERT ON entities
 BEGIN
     INSERT INTO unified_search (content, entity_id, source_type, source_id)

@@ -10,12 +10,8 @@ import re
 
 _PREFIX_MATCH_LEN = 5  # two tokens count as "the same word" if they share this many leading chars
 
-# Common function words filtered out before scoring -- meaningful for
-# longer free-text matching (event/problem descriptions), where grammatical
-# filler otherwise dilutes genuine overlap far more than it does for short
-# entity-alias comparisons. Deliberately small and hand-picked, not a
-# standard NLP stopword list -- consistent with keeping v1 matching
-# rule-based rather than pulling in an NLP dependency.
+# Hand-picked, not a standard stopword list. Filler dilutes long description
+# matches far more than short alias ones.
 _STOPWORDS = {
     "a", "an", "the", "is", "are", "was", "were", "be", "been", "being",
     "to", "of", "in", "on", "at", "for", "and", "or", "not", "no",
@@ -30,8 +26,7 @@ def normalize(text: str) -> str:
 def _tokens_match(a: str, b: str) -> bool:
     """Exact match, or a shared-prefix heuristic that catches simple word-form
     variation (converge/converging, meeting/meetings) without pulling in a
-    real stemmer. Both tokens must be long enough that a shared prefix is
-    actually meaningful -- 'a' and 'as' sharing a prefix would be noise."""
+    real stemmer."""
     if a == b:
         return True
     if len(a) >= _PREFIX_MATCH_LEN and len(b) >= _PREFIX_MATCH_LEN:

@@ -1,0 +1,476 @@
+{
+  "started_at": "2026-09-11T22:43:53+00:00",
+  "mode": "full pipeline (agent model: gemini-3.1-flash-lite)",
+  "database": "C:\\Users\\Rishabh Singh\\Downloads\\SVM_claude\\evals\\results\\20260912_041353\\eval.db",
+  "eval_set": "C:\\Users\\Rishabh Singh\\Downloads\\SVM_claude\\evals\\eval_set.json",
+  "totals": {
+    "cases": 3,
+    "retrieval_total": 4,
+    "retrieval_passed": 4,
+    "agent_total": 3,
+    "agent_passed": 3,
+    "post_total": 0,
+    "post_passed": 0
+  },
+  "performance": {
+    "agent_model_calls": 8,
+    "prompt_tokens": 46344,
+    "completion_tokens": 1350,
+    "total_tokens": 47694,
+    "estimated_cost_usd": "not configured -- set KIVI_EVAL_COST_PER_1M_INPUT / _OUTPUT to price a run",
+    "retrieval_check_latency_ms_mean": 0.64,
+    "agent_latency_ms_mean": 7306.0,
+    "agent_latency_ms_median": 5630.6,
+    "agent_latency_ms_max": 10903.0,
+    "ingestion_wall_clock_s": null,
+    "db_growth_bytes": 0
+  },
+  "db_before": {
+    "size_bytes": 798720,
+    "captures": 515,
+    "entities": 51,
+    "declarative_facts": 298,
+    "episodic_events": 161,
+    "commitments": 122,
+    "commitment_status_events": 163,
+    "preferences": 39,
+    "relationships": 9,
+    "decision_logs": 535,
+    "active_facts": 198,
+    "superseded_facts": 100,
+    "rejected_captures": 53
+  },
+  "db_after": {
+    "size_bytes": 798720,
+    "captures": 515,
+    "entities": 51,
+    "declarative_facts": 298,
+    "episodic_events": 161,
+    "commitments": 122,
+    "commitment_status_events": 163,
+    "preferences": 39,
+    "relationships": 9,
+    "decision_logs": 535,
+    "active_facts": 198,
+    "superseded_facts": 100,
+    "rejected_captures": 53
+  },
+  "ingestion": {
+    "decisions": {
+      "memorized": 460,
+      "rejected": 75
+    },
+    "deliberately_ignored_sample": [
+      {
+        "capture_id": "cap_0016",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is transient small talk/conversational filler with no durable signal."
+      },
+      {
+        "capture_id": "cap_0036",
+        "extraction_status": "transient_discard",
+        "discard_reason": "Testing audio check/small talk with no durable signal"
+      },
+      {
+        "capture_id": "cap_0046",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user is in the middle of searching for a document; there is no durable signal here."
+      },
+      {
+        "capture_id": "cap_0054",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, non-durable remark about checking on an unspecified 'that' at an unspecified 'later' time; it contains no actionable task or meaningful entity information."
+      },
+      {
+        "capture_id": "cap_0056",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user explicitly requested to disregard the previous input."
+      },
+      {
+        "capture_id": "cap_0057",
+        "extraction_status": "pii_detected",
+        "discard_reason": "pre-LLM triage: password-like pattern detected ('password is/: <value>')"
+      },
+      {
+        "capture_id": "cap_0062",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input contains only filler phrases with no durable or actionable information."
+      },
+      {
+        "capture_id": "cap_0065",
+        "extraction_status": "transient_discard",
+        "discard_reason": "User explicitly requested to disregard the capture."
+      },
+      {
+        "capture_id": "cap_0070",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, hypothetical musing ('Maybe I should...') rather than a grounded fact, event, or specific commitment."
+      },
+      {
+        "capture_id": "cap_0075",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is vague and contains no actionable or durable signal (it does not specify what 'that' refers to, nor does it provide a context for a commitment or task)."
+      },
+      {
+        "capture_id": "cap_0076",
+        "extraction_status": "pii_detected",
+        "discard_reason": "pre-LLM triage: password-like pattern detected ('password is/: <value>')"
+      },
+      {
+        "capture_id": "cap_0077",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague hypothetical statement ('Maybe I should...') with no actionable commitment, specific entity, or durable signal."
+      },
+      {
+        "capture_id": "cap_0082",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a speculative/hypothetical musing rather than a concrete commitment or fact."
+      },
+      {
+        "capture_id": "cap_0087",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input contains only '...' which is an incomplete capture and does not convey actionable information."
+      },
+      {
+        "capture_id": "cap_0102",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user stated \"never mind\", indicating the capture contains no durable or actionable information."
+      },
+      {
+        "capture_id": "cap_0109",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user indicated they did not want to record any information."
+      },
+      {
+        "capture_id": "cap_0129",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, hypothetical musing ('Maybe I should...') with no actionable commitment or durable fact."
+      },
+      {
+        "capture_id": "cap_0150",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains no actionable or durable information; 'Hm.' is transient conversational filler."
+      },
+      {
+        "capture_id": "cap_0155",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains only an ellipsis and no content to process."
+      },
+      {
+        "capture_id": "cap_0167",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user input 'Uh hold on let me find the doc' is a transient interaction regarding the process of locating a document, rather than a durable fact, event, commitment, or preference."
+      },
+      {
+        "capture_id": "cap_0176",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains only filler speech (uh) with no durable information or actionable content."
+      },
+      {
+        "capture_id": "cap_0191",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The content is empty or contains no actionable signal."
+      },
+      {
+        "capture_id": "cap_0206",
+        "extraction_status": "transient_discard",
+        "discard_reason": "Testing audio or text input with no durable information."
+      },
+      {
+        "capture_id": "cap_0207",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a test phrase and contains no durable information, facts, or commitments."
+      },
+      {
+        "capture_id": "cap_0225",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input provided is non-substantive/transient chatter with no actionable content."
+      }
+    ],
+    "ingestion_latency_ms": {
+      "count": 534,
+      "mean": 6444.3,
+      "median": 3523.5,
+      "p95": 16875.0,
+      "max": 65719.0
+    }
+  },
+  "cases": [
+    {
+      "case_id": "solution_reuse_finds_past_fix",
+      "question": "The sync job is duplicating records again. How did we fix that last time?",
+      "category": "solution_reuse",
+      "why": "The product's central promise is that the user does not solve the same problem twice. This is a two-hop answer -- find the problem, then follow its 'resolves' edge to the fix -- and the fix has to come back with its actual technical substance (the upsert key), not a vague 'we fixed it'. Answering with the problem alone, or with a fix the graph does not link, is the failure this guards.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "edges_found": [
+            {
+              "source": "Sync job duplicating records due to upsert keying on email instead of external ID during address changes.",
+              "target": "Switched the upsert key to external ID and backfilled the duplicate records."
+            },
+            {
+              "source": "Compass redesign sync is duplicating records due to upsert keys on email.",
+              "target": "Switched to external ID as the upsert key to resolve record duplication."
+            }
+          ],
+          "reason": "2 matching 'resolves' edge(s) of 5 total",
+          "latency_ms": 0.24,
+          "passed": true
+        },
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "evt_b2f53a51e3e9",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_548a44a0c219",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_d6fd6b87e0fe",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_3be4776661ce",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_bcdd69963a4c",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_6b646471e98a",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_f094a0660d3b",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_77235d49fa9f",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_5ed00ddfc551",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_ac638236d588",
+              "node_type": "event"
+            }
+          ],
+          "reason": "10 matching result(s)",
+          "latency_ms": 1.47,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "The last time we fixed this, we switched the upsert key to use the external ID instead of the email and then performed a backfill to resolve the duplicate records.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "event",
+            "source_id": "evt_7024f849f745",
+            "snippet": "Switched the upsert key to external ID and backfilled the duplicate records.",
+            "capture_id": "cap_0502",
+            "captured_at": "2026-09-11T11:40:19Z",
+            "foreground_app": "VS Code",
+            "source_text": "Found the root cause of the sync job duplicating records on the Cascade rollout: the upsert was keying on email instead of the external ID, so any address change created a second row. Switched the key to external ID and backfilled the duplicates.",
+            "is_active": null,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "The user is asking about a recurring issue ('sync job duplicating records') and specifically wants to know the resolution used last time. Per instructions, this is a two-step process: find the occurrence of the problem, then follow the 'resolve' edge to find the fix.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"sync job duplicate records\"}"
+          },
+          {
+            "thought": "I have identified several occurrences of the 'sync job duplicating records' issue. To find the fix, I need to check for resolution edges connected to these events. I will start by checking the most specific-looking ones, such as the Cascade rollout event (evt_5ed00ddfc551) which already mentions a specific cause, and follow up with others if needed.",
+            "action": "call_tool",
+            "tool": "get_connected_edges",
+            "arguments": "{\"source_node_id\": \"evt_5ed00ddfc551\", \"edge_type\": \"resolve\"}"
+          },
+          {
+            "thought": "I have successfully identified the last resolution for the sync job duplicating records issue by finding a 'resolves' edge from an event to a specific action. I can now provide the final answer.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 3.78,
+          "generation_latency_ms": 10898.75,
+          "total_latency_ms": 10903.0,
+          "prompt_tokens": 17504,
+          "completion_tokens": 465,
+          "total_tokens": 17969
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "past_fix_carries_technical_substance",
+      "question": "Why did the Nimbus dashboard deploy keep failing, and what did we do about it?",
+      "category": "solution_reuse",
+      "why": "A recorded fix is only worth storing if it is specific enough to reuse months later. 'Cleared the CDN cache and pinned the build hash' is reusable; 'fixed the deploy' is not. This checks the cause and the remedy both survive extraction.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "edges_found": [
+            {
+              "source": "Nimbus dashboard deploy failing due to stale cache",
+              "target": "Cleared the CDN cache and pinned the build hash in the deploy config to stop serving the old bundle"
+            }
+          ],
+          "reason": "1 matching 'resolves' edge(s) of 5 total",
+          "latency_ms": 0.27,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "The Nimbus dashboard deployment failures were caused by a stale cache. To resolve this, we cleared the CDN cache and pinned the build hash in the deployment configuration to ensure the old bundle was no longer served.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "event",
+            "source_id": "evt_0669a9adf0b8",
+            "snippet": "Nimbus dashboard deploy failing due to stale cache",
+            "capture_id": "cap_0501",
+            "captured_at": "2026-09-11T09:12:04Z",
+            "foreground_app": "Terminal",
+            "source_text": "The Nimbus dashboard deploy failing twice was the stale cache issue again. I fixed it by clearing the CDN cache and pinning the build hash in the deploy config, so it stops serving the old bundle.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "event",
+            "source_id": "evt_f3eabdc0da44",
+            "snippet": "Cleared the CDN cache and pinned the build hash in the deploy config to stop serving the old bundle",
+            "capture_id": "cap_0501",
+            "captured_at": "2026-09-11T09:12:04Z",
+            "foreground_app": "Terminal",
+            "source_text": "The Nimbus dashboard deploy failing twice was the stale cache issue again. I fixed it by clearing the CDN cache and pinning the build hash in the deploy config, so it stops serving the old bundle.",
+            "is_active": null,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "The user is asking about the cause of failures for a specific event ('Nimbus dashboard deploy') and its subsequent resolution. I need to first find the event node for the deployment failure and then look for a 'resolve' edge to find the fix.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Nimbus dashboard deploy\"}"
+          },
+          {
+            "thought": "I have found the failure event (evt_0669a9adf0b8) which explicitly mentions 'stale cache' as the cause, and the resolution event (evt_f3eabdc0da44) which details the actions taken to fix it. I have all necessary information.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 2,
+          "tool_calls": 1,
+          "retrieval_latency_ms": 7.7,
+          "generation_latency_ms": 5622.76,
+          "total_latency_ms": 5630.65,
+          "prompt_tokens": 11245,
+          "completion_tokens": 383,
+          "total_tokens": 11628
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "dependency_ordering_prerequisite_first",
+      "question": "What do I need to do before I can start the Trellis rewrite migration?",
+      "category": "ordering",
+      "why": "The vision's flagship ordering moment -- 'reminding them to ask a question before jumping into a meeting'. The prerequisite belongs to a different entity than the task being asked about, so a naive entity-scoped lookup returns the dependent task with its prerequisite invisible: the one thing the question was asking for.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "edges_found": [
+            {
+              "source": "get vendor access from Meridian Logistics",
+              "target": "Trellis rewrite migration"
+            }
+          ],
+          "reason": "1 matching 'must_precede' edge(s) of 4 total",
+          "latency_ms": 0.58,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "You need to get the vendor access sorted from Meridian Logistics before you can start the Trellis rewrite migration. It is noted that there is no point in beginning that work until you have those credentials in hand.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "commitment",
+            "source_id": "com_95ec6d43d138",
+            "snippet": "I need to get the vendor access sorted from Meridian Logistics before I can start the Trellis rewrite migration. There is no point beginning that work until the credentials are in hand.",
+            "capture_id": "cap_0506",
+            "captured_at": "2026-09-12T09:15:44Z",
+            "foreground_app": "Slack",
+            "source_text": "I need to get the vendor access sorted from Meridian Logistics before I can start the Trellis rewrite migration. There is no point beginning that work until the credentials are in hand.",
+            "is_active": null,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "I need to determine the status of the 'Trellis rewrite migration' and identify its dependencies. I will start by searching for 'Trellis rewrite migration' to get the entity or commitment ID, then I will use that ID to check its dependencies or associated commitments.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"Trellis rewrite migration\"}"
+          },
+          {
+            "thought": "I have identified the 'Trellis rewrite migration' commitment (com_95ec6d43d138) and see that there is another commitment related to the Trellis rewrite that is currently 'blocked' (com_31ffda7f972e). I need to check the details of these commitments and any potential dependencies or connections between them to answer the user's question about what must be done first.",
+            "action": "call_tool",
+            "tool": "get_node_details",
+            "arguments": "{\"node_id\": \"com_95ec6d43d138\"}"
+          },
+          {
+            "thought": "I have found the specific dependency for the 'Trellis rewrite migration' in the commitment details, which clearly states that vendor access from Meridian Logistics must be sorted first. I have all the necessary information to answer the user.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 10.0,
+          "generation_latency_ms": 5374.03,
+          "total_latency_ms": 5384.33,
+          "prompt_tokens": 17595,
+          "completion_tokens": 502,
+          "total_tokens": 18097
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    }
+  ]
+}

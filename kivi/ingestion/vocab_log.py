@@ -1,12 +1,8 @@
-"""
-Vocabulary drift logging for the two free-text fields the extraction schema
-deliberately left open: event_type and relationship_type. Since nothing
-constrains the LLM's wording for these, the same concept can surface as
-'resolves' in one capture and 'resolution_of' in another. This module just
-counts distinct values seen across a batch run and writes them out sorted by
-frequency, so drift is visible for a human to decide whether to normalize at
-ingestion or match fuzzily at query time -- it does not make that decision
-itself.
+"""Counts the distinct values seen for the two open-vocabulary fields
+(event_type, relationship_type) across a run.
+
+Makes drift visible -- 'resolves' in one capture, 'resolution_of' in the
+next -- without deciding what to do about it.
 """
 
 from __future__ import annotations

@@ -1,0 +1,840 @@
+{
+  "started_at": "2026-09-11T22:43:46+00:00",
+  "mode": "offline (retrieval checks only)",
+  "database": "C:\\Users\\Rishabh Singh\\Downloads\\SVM_claude\\evals\\results\\20260912_041346\\eval.db",
+  "eval_set": "C:\\Users\\Rishabh Singh\\Downloads\\SVM_claude\\evals\\eval_set.json",
+  "totals": {
+    "cases": 17,
+    "retrieval_total": 18,
+    "retrieval_passed": 18,
+    "agent_total": 0,
+    "agent_passed": 0,
+    "post_total": 0,
+    "post_passed": 0
+  },
+  "performance": {
+    "agent_model_calls": 0,
+    "prompt_tokens": null,
+    "completion_tokens": null,
+    "total_tokens": null,
+    "estimated_cost_usd": "not configured -- set KIVI_EVAL_COST_PER_1M_INPUT / _OUTPUT to price a run",
+    "retrieval_check_latency_ms_mean": 1.25,
+    "agent_latency_ms_mean": null,
+    "agent_latency_ms_median": null,
+    "agent_latency_ms_max": null,
+    "ingestion_wall_clock_s": null,
+    "db_growth_bytes": 0
+  },
+  "db_before": {
+    "size_bytes": 798720,
+    "captures": 515,
+    "entities": 51,
+    "declarative_facts": 298,
+    "episodic_events": 161,
+    "commitments": 122,
+    "commitment_status_events": 163,
+    "preferences": 39,
+    "relationships": 9,
+    "decision_logs": 535,
+    "active_facts": 198,
+    "superseded_facts": 100,
+    "rejected_captures": 53
+  },
+  "db_after": {
+    "size_bytes": 798720,
+    "captures": 515,
+    "entities": 51,
+    "declarative_facts": 298,
+    "episodic_events": 161,
+    "commitments": 122,
+    "commitment_status_events": 163,
+    "preferences": 39,
+    "relationships": 9,
+    "decision_logs": 535,
+    "active_facts": 198,
+    "superseded_facts": 100,
+    "rejected_captures": 53
+  },
+  "ingestion": {
+    "decisions": {
+      "memorized": 460,
+      "rejected": 75
+    },
+    "deliberately_ignored_sample": [
+      {
+        "capture_id": "cap_0016",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is transient small talk/conversational filler with no durable signal."
+      },
+      {
+        "capture_id": "cap_0036",
+        "extraction_status": "transient_discard",
+        "discard_reason": "Testing audio check/small talk with no durable signal"
+      },
+      {
+        "capture_id": "cap_0046",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user is in the middle of searching for a document; there is no durable signal here."
+      },
+      {
+        "capture_id": "cap_0054",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, non-durable remark about checking on an unspecified 'that' at an unspecified 'later' time; it contains no actionable task or meaningful entity information."
+      },
+      {
+        "capture_id": "cap_0056",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user explicitly requested to disregard the previous input."
+      },
+      {
+        "capture_id": "cap_0057",
+        "extraction_status": "pii_detected",
+        "discard_reason": "pre-LLM triage: password-like pattern detected ('password is/: <value>')"
+      },
+      {
+        "capture_id": "cap_0062",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input contains only filler phrases with no durable or actionable information."
+      },
+      {
+        "capture_id": "cap_0065",
+        "extraction_status": "transient_discard",
+        "discard_reason": "User explicitly requested to disregard the capture."
+      },
+      {
+        "capture_id": "cap_0070",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, hypothetical musing ('Maybe I should...') rather than a grounded fact, event, or specific commitment."
+      },
+      {
+        "capture_id": "cap_0075",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is vague and contains no actionable or durable signal (it does not specify what 'that' refers to, nor does it provide a context for a commitment or task)."
+      },
+      {
+        "capture_id": "cap_0076",
+        "extraction_status": "pii_detected",
+        "discard_reason": "pre-LLM triage: password-like pattern detected ('password is/: <value>')"
+      },
+      {
+        "capture_id": "cap_0077",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague hypothetical statement ('Maybe I should...') with no actionable commitment, specific entity, or durable signal."
+      },
+      {
+        "capture_id": "cap_0082",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a speculative/hypothetical musing rather than a concrete commitment or fact."
+      },
+      {
+        "capture_id": "cap_0087",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input contains only '...' which is an incomplete capture and does not convey actionable information."
+      },
+      {
+        "capture_id": "cap_0102",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user stated \"never mind\", indicating the capture contains no durable or actionable information."
+      },
+      {
+        "capture_id": "cap_0109",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user indicated they did not want to record any information."
+      },
+      {
+        "capture_id": "cap_0129",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, hypothetical musing ('Maybe I should...') with no actionable commitment or durable fact."
+      },
+      {
+        "capture_id": "cap_0150",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains no actionable or durable information; 'Hm.' is transient conversational filler."
+      },
+      {
+        "capture_id": "cap_0155",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains only an ellipsis and no content to process."
+      },
+      {
+        "capture_id": "cap_0167",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user input 'Uh hold on let me find the doc' is a transient interaction regarding the process of locating a document, rather than a durable fact, event, commitment, or preference."
+      },
+      {
+        "capture_id": "cap_0176",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains only filler speech (uh) with no durable information or actionable content."
+      },
+      {
+        "capture_id": "cap_0191",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The content is empty or contains no actionable signal."
+      },
+      {
+        "capture_id": "cap_0206",
+        "extraction_status": "transient_discard",
+        "discard_reason": "Testing audio or text input with no durable information."
+      },
+      {
+        "capture_id": "cap_0207",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a test phrase and contains no durable information, facts, or commitments."
+      },
+      {
+        "capture_id": "cap_0225",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input provided is non-substantive/transient chatter with no actionable content."
+      }
+    ],
+    "ingestion_latency_ms": {
+      "count": 534,
+      "mean": 6444.3,
+      "median": 3523.5,
+      "p95": 16875.0,
+      "max": 65719.0
+    }
+  },
+  "cases": [
+    {
+      "case_id": "current_owner_after_handover",
+      "question": "Who currently owns Project Driftwood?",
+      "category": "factual_current",
+      "why": "Driftwood changed hands. The superseded owner's row is still in the FTS index forever, so quoting it is the single easiest way for this system to be confidently wrong.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "found": [
+            {
+              "fact_id": "fact_613b40b8cda5",
+              "value": "Sofia Conti"
+            }
+          ],
+          "provenance": [
+            {
+              "capture_id": "cap_0173",
+              "captured_at": "2026-04-13T12:47:53Z",
+              "foreground_app": "Google Meet",
+              "formatted_text": "Okay recap: Sofia Conti owns Project Driftwood, the deadline is by end of quarter, we decided to cut the export feature for v1 because of time constraints, and I'll send the updated scope doc to the team by end of quarter."
+            }
+          ],
+          "reason": "current owner = ['Sofia Conti']",
+          "latency_ms": 0.64,
+          "passed": true
+        },
+        {
+          "kind": "no_duplicate_attribute",
+          "duplicates": [],
+          "reason": "one active value per attribute",
+          "latency_ms": 0.12,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "numeric_fact_readable",
+      "question": "What is the budget for project Jinangxi?",
+      "category": "factual_current",
+      "why": "The value lives in value_numeric with value_text NULL. Every display path has to reunite those columns; the one that didn't rendered this fact as 'None'.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "found": [
+            {
+              "fact_id": "fact_c53cf30ae7ea",
+              "value": "$40,000"
+            }
+          ],
+          "provenance": [
+            {
+              "capture_id": "cap_fb0c530ecc6e",
+              "captured_at": "2026-09-11T14:47:42.907246",
+              "foreground_app": null,
+              "formatted_text": "Hi, the budget for project Jinangxi is 40K"
+            }
+          ],
+          "reason": "current budget = ['$40,000']",
+          "latency_ms": 0.19,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "abstain_on_unrecorded_topic",
+      "question": "What did we decide about the Antarctic expedition permits?",
+      "category": "abstention",
+      "why": "Nothing in this history is about this. The right answer is to say so. An OR'd keyword search that returns one incidentally-matching row is all it takes for the model to invent a confident answer around it.",
+      "retrieval_checks": [
+        {
+          "kind": "search_returns_nothing",
+          "results": [],
+          "reason": "no candidate cleared the relevance floor, so the agent is forced to abstain",
+          "latency_ms": 0.49,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "abstain_on_plausible_but_absent_detail",
+      "question": "Was the coffee machine repair ever approved?",
+      "category": "abstention",
+      "why": "Plausible-sounding office trivia the corpus never records. Abstention has to hold for questions that SOUND like they belong, not just obviously alien ones.",
+      "retrieval_checks": [
+        {
+          "kind": "search_returns_nothing",
+          "results": [],
+          "reason": "no candidate cleared the relevance floor, so the agent is forced to abstain",
+          "latency_ms": 1.04,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "compound_two_preferences",
+      "question": "What are my preferences for focus blocks and for meeting note formatting?",
+      "category": "compound_query",
+      "why": "Two unrelated topics in one turn. The reported failure was searching the first, finding something, and answering as though the second half of the sentence wasn't there.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "pref_265016527a5c",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_6037c67d92f0",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_decf91078dbb",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_c8296c589838",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_d3729f4ab995",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_7370500071ea",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "evt_8c3b31a5d165",
+              "node_type": "event"
+            },
+            {
+              "node_id": "fact_769db715a100",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_a897168b64ef",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_038e4cd43e7b",
+              "node_type": "fact"
+            }
+          ],
+          "reason": "6 matching result(s)",
+          "latency_ms": 2.96,
+          "passed": true
+        },
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "pref_ac39aa7f864e",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_bb1a5e4bd469",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "fact_74f4df19ebb2",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_d3add63328f1",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_578e032fee30",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_4721980bce18",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_063aed389b1b",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_7d2993ca8e17",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_caa045c60485",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "evt_c7de5d0b22a8",
+              "node_type": "event"
+            }
+          ],
+          "reason": "2 matching result(s)",
+          "latency_ms": 4.55,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "compound_two_entities",
+      "question": "What's the deadline for Project Driftwood, and who owns the Helix migration?",
+      "category": "compound_query",
+      "why": "Two entities, two different attributes, one turn. Tests decomposition across entities rather than across topics.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "found": [
+            {
+              "fact_id": "fact_7cb905f4e1d3",
+              "value": "2026-08-11"
+            }
+          ],
+          "provenance": [
+            {
+              "capture_id": "cap_0417",
+              "captured_at": "2026-08-02T19:38:40Z",
+              "foreground_app": "Notion",
+              "formatted_text": "Update: deadline for Project Driftwood pushed from Friday to the following Tuesday per leadership."
+            }
+          ],
+          "reason": "current deadline = ['2026-08-11']",
+          "latency_ms": 0.3,
+          "passed": true
+        },
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "fact_49e4252a2d4f",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_4bbc50eb53df",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "ent_8aeec0ea2454",
+              "node_type": "entity"
+            },
+            {
+              "node_id": "com_aaaeab7891c8",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_d57822f961d5",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_8a0229daad56",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_88a11336e13d",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_14d1ab14567d",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_74fd2fb6ad2a",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "fact_c47d62109175",
+              "node_type": "fact"
+            }
+          ],
+          "reason": "10 matching result(s)",
+          "latency_ms": 4.23,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "conversational_deletion_persists",
+      "question": "Forget the budget for project Jinangxi.",
+      "category": "mutation",
+      "why": "The headline failure: the agent said 'I have forgotten that' and the row kept is_active=1, deleted_at=NULL. The post_check is the whole point of this case -- a passing answer with a failing post_check is exactly the bug. Citing the record it just deleted is correct, not stale-data leakage.",
+      "retrieval_checks": [],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "commitment_status_is_respected",
+      "question": "What am I still waiting on for Project Driftwood?",
+      "category": "commitment_status",
+      "why": "Completed and cancelled commitments must not be presented as outstanding work. A memory system that reminds you about things you already finished stops being trusted quickly.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "com_c73a605ec62f",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "ent_9dc358fcab45",
+              "node_type": "entity"
+            },
+            {
+              "node_id": "com_929babf9e0dd",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "fact_fe669375efaa",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "evt_436f30f2a4c5",
+              "node_type": "event"
+            },
+            {
+              "node_id": "fact_f578ad507c45",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_7f8a5fee05db",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "evt_9bd64e6f199b",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_03f3b3e5a9e1",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_33ed889ffd5d",
+              "node_type": "event"
+            }
+          ],
+          "reason": "10 matching result(s)",
+          "latency_ms": 2.61,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "history_available_on_request",
+      "question": "What was Project Driftwood's owner before the current one?",
+      "category": "episodic",
+      "why": "Superseded values are hidden from ordinary retrieval but must remain reachable when the question is explicitly about history -- otherwise 'never show stale data' has quietly become 'destroy the audit trail'. The citation here SHOULD be the superseded row -- that is the record being asked about.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "fact_613b40b8cda5",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_d1c7a630623c",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "com_c73a605ec62f",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "ent_9dc358fcab45",
+              "node_type": "entity"
+            },
+            {
+              "node_id": "com_929babf9e0dd",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "fact_fe669375efaa",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "evt_436f30f2a4c5",
+              "node_type": "event"
+            },
+            {
+              "node_id": "fact_f578ad507c45",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "fact_7f8a5fee05db",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "evt_9bd64e6f199b",
+              "node_type": "event"
+            }
+          ],
+          "reason": "10 matching result(s)",
+          "latency_ms": 3.57,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "preference_recall",
+      "question": "How do I like my commit messages written?",
+      "category": "preference",
+      "why": "Preference-level recall, phrased nothing like the stored text. Tests that the preference layer is retrievable by intent, not just by matching words.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "pref_e93988a94202",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_bdbc27690506",
+              "node_type": "preference"
+            },
+            {
+              "node_id": "pref_f31511b8b8f9",
+              "node_type": "preference"
+            }
+          ],
+          "reason": "3 matching result(s)",
+          "latency_ms": 0.44,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "distributed_across_dictations",
+      "question": "Tell me everything currently true about the Helix migration.",
+      "category": "multi_hop",
+      "why": "The answer is spread across several dictations recorded weeks apart. This is the case that proves memory is doing something a single transcript search cannot.",
+      "retrieval_checks": [
+        {
+          "kind": "no_duplicate_attribute",
+          "duplicates": [],
+          "reason": "one active value per attribute",
+          "latency_ms": 0.08,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "false_premise_is_corrected",
+      "question": "Since the Driftwood deadline was already agreed and signed off, what's the next step?",
+      "category": "false_premise",
+      "why": "The question smuggles in an assumption. Accepting a premise the history doesn't support is a subtler kind of hallucination than inventing a fact, and a more damaging one.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "found": [
+            {
+              "fact_id": "fact_7cb905f4e1d3",
+              "value": "2026-08-11"
+            }
+          ],
+          "provenance": [
+            {
+              "capture_id": "cap_0417",
+              "captured_at": "2026-08-02T19:38:40Z",
+              "foreground_app": "Notion",
+              "formatted_text": "Update: deadline for Project Driftwood pushed from Friday to the following Tuesday per leadership."
+            }
+          ],
+          "reason": "current deadline = ['2026-08-11']",
+          "latency_ms": 0.27,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "what_should_i_do_first",
+      "question": "What should I work on first?",
+      "category": "ordering",
+      "why": "The product promises to 'look at their unfinished work and suggest the best order to tackle it'. The order must come from the deterministic tool, and blocked work must be reported as waiting-on rather than as today's work.",
+      "retrieval_checks": [],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "what_am_i_waiting_on",
+      "question": "What am I currently blocked on, and who am I waiting on?",
+      "category": "ordering",
+      "why": "Blocked commitments carry the user's own blocking_reason. That text IS the answer to 'what am I waiting on' -- the agent must surface it rather than paraphrase it away or list blocked items as actionable work.",
+      "retrieval_checks": [],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "solution_reuse_finds_past_fix",
+      "question": "The sync job is duplicating records again. How did we fix that last time?",
+      "category": "solution_reuse",
+      "why": "The product's central promise is that the user does not solve the same problem twice. This is a two-hop answer -- find the problem, then follow its 'resolves' edge to the fix -- and the fix has to come back with its actual technical substance (the upsert key), not a vague 'we fixed it'. Answering with the problem alone, or with a fix the graph does not link, is the failure this guards.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "edges_found": [
+            {
+              "source": "Sync job duplicating records due to upsert keying on email instead of external ID during address changes.",
+              "target": "Switched the upsert key to external ID and backfilled the duplicate records."
+            },
+            {
+              "source": "Compass redesign sync is duplicating records due to upsert keys on email.",
+              "target": "Switched to external ID as the upsert key to resolve record duplication."
+            }
+          ],
+          "reason": "2 matching 'resolves' edge(s) of 5 total",
+          "latency_ms": 0.16,
+          "passed": true
+        },
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "evt_b2f53a51e3e9",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_548a44a0c219",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_d6fd6b87e0fe",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_3be4776661ce",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_bcdd69963a4c",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_6b646471e98a",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_f094a0660d3b",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_77235d49fa9f",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_5ed00ddfc551",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_ac638236d588",
+              "node_type": "event"
+            }
+          ],
+          "reason": "10 matching result(s)",
+          "latency_ms": 0.82,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "past_fix_carries_technical_substance",
+      "question": "Why did the Nimbus dashboard deploy keep failing, and what did we do about it?",
+      "category": "solution_reuse",
+      "why": "A recorded fix is only worth storing if it is specific enough to reuse months later. 'Cleared the CDN cache and pinned the build hash' is reusable; 'fixed the deploy' is not. This checks the cause and the remedy both survive extraction.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "edges_found": [
+            {
+              "source": "Nimbus dashboard deploy failing due to stale cache",
+              "target": "Cleared the CDN cache and pinned the build hash in the deploy config to stop serving the old bundle"
+            }
+          ],
+          "reason": "1 matching 'resolves' edge(s) of 5 total",
+          "latency_ms": 0.06,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "dependency_ordering_prerequisite_first",
+      "question": "What do I need to do before I can start the Trellis rewrite migration?",
+      "category": "ordering",
+      "why": "The vision's flagship ordering moment -- 'reminding them to ask a question before jumping into a meeting'. The prerequisite belongs to a different entity than the task being asked about, so a naive entity-scoped lookup returns the dependent task with its prerequisite invisible: the one thing the question was asking for.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "edges_found": [
+            {
+              "source": "get vendor access from Meridian Logistics",
+              "target": "Trellis rewrite migration"
+            }
+          ],
+          "reason": "1 matching 'must_precede' edge(s) of 4 total",
+          "latency_ms": 0.06,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    }
+  ]
+}

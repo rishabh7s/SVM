@@ -1,12 +1,9 @@
 """
-Hand-crafted tests for kivi/models/extraction.py -- a deliberate mix of valid
-and invalid payloads. The invalid cases exist specifically to prove that
-Pydantic rejects the kinds of malformed/dangerous data the design docs
+Hand-crafted tests for kivi/models/extraction.py -- a deliberate mix of
+valid and invalid payloads. The invalid cases exist specifically to prove
+that Pydantic rejects the kinds of malformed/dangerous data the design docs
 called out: a commitment marked done without confirmation, a discarded
 capture leaking content, a fact with no actual value, etc.
-
-Run with:
-    python -m pytest tests/test_extraction_models.py -v
 """
 
 import pytest

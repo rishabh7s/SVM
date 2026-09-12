@@ -1,22 +1,13 @@
 """
 Headless API test suite -- runs the complete deterministic REST contract
 (GET/PATCH/DELETE /memories) and the CORS/health surface with FastAPI's
-TestClient, no running frontend and no network calls needed for those
-paths.
-
-The /query endpoint's tests are split deliberately into two groups:
-  - Contract-shape tests, which work identically whether or not a live
-    model is reachable, since even a failed model call must still produce
-    a correctly-shaped QueryResponse with real (non-zero) timing data --
-    this is a genuinely meaningful test of the metrics/provenance contract,
-    not a weakened substitute for one.
-  - A live-only test, decorated to skip automatically when GEMINI_API_KEY
-    isn't a real key or the network is unreachable, for exercising the
-    actual condensation/clarification conversation flow end to end.
-
-Every test in this file prints its own measured wall-clock duration, per
-the explicit request to show real timing for each operation, not just
-whether it passed.
+TestClient, no running frontend and no network calls needed for those paths.
+The /query tests are split in two: -
+Contract-shape tests, which work identically whether or not a live model is
+reachable, since even a failed model call must still produce a
+correctly-shaped QueryResponse with real (non-zero) timing data -- this is a
+genuinely meaningful test of the metrics/provenance contract, not a weakened
+substitute for one.
 """
 
 from __future__ import annotations
@@ -34,10 +25,10 @@ DB_PATH = Path(__file__).resolve().parents[1] / "db" / "kivi.db"
 
 @pytest.fixture
 def client(tmp_path, monkeypatch):
-    """Points the API at a disposable temp copy of the seeded database for
-    the duration of each test, so mutating tests (PATCH/DELETE) never touch
-    the real db/kivi.db -- same isolation pattern used throughout this
-    project's other test files, applied here at the API layer."""
+    """Points the API at a disposable temp copy of the seeded database for the
+    duration of each test, so mutating tests (PATCH/DELETE) never touch the
+    real db/kivi.db -- same isolation pattern used throughout this project's
+    other test files, applied here at the API layer."""
     temp_db = tmp_path / "kivi_test.db"
     shutil.copy(DB_PATH, temp_db)
 
@@ -87,10 +78,7 @@ def test_cors_preflight_headers_present(client):
         ),
     )
     assert response.status_code in (200, 204)
-    # With allow_credentials=True, the CORS spec disallows a literal "*"
-    # allow-origin on a credentialed request -- Starlette correctly reflects
-    # the specific requesting Origin instead, which is what browsers require
-    # for credentialed cross-origin requests to actually succeed.
+    # allow_credentials=True means Starlette reflects the origin, not "*"
     assert response.headers.get("access-control-allow-origin") == "http://localhost:3000"
 
 
@@ -229,10 +217,10 @@ def test_delete_entity_rejected(client):
 # ---------------------------------------------------------------------------
 
 def test_query_contract_shape_and_metrics_always_present(client):
-    """Even a failed model call must produce a correctly-shaped
-    QueryResponse with genuine (non-fabricated, non-zero where meaningful)
-    timing data -- this is the actual metrics/provenance contract, tested
-    regardless of live network availability."""
+    """Even a failed model call must produce a correctly-shaped QueryResponse
+    with genuine (non-fabricated, non-zero where meaningful) timing data --
+    this is the actual metrics/provenance contract, tested regardless of
+    live network availability."""
     response, elapsed = _timed(
         "POST /query (contract-shape check, first turn)",
         lambda: client.post("/query", json={"question": "What is the Meridian budget?", "headless_mode": True}),
@@ -260,9 +248,7 @@ def test_query_contract_shape_and_metrics_always_present(client):
     print(f"[TIMED]   -> reported generation_latency_ms: {metrics['generation_latency_ms']:.2f} ms")
     print(f"[TIMED]   -> response_type: {body['response_type']}")
 
-    # the endpoint's own measured total_latency_ms must be internally
-    # consistent with the wall-clock time the test itself measured around
-    # the whole HTTP call -- it can't be LARGER than the outer measurement
+    # reported latency has to match the wall clock the test measured
     assert metrics["total_latency_ms"] <= elapsed + 5  # +5ms slack for measurement boundary overhead
 
 
@@ -363,18 +349,14 @@ def test_live_clarification_flow_on_genuine_miss(client):
 
 
 # ---------------------------------------------------------------------------
-# /ingest -- the triage-quarantine path never calls the LLM (secrets are
-# short-circuited pre-extraction), so it's fully testable headless with no
-# key required. The happy (extraction) path is exercised only by the
-# live-only test below, same pattern as /query's condensation/clarification
-# flow above.
+# the triage-quarantine path never calls the LLM, so this runs headless
 # ---------------------------------------------------------------------------
 
 def test_ingest_quarantines_pii_without_calling_llm(client, monkeypatch):
-    """A capture containing an OTP is quarantined by pre-LLM triage --
-    proven here by removing the API key entirely (get_client() would raise
-    if this path ever reached it) and confirming the request still
-    succeeds with extraction_status='pii_detected'."""
+    """A capture containing an OTP is quarantined by pre-LLM triage -- proven
+    here by removing the API key entirely (get_client() would raise if this
+    path ever reached it) and confirming the request still succeeds with
+    extraction_status='pii_detected'."""
     import kivi.api.app as app_module
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
     monkeypatch.setattr(app_module, "get_client", lambda: (_ for _ in ()).throw(AssertionError("LLM should never be called for a quarantined capture")))

@@ -36,11 +36,7 @@ DB_PATH = Path(__file__).resolve().parents[2] / "db" / "kivi.db"
 
 app = FastAPI(title="Kivi API")
 
-# CORS: permissive by design for local frontend development against this
-# backend -- allow_origins=["*"] is appropriate for a dev/demo API with no
-# cookie-based auth (there's nothing here for a malicious origin to steal by
-# virtue of CORS alone). Tighten to specific origins before any real
-# deployment.
+# Wide open for local dev. Tighten before this goes anywhere real.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -68,11 +64,11 @@ class QueryRequest(BaseModel):
 
 
 class RichCitation(BaseModel):
-    """The provenance contract: every citation is expanded with its full
-    source detail, not just the bare (source_type, source_id) the agent
-    itself produces -- built deterministically via get_node_details() after
-    the agent returns, never asked of the LLM directly (safer and cheaper
-    than trusting the model to carry transcript IDs/timestamps itself)."""
+    """The provenance contract: every citation is expanded with its full source
+    detail, not just the bare (source_type, source_id) the agent itself
+    produces -- built deterministically via get_node_details() after the
+    agent returns, never asked of the LLM directly (safer and cheaper than
+    trusting the model to carry transcript IDs/timestamps itself)."""
 
     source_type: str
     source_id: str
@@ -118,15 +114,7 @@ class MemoryDeleteRequest(BaseModel):
 
 
 class IngestRequest(BaseModel):
-    """One external transcript/note to ingest. Deliberately mirrors the
-    shape kivi/ingestion/pipeline.py's batch CLI already consumes (a
-    captures row) rather than inventing a parallel schema -- 'content' is
-    what's stored as formatted_text, and this same record becomes
-    immediately searchable through search_nodes once extraction runs,
-    because it goes through the identical write path (triage -> extract ->
-    kivi/ingestion/writer.py) that populates the unified_search FTS index
-    for every other capture in this system.
-    """
+    """One external transcript/note to ingest."""
 
     content: str = Field(..., min_length=1, description="The raw transcript or note text.")
     metadata: Optional[dict[str, Any]] = Field(
@@ -240,15 +228,8 @@ def delete_memory(memory_id: str, body: MemoryDeleteRequest = MemoryDeleteReques
 
 
 # ---------------------------------------------------------------------------
-# Ingestion -- synchronous single-record entry point for external
-# transcripts/notes. Deliberately reuses the SAME triage -> extract -> write
-# path as the batch pipeline (kivi/ingestion/pipeline.py), rather than a
-# parallel "just insert some rows" implementation -- that's what makes the
-# result "immediately searchable via existing retrieval tools" true by
-# construction: writer.py's INSERTs into declarative_facts/episodic_events/
-# commitments fire the exact same unified_search triggers a batch-ingested
-# capture would, so search_nodes finds this content with no separate
-# indexing step.
+# Single-record ingestion. Same triage -> extract -> write path as the batch
+# pipeline, so anything added here is searchable straight away.
 # ---------------------------------------------------------------------------
 
 @app.post("/ingest", response_model=IngestResponse)
@@ -260,16 +241,9 @@ def ingest(body: IngestRequest) -> IngestResponse:
     window_title = metadata.get("window_title")
     source_modality = body.source_type or "selected_text"
 
-    # Flow 1 ("Put Info"): if a session_id is given AND that session already
-    # has turns, resolve implicit references (e.g. "Update the budget to
-    # $400k" right after a chat about Project Meridian) into a standalone
-    # declarative statement BEFORE extraction -- using condense_statement,
-    # never condense_query, so the rewrite can never drift into a question.
-    # A session with no turns yet, or no session_id at all, ingests
-    # body.content exactly as given (condense_statement's own no-history
-    # short-circuit makes this a no-op call, but we skip the call entirely
-    # when there's no session_id to avoid depending on GEMINI_API_KEY for
-    # ingestion that doesn't need it).
+    # With a session that has turns, resolve implicit references first
+    # ("update the budget to $400k" -> which project). condense_statement,
+    # not condense_query -- the rewrite has to stay a statement.
     resolved_content = body.content
     condensed_content_for_response: Optional[str] = None
     if body.session_id:
@@ -280,9 +254,7 @@ def ingest(body: IngestRequest) -> IngestResponse:
             if condensation_result.used_history:
                 resolved_content = condensation_result.standalone_query
                 condensed_content_for_response = resolved_content
-        # Record this ingestion as a turn too, so a /query in the same
-        # session moments later can resolve references against it (e.g.
-        # asking "what's its budget now?" right after this Put Info call).
+        # log it as a turn so a follow-up /query can refer back to it
         session.add_turn("user", resolved_content)
         SESSION_STORE.save(session)
 
@@ -301,9 +273,7 @@ def ingest(body: IngestRequest) -> IngestResponse:
         )
         conn.commit()
 
-        # --- Pre-LLM triage, identical to the batch pipeline: a flagged
-        # secret is quarantined directly with NO extraction call, so it
-        # never leaves the machine at all. ---
+        # Triage first. A flagged secret never reaches the model.
         triage_result = triage(body.content, resolved_content)
         if triage_result.flagged:
             discard_reason = f"pre-LLM triage: {triage_result.reason}"
@@ -539,9 +509,7 @@ def query(body: QueryRequest) -> QueryResponse:
 
 
 # ---------------------------------------------------------------------------
-# Session inspection (debugging/inspectability -- not strictly required by
-# the contract, but cheap and consistent with this project's emphasis on
-# "an engineer can inspect why memory did or did not affect a result")
+# Session inspection. Not required by the contract, but cheap to have.
 # ---------------------------------------------------------------------------
 
 @app.get("/sessions/{session_id}")

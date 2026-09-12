@@ -4,9 +4,6 @@ objects as a stand-in for what the LLM would return -- no network call, no
 dependency on model behavior. This tests the deterministic part of the
 pipeline: entity resolution, fact/commitment supersession, and relationship
 linking against the real schema.
-
-Runs against a disposable temp copy of the seeded database so it never
-mutates db/kivi.db.
 """
 
 import shutil
@@ -48,8 +45,7 @@ def _insert_test_capture(conn: sqlite3.Connection, capture_id: str, captured_at:
 # ---------------------------------------------------------------------------
 
 def test_new_fact_for_known_entity_supersedes_old_active_fact(conn):
-    """Meridian budget is currently 4500000 (fact_002, seeded). A new capture
-    reporting a different value should supersede it, not duplicate it."""
+    """Meridian budget is currently 4500000 (fact_002, seeded)."""
     _insert_test_capture(conn, "cap_w001")
     result = ExtractionResult(
         capture_id="cap_w001",
@@ -112,8 +108,7 @@ def test_identical_fact_value_is_a_no_op(conn):
 # ---------------------------------------------------------------------------
 
 def test_commitment_status_change_supersedes_not_mutates(conn):
-    """com_002 is currently 'blocked' (seeded). Reporting it done+confirmed
-    should create a NEW commitment_status_events row, not overwrite the old."""
+    """com_002 is currently 'blocked' (seeded)."""
     _insert_test_capture(conn, "cap_w003")
     result = ExtractionResult(
         capture_id="cap_w003",

@@ -1,23 +1,10 @@
-"""
-Pydantic v2 models for the ingestion extraction contract.
+"""The extraction contract.
 
-These map 1:1 to kivi_extraction_schema_v2.json (facts / events / commitments
-/ relationships as generic primitives -- see that file's docstring for why
-entity_type / event_type / relationship_type are open strings rather than
-enums). Where the JSON Schema expressed a constraint as if/then, this file
-enforces the same constraint with a Pydantic model_validator, so a violation
-is caught the moment `instructor` tries to parse an LLM response into one of
-these models -- before it ever reaches the database.
-
-A few validators here go slightly beyond what the JSON Schema stated
-literally, because Pydantic makes it cheap to enforce them and they close
-gaps the JSON Schema left soft:
-  - Fact must carry at least one of value_text / value_numeric.
-  - Commitment status 'blocked' must carry a blocking_reason.
-  - ExtractionResult must not carry any facts/events/commitments/relationships
-    when extraction_status != 'processed' -- a quarantined capture must not
-    leak content into memory just because the model still tried to extract
-    something from it.
+Constraints the JSON Schema expressed as if/then are Pydantic validators
+here, so a violation is caught when instructor parses the response, before
+it can reach the database. The important ones: a fact needs a value, a
+'blocked' commitment needs a reason, 'done' needs explicit confirmation, and
+a discarded capture must carry no content at all.
 """
 
 from __future__ import annotations
@@ -42,8 +29,7 @@ CommitmentStatus = Literal["open", "in_progress", "blocked", "done"]
 
 class Fact(BaseModel):
     """A stated property of an entity -- a deadline, a budget, a role, a
-    preference. entity_type and attribute are free text on purpose; see the
-    module docstring."""
+    preference."""
 
     entity_mention: str = Field(..., description="Raw text mention of the entity this fact is about.")
     entity_type: str = Field(..., description="Free-text kind of entity, e.g. 'project', 'person', 'system'.")
@@ -77,8 +63,7 @@ class Fact(BaseModel):
 # ---------------------------------------------------------------------------
 
 class Event(BaseModel):
-    """Something that happened at a point in time. event_type is free text --
-    see the module docstring for why."""
+    """Something that happened at a point in time."""
 
     entity_mention: Optional[str] = Field(
         default=None, description="Entity this event concerns, if any. Some events are self-contained."
@@ -97,11 +82,7 @@ class Event(BaseModel):
 # ---------------------------------------------------------------------------
 
 class Commitment(BaseModel):
-    """Anything planned, promised, or owed. Mirrors the database's
-    commitments / commitment_status_events split conceptually: this model
-    represents a single reported status at extraction time, not the full
-    history -- the ingestion pipeline is responsible for writing it as a new
-    versioned row rather than mutating an existing one."""
+    """Anything planned, promised, or owed."""
 
     commitment_mention: str = Field(
         ..., description="Short raw-text label, used as the join key for later mentions/relationships."
@@ -139,18 +120,7 @@ class Commitment(BaseModel):
 
 class Preference(BaseModel):
     """An enduring habit or operational constraint -- HOW the user wants
-    something done, not a ground truth about the world (that's a Fact).
-    e.g. "always summarize in bullet points" (unscoped: no entity_mention,
-    no category), or "David prefers async updates over meetings"
-    (entity_mention='David', category='communication_style').
-
-    entity_mention/category are both optional together on purpose: a
-    general standing preference has neither. When BOTH are present, this
-    preference participates in supersession (see writer.py) the same way a
-    Fact does for (entity_id, attribute); when either is missing, it is
-    always appended fresh rather than deduplicated, since there is no
-    reliable key to group repeats under.
-    """
+    something done, not a ground truth about the world (that's a Fact)."""
 
     preference_text: str = Field(
         ..., description="The standing instruction/habit itself, in the user's own terms."
@@ -164,11 +134,8 @@ class Preference(BaseModel):
 
     @model_validator(mode="after")
     def _category_requires_entity_or_is_general(self) -> "Preference":
-        # Deliberately NOT enforced as a hard requirement -- a category
-        # without an entity_mention is still meaningful (e.g. a general
-        # 'formatting' preference with category='formatting' but no
-        # specific entity). Left as a plain pass-through; kept as an
-        # explicit validator stub so a future stricter rule has a home.
+        # Not enforced. A category with no entity is still meaningful; this is just
+        # a home for a stricter rule if one is ever wanted.
         return self
 
 
@@ -177,8 +144,7 @@ class Preference(BaseModel):
 # ---------------------------------------------------------------------------
 
 class Relationship(BaseModel):
-    """Generic link between two mentions (facts, events, or commitments).
-    relationship_type is free text -- see the module docstring."""
+    """Generic link between two mentions (facts, events, or commitments)."""
 
     source_mention: str
     target_mention: str
@@ -210,10 +176,7 @@ class ExtractionResult(BaseModel):
     preferences: list[Preference] = Field(default_factory=list)
     relationships: list[Relationship] = Field(default_factory=list)
 
-    # Metadata inferred by the extractor about the capture itself, distinct
-    # from the memory items above. Populated only when the source text
-    # explicitly names an application ("In Slack...", "From Chrome...") --
-    # see extractor.py's SYSTEM_PROMPT_TEMPLATE. None means "not stated,"
+    # Set only when the text names an app outright. None means "not stated",
     # never a guess.
     inferred_foreground_app: Optional[str] = None
 

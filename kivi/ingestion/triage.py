@@ -1,15 +1,10 @@
-"""
-Pre-persistence, pre-LLM secret/PII scrub.
+"""Secret and PII scan, run on raw text before any model call.
 
-Runs on raw capture text BEFORE any LLM call is made, not just before
-writing to the database. This is a stronger privacy property than screening
-the LLM's *output* -- if a capture is flagged here, the raw text containing
-the secret never leaves the local machine at all, since we skip the
-extraction call entirely and mark the capture quarantined directly.
+The ordering is the point: a flagged capture is quarantined locally and the
+extraction call never happens, so the secret doesn't leave the machine.
+Screening the model's output instead would be strictly weaker.
 
-This is deliberately a fast, cheap regex + entropy pass, not a learned
-classifier -- consistent with the project's "don't over-engineer v1"
-approach to fuzzy matching elsewhere.
+Regex and entropy, not a classifier.
 """
 
 from __future__ import annotations
@@ -37,9 +32,7 @@ _PASSWORD_PATTERN = re.compile(
 
 _CREDIT_CARD_PATTERN = re.compile(r"\b(?:\d[ -]?){13,16}\b")
 
-# A high-entropy token near a credential-suggestive keyword. This is the
-# most likely to false-positive of the three checks, so it's the last one
-# tried and requires a nearby keyword, not entropy alone.
+# Most false-positive-prone of the three, so it needs a nearby keyword.
 _CREDENTIAL_KEYWORD_PATTERN = re.compile(
     r"\b(api[\s-]?key|secret|token|credential)\b[^.\n]{0,20}?([A-Za-z0-9_\-]{8,})",
     re.IGNORECASE,
@@ -63,11 +56,7 @@ class TriageResult:
 
 
 def triage(raw_text: str, formatted_text: str = "") -> TriageResult:
-    """Screens raw + formatted capture text for secrets before any LLM call.
-    Returns flagged=True with a human-readable reason the moment any pattern
-    matches -- deliberately stops at the first hit rather than exhaustively
-    reporting all matches, since one is already enough to quarantine the
-    whole capture."""
+    """Screens raw + formatted capture text for secrets before any LLM call."""
     combined = f"{raw_text}\n{formatted_text}"
 
     if match := _OTP_PATTERN.search(combined):

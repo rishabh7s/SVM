@@ -1,21 +1,12 @@
-"""
-Two-tier entity resolution.
+"""Resolves an entity mention to a canonical id.
 
-L1: the ~50 most recently active entities (by their most recent alias
-    insertion) are matched against by cheap exact/normalized string
-    comparison -- this is meant to be injected into the extraction prompt
-    too, so the LLM itself snaps mentions to known entities before this
-    module even runs.
-L2: anything L1 didn't catch falls back to an FTS5 lexical search against
-    entity_search, accepted only if a hardcoded token-overlap threshold is
-    cleared. This is deliberately NOT a learned/embedding matcher for v1 --
-    a hardcoded threshold is enough to prove the mechanism and cheap to
-    replace later if precision turns out to matter more.
-Anything neither tier resolves registers a new entity.
+L1 is exact/normalised matching against recently active entities, and that
+same list goes into the extraction prompt so the model snaps mentions itself
+before this runs. L2 falls back to FTS over aliases, accepted only above a
+hardcoded overlap threshold. Anything neither catches becomes a new entity.
 
-Every resolution decision is returned with a `method` tag
-('l1' / 'l2_fuzzy' / 'new') so the caller can log resolution decisions for
-inspection -- this is what makes entity drift debuggable later.
+Every result carries how it was resolved ('l1' / 'l2_fuzzy' / 'new'), which
+is what makes entity drift debuggable.
 """
 
 from __future__ import annotations
@@ -46,10 +37,10 @@ class ResolutionResult:
 
 
 def get_l1_context(conn: sqlite3.Connection, limit: int = 50) -> list[dict]:
-    """Returns the ~limit most recently active entities as
-    {entity_id, canonical_name, entity_type, aliases: [...]} -- this is the
-    payload meant to be injected into the extraction prompt so the LLM
-    itself can snap mentions to existing entities before resolution runs."""
+    """Returns the ~limit most recently active entities as {entity_id,
+    canonical_name, entity_type, aliases: [...]} -- this is the payload
+    meant to be injected into the extraction prompt so the LLM itself can
+    snap mentions to existing entities before resolution runs."""
     rows = conn.execute(
         """
         SELECT e.entity_id, e.canonical_name, e.entity_type,
@@ -89,15 +80,7 @@ def _match_l1(mention: str, l1_context: list[dict]) -> str | None:
 
 
 def _match_l2_fuzzy(conn: sqlite3.Connection, mention: str) -> tuple[str, str, float] | None:
-    """FTS5 lexical search fallback. Returns (entity_id, matched_alias, similarity)
-    or None if nothing clears the threshold.
-
-    Builds an OR query across the mention's individual tokens -- FTS5 treats
-    space-separated terms as an implicit AND, which would require an alias to
-    contain every single word of the mention to match at all. An OR query
-    casts a wider net of candidates, and the actual similarity decision is
-    made afterward by _token_overlap, not by FTS5's own ranking.
-    """
+    """FTS5 lexical search fallback."""
     tokens = _normalize(mention).split()
     if not tokens:
         return None
@@ -132,9 +115,7 @@ def resolve_entity(
     l1_context: list[dict],
 ) -> ResolutionResult:
     """Resolves a raw entity mention to a canonical entity_id, creating a new
-    entity if neither tier matches. Also writes a new alias row whenever the
-    mention text differs from anything already on file for that entity, so
-    future L1 lookups catch it directly next time."""
+    entity if neither tier matches."""
 
     # --- L1 ---
     if entity_id := _match_l1(mention, l1_context):

@@ -1,0 +1,490 @@
+{
+  "started_at": "2026-09-11T22:51:05+00:00",
+  "mode": "full pipeline (agent model: gemini-3.1-flash-lite)",
+  "database": "C:\\Users\\Rishabh Singh\\Downloads\\SVM_claude\\evals\\results\\20260912_042105\\eval.db",
+  "eval_set": "C:\\Users\\Rishabh Singh\\Downloads\\SVM_claude\\evals\\eval_set.json",
+  "totals": {
+    "cases": 2,
+    "retrieval_total": 2,
+    "retrieval_passed": 2,
+    "agent_total": 2,
+    "agent_passed": 2,
+    "post_total": 0,
+    "post_passed": 0,
+    "provider_errors": 0
+  },
+  "performance": {
+    "agent_model_calls": 5,
+    "prompt_tokens": 32818,
+    "completion_tokens": 1466,
+    "total_tokens": 34284,
+    "estimated_cost_usd": "not configured -- set KIVI_EVAL_COST_PER_1M_INPUT / _OUTPUT to price a run",
+    "retrieval_check_latency_ms_mean": 1.96,
+    "agent_latency_ms_mean": 4534.1,
+    "agent_latency_ms_median": 4534.1,
+    "agent_latency_ms_max": 4648.1,
+    "ingestion_wall_clock_s": null,
+    "db_growth_bytes": 0
+  },
+  "db_before": {
+    "size_bytes": 798720,
+    "captures": 515,
+    "entities": 51,
+    "declarative_facts": 298,
+    "episodic_events": 161,
+    "commitments": 122,
+    "commitment_status_events": 163,
+    "preferences": 39,
+    "relationships": 9,
+    "decision_logs": 535,
+    "active_facts": 198,
+    "superseded_facts": 100,
+    "rejected_captures": 53
+  },
+  "db_after": {
+    "size_bytes": 798720,
+    "captures": 515,
+    "entities": 51,
+    "declarative_facts": 298,
+    "episodic_events": 161,
+    "commitments": 122,
+    "commitment_status_events": 163,
+    "preferences": 39,
+    "relationships": 9,
+    "decision_logs": 535,
+    "active_facts": 198,
+    "superseded_facts": 100,
+    "rejected_captures": 53
+  },
+  "ingestion": {
+    "decisions": {
+      "memorized": 460,
+      "rejected": 75
+    },
+    "deliberately_ignored_sample": [
+      {
+        "capture_id": "cap_0016",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is transient small talk/conversational filler with no durable signal."
+      },
+      {
+        "capture_id": "cap_0036",
+        "extraction_status": "transient_discard",
+        "discard_reason": "Testing audio check/small talk with no durable signal"
+      },
+      {
+        "capture_id": "cap_0046",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user is in the middle of searching for a document; there is no durable signal here."
+      },
+      {
+        "capture_id": "cap_0054",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, non-durable remark about checking on an unspecified 'that' at an unspecified 'later' time; it contains no actionable task or meaningful entity information."
+      },
+      {
+        "capture_id": "cap_0056",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user explicitly requested to disregard the previous input."
+      },
+      {
+        "capture_id": "cap_0057",
+        "extraction_status": "pii_detected",
+        "discard_reason": "pre-LLM triage: password-like pattern detected ('password is/: <value>')"
+      },
+      {
+        "capture_id": "cap_0062",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input contains only filler phrases with no durable or actionable information."
+      },
+      {
+        "capture_id": "cap_0065",
+        "extraction_status": "transient_discard",
+        "discard_reason": "User explicitly requested to disregard the capture."
+      },
+      {
+        "capture_id": "cap_0070",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, hypothetical musing ('Maybe I should...') rather than a grounded fact, event, or specific commitment."
+      },
+      {
+        "capture_id": "cap_0075",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is vague and contains no actionable or durable signal (it does not specify what 'that' refers to, nor does it provide a context for a commitment or task)."
+      },
+      {
+        "capture_id": "cap_0076",
+        "extraction_status": "pii_detected",
+        "discard_reason": "pre-LLM triage: password-like pattern detected ('password is/: <value>')"
+      },
+      {
+        "capture_id": "cap_0077",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague hypothetical statement ('Maybe I should...') with no actionable commitment, specific entity, or durable signal."
+      },
+      {
+        "capture_id": "cap_0082",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a speculative/hypothetical musing rather than a concrete commitment or fact."
+      },
+      {
+        "capture_id": "cap_0087",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input contains only '...' which is an incomplete capture and does not convey actionable information."
+      },
+      {
+        "capture_id": "cap_0102",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user stated \"never mind\", indicating the capture contains no durable or actionable information."
+      },
+      {
+        "capture_id": "cap_0109",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user indicated they did not want to record any information."
+      },
+      {
+        "capture_id": "cap_0129",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a vague, hypothetical musing ('Maybe I should...') with no actionable commitment or durable fact."
+      },
+      {
+        "capture_id": "cap_0150",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains no actionable or durable information; 'Hm.' is transient conversational filler."
+      },
+      {
+        "capture_id": "cap_0155",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains only an ellipsis and no content to process."
+      },
+      {
+        "capture_id": "cap_0167",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The user input 'Uh hold on let me find the doc' is a transient interaction regarding the process of locating a document, rather than a durable fact, event, commitment, or preference."
+      },
+      {
+        "capture_id": "cap_0176",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The capture contains only filler speech (uh) with no durable information or actionable content."
+      },
+      {
+        "capture_id": "cap_0191",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The content is empty or contains no actionable signal."
+      },
+      {
+        "capture_id": "cap_0206",
+        "extraction_status": "transient_discard",
+        "discard_reason": "Testing audio or text input with no durable information."
+      },
+      {
+        "capture_id": "cap_0207",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input is a test phrase and contains no durable information, facts, or commitments."
+      },
+      {
+        "capture_id": "cap_0225",
+        "extraction_status": "transient_discard",
+        "discard_reason": "The input provided is non-substantive/transient chatter with no actionable content."
+      }
+    ],
+    "ingestion_latency_ms": {
+      "count": 534,
+      "mean": 6444.3,
+      "median": 3523.5,
+      "p95": 16875.0,
+      "max": 65719.0
+    }
+  },
+  "cases": [
+    {
+      "case_id": "what_am_i_waiting_on",
+      "question": "What am I currently blocked on, and who am I waiting on?",
+      "category": "ordering",
+      "why": "Blocked commitments carry the user's own blocking_reason. That text IS the answer to 'what am I waiting on' -- the agent must surface it rather than paraphrase it away or list blocked items as actionable work.",
+      "retrieval_checks": [],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "You are currently blocked on 14 items, primarily waiting on vendor access or API keys from various partners. Specifically, you are waiting on: Vertex Cloud (Project Solstice), Kestrel Analytics (Nimbus dashboard), Harborlight Design (Marigold campaign), Brightline Payments (Ember backend, Compass redesign, and a pending ticket), Meridian Logistics (Trellis rewrite), Sparrow Hosting (Project Solstice), and Glasswing Consulting (Fenwick integration, Helix migration). Additionally, there is a ticket for Anchorpoint Legal API keys, an unclear ETA on an Aiko Tanaka ticket, and a pending ticket for Ridgeline Data API keys affecting Project Driftwood.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "commitment",
+            "source_id": "com_ee5406812edf",
+            "snippet": "Progress on Project Solstice is blocked due to missing vendor access from Vertex Cloud.",
+            "capture_id": "cap_0074",
+            "captured_at": "2026-02-11T10:54:12Z",
+            "foreground_app": "Slack",
+            "source_text": "Still blocked on Project Solstice because we're waiting on vendor access from Vertex Cloud.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_4dabd5bf8aa1",
+            "snippet": "Nimbus dashboard blocked: waiting on vendor access from Kestrel Analytics",
+            "capture_id": "cap_0078",
+            "captured_at": "2026-02-12T18:56:54Z",
+            "foreground_app": "Notion",
+            "source_text": "the Nimbus dashboard \u00e2\u20ac\u201d Status: In Progress. Owner: Nadia Petrov. Target date: end of quarter.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_3c00348f5ac5",
+            "snippet": "Marigold campaign blocked: Waiting on vendor access from Harborlight Design",
+            "capture_id": "cap_0088",
+            "captured_at": "2026-02-21T13:35:39Z",
+            "foreground_app": "Slack",
+            "source_text": "Still blocked on the Marigold campaign because we're waiting on vendor access from Harborlight Design.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_a0f06a0bb711",
+            "snippet": "Ember backend blocked: Waiting on vendor access from Brightline Payments",
+            "capture_id": "cap_0107",
+            "captured_at": "2026-03-07T18:51:22Z",
+            "foreground_app": "Notion",
+            "source_text": "the Ember backend \u00e2\u20ac\u201d Status: In Progress. Owner: Tom Alder. Target date: end of quarter.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_31ffda7f972e",
+            "snippet": "Trellis rewrite blocked: waiting on vendor access from Meridian Logistics",
+            "capture_id": "cap_0132",
+            "captured_at": "2026-03-22T10:42:23Z",
+            "foreground_app": "Notion",
+            "source_text": "the Trellis rewrite \u00e2\u20ac\u201d Status: In Progress. Owner: Jasmine Cole. Target date: end of quarter.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_9d9696f04f8a",
+            "snippet": "Project Solstice blocked: waiting on Sparrow Hosting API keys",
+            "capture_id": "cap_0357",
+            "captured_at": "2026-07-10T10:14:01Z",
+            "foreground_app": "Slack",
+            "source_text": "Yara Haddad: heads up, Project Solstice is now blocked on the Sparrow Hosting API keys \u00e2\u20ac\u201d opened a ticket, ETA unclear.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_bc74d9721d9c",
+            "snippet": "Fenwick integration blocked: Glasswing Consulting API keys not yet provided",
+            "capture_id": "cap_0399",
+            "captured_at": "2026-07-26T18:16:39Z",
+            "foreground_app": "Slack",
+            "source_text": "Tom Alder: heads up, the Fenwick integration is now blocked on the Glasswing Consulting API keys \u00e2\u20ac\u201d opened a ticket, ETA unclear.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_5560a2d6f26d",
+            "snippet": "Brightline Payments ticket blocked: waiting for API keys",
+            "capture_id": "cap_0418",
+            "captured_at": "2026-08-03T09:38:05Z",
+            "foreground_app": "Slack",
+            "source_text": "Sam Okoye: heads up, the Atlas redesign is now blocked on the Brightline Payments API keys \u00e2\u20ac\u201d opened a ticket, ETA unclear.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_d0e71758b54f",
+            "snippet": "Anchorpoint Legal ticket blocked: waiting on API keys",
+            "capture_id": "cap_0315",
+            "captured_at": "2026-06-24T07:47:41Z",
+            "foreground_app": "Slack",
+            "source_text": "Jasmine Cole: heads up, the Ember backend is now blocked on the Anchorpoint Legal API keys \u00e2\u20ac\u201d opened a ticket, ETA unclear.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_370f7c3a3ed0",
+            "snippet": "Aiko Tanaka ticket blocked: ETA unclear",
+            "capture_id": "cap_0156",
+            "captured_at": "2026-04-06T14:51:48Z",
+            "foreground_app": "Slack",
+            "source_text": "Aiko Tanaka: heads up, the Trellis rewrite is now blocked on the Kestrel Analytics API keys \u00e2\u20ac\u201d opened a ticket, ETA unclear.",
+            "is_active": null,
+            "deleted_at": null
+          },
+          {
+            "source_type": "commitment",
+            "source_id": "com_c6722ab01587",
+            "snippet": "Project Driftwood blocked: waiting for Ridgeline Data API keys",
+            "capture_id": "cap_0491",
+            "captured_at": "2026-09-07T10:33:55Z",
+            "foreground_app": "Slack",
+            "source_text": "Lena Fischer: heads up, Project Driftwood is now blocked on the Ridgeline Data API keys \u00e2\u20ac\u201d opened a ticket, ETA unclear.",
+            "is_active": null,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "The user is asking for what they are blocked on and who they are waiting on. The correct tool to retrieve this information is 'get_open_commitments', which returns both actionable and blocked commitments, along with the reasoning for why a commitment is blocked.",
+            "action": "call_tool",
+            "tool": "get_open_commitments",
+            "arguments": "{}"
+          },
+          {
+            "thought": "I retrieved the open commitments using get_open_commitments, which explicitly separates actionable tasks from those that are blocked. I will now synthesize this into an answer for the user.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 2,
+          "tool_calls": 1,
+          "retrieval_latency_ms": 11.75,
+          "generation_latency_ms": 4635.89,
+          "total_latency_ms": 4648.12,
+          "prompt_tokens": 15258,
+          "completion_tokens": 954,
+          "total_tokens": 16212
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "solution_reuse_finds_past_fix",
+      "question": "The sync job is duplicating records again. How did we fix that last time?",
+      "category": "solution_reuse",
+      "why": "The product's central promise is that the user does not solve the same problem twice. This is a two-hop answer -- find the problem, then follow its 'resolves' edge to the fix -- and the fix has to come back with its actual technical substance (the upsert key), not a vague 'we fixed it'. Answering with the problem alone, or with a fix the graph does not link, is the failure this guards.",
+      "retrieval_checks": [
+        {
+          "kind": "relationship_exists",
+          "edges_found": [
+            {
+              "source": "Sync job duplicating records due to upsert keying on email instead of external ID during address changes.",
+              "target": "Switched the upsert key to external ID and backfilled the duplicate records."
+            },
+            {
+              "source": "Compass redesign sync is duplicating records due to upsert keys on email.",
+              "target": "Switched to external ID as the upsert key to resolve record duplication."
+            }
+          ],
+          "reason": "2 matching 'resolves' edge(s) of 5 total",
+          "latency_ms": 0.33,
+          "passed": true
+        },
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "evt_b2f53a51e3e9",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_548a44a0c219",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_d6fd6b87e0fe",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_3be4776661ce",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_bcdd69963a4c",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_6b646471e98a",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_f094a0660d3b",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_77235d49fa9f",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_5ed00ddfc551",
+              "node_type": "event"
+            },
+            {
+              "node_id": "evt_ac638236d588",
+              "node_type": "event"
+            }
+          ],
+          "reason": "10 matching result(s)",
+          "latency_ms": 3.59,
+          "passed": true
+        }
+      ],
+      "agent": {
+        "passed": true,
+        "failures": [],
+        "response_type": "answer",
+        "answer": "Last time this happened, the sync job issue was fixed by changing the upsert key to use the external ID rather than the email address, followed by a backfill of the duplicate records.",
+        "abstain_reason": null,
+        "disambiguation_options": null,
+        "citations": [
+          {
+            "source_type": "event",
+            "source_id": "evt_7024f849f745",
+            "snippet": "Switched the upsert key to external ID and backfilled the duplicate records.",
+            "capture_id": "cap_0502",
+            "captured_at": "2026-09-11T11:40:19Z",
+            "foreground_app": "VS Code",
+            "source_text": "Found the root cause of the sync job duplicating records on the Cascade rollout: the upsert was keying on email instead of the external ID, so any address change created a second row. Switched the key to external ID and backfilled the duplicates.",
+            "is_active": null,
+            "deleted_at": null
+          }
+        ],
+        "trace": [
+          {
+            "thought": "The user is asking about a recurring technical issue ('sync job duplicating records') and specifically wants to know the resolution from the last time it occurred. Following the agent guidelines for 'How did we fix this last time?', I must first search for the problem event ('sync job duplicating records') to find the history of this issue, and then follow the 'resolve' edge from that event to find the fix.",
+            "action": "call_tool",
+            "tool": "search_nodes",
+            "arguments": "{\"query\": \"sync job duplicating records\"}"
+          },
+          {
+            "thought": "The user is asking how a 'sync job duplicating records' was fixed last time. My search returned multiple occurrences of this issue. I need to check the resolution for these events. I will start by examining the resolution for one of the specific entries, such as 'evt_5ed00ddfc551', which provides more detail in the snippet about the root cause (upsert keying).",
+            "action": "call_tool",
+            "tool": "get_connected_edges",
+            "arguments": "{\"source_node_id\": \"evt_5ed00ddfc551\", \"edge_type\": \"resolve\"}"
+          },
+          {
+            "thought": "I have found a clear resolution for the sync job duplication issue from a previous event. By following the resolution edge, I see that the fix involved switching the upsert key to use the external ID instead of email, and then backfilling the duplicate records.",
+            "action": "final_answer",
+            "tool": null,
+            "arguments": null
+          }
+        ],
+        "metrics": {
+          "model_calls": 3,
+          "tool_calls": 2,
+          "retrieval_latency_ms": 4.92,
+          "generation_latency_ms": 4414.7,
+          "total_latency_ms": 4420.0,
+          "prompt_tokens": 17560,
+          "completion_tokens": 512,
+          "total_tokens": 18072
+        }
+      },
+      "post_checks": [],
+      "passed": true
+    }
+  ]
+}

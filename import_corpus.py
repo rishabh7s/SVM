@@ -1,18 +1,9 @@
-"""
-Headless batch import runner.
+"""Batch import.
 
-    python import_corpus.py <path_to_corpus_json>
+    python import_corpus.py <corpus.json>
 
-Thin CLI wrapper around kivi.ingestion.pipeline.run -- the actual
-triage -> extract -> write loop, rate-limit backoff, per-record decision
-logging (decision_logs table), and the final summary (records processed,
-memorized vs. rejected, facts/events/commitments/preferences created,
-wall-clock time, avg latency, db growth, decision-log location) all live
-there; see kivi/ingestion/pipeline.py's run() docstring/comments for the
-implementation. This file exists only so the exact CLI shape requested by
-Sarvam's review process (`python import_corpus.py corpus.json`, no
-`--input` flag) is available at the repo root, without duplicating any of
-the actual pipeline logic.
+Thin wrapper around kivi.ingestion.pipeline.run, so the flag-free CLI shape
+exists at the repo root. All the actual logic is in the pipeline.
 """
 
 from __future__ import annotations

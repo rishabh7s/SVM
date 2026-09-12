@@ -1,0 +1,347 @@
+{
+  "started_at": "2026-09-11T22:33:02+00:00",
+  "mode": "offline (retrieval checks only)",
+  "database": "C:\\Users\\Rishabh Singh\\Downloads\\SVM_claude\\evals\\results\\20260912_040302\\eval.db",
+  "eval_set": "C:\\Users\\Rishabh Singh\\Downloads\\SVM_claude\\evals\\eval_set.json",
+  "totals": {
+    "cases": 14,
+    "retrieval_total": 14,
+    "retrieval_passed": 4,
+    "agent_total": 0,
+    "agent_passed": 0,
+    "post_total": 0,
+    "post_passed": 0
+  },
+  "performance": {
+    "agent_model_calls": 0,
+    "prompt_tokens": null,
+    "completion_tokens": null,
+    "total_tokens": null,
+    "estimated_cost_usd": "not configured -- set KIVI_EVAL_COST_PER_1M_INPUT / _OUTPUT to price a run",
+    "retrieval_check_latency_ms_mean": 0.29,
+    "agent_latency_ms_mean": null,
+    "agent_latency_ms_median": null,
+    "agent_latency_ms_max": null,
+    "ingestion_wall_clock_s": null,
+    "db_growth_bytes": 0
+  },
+  "db_before": {
+    "size_bytes": 204800,
+    "captures": 8,
+    "entities": 3,
+    "declarative_facts": 2,
+    "episodic_events": 2,
+    "commitments": 2,
+    "commitment_status_events": 3,
+    "preferences": 3,
+    "relationships": 2,
+    "decision_logs": 0,
+    "active_facts": 1,
+    "superseded_facts": 1,
+    "rejected_captures": 1
+  },
+  "db_after": {
+    "size_bytes": 204800,
+    "captures": 8,
+    "entities": 3,
+    "declarative_facts": 2,
+    "episodic_events": 2,
+    "commitments": 2,
+    "commitment_status_events": 3,
+    "preferences": 3,
+    "relationships": 2,
+    "decision_logs": 0,
+    "active_facts": 1,
+    "superseded_facts": 1,
+    "rejected_captures": 1
+  },
+  "ingestion": {
+    "decisions": {},
+    "deliberately_ignored_sample": [
+      {
+        "capture_id": "cap_008",
+        "extraction_status": "pii_detected",
+        "discard_reason": "OTP detected in dictation; capture quarantined, no facts/events/commitments extracted"
+      }
+    ],
+    "ingestion_latency_ms": {
+      "count": 0,
+      "mean": null,
+      "median": null,
+      "p95": null,
+      "max": null
+    }
+  },
+  "cases": [
+    {
+      "case_id": "current_owner_after_handover",
+      "question": "Who currently owns Project Driftwood?",
+      "category": "factual_current",
+      "why": "Driftwood changed hands. The superseded owner's row is still in the FTS index forever, so quoting it is the single easiest way for this system to be confidently wrong.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "reason": "entity 'Project Driftwood' not found in this database",
+          "latency_ms": 0.77,
+          "passed": false
+        },
+        {
+          "kind": "no_duplicate_attribute",
+          "reason": "entity 'Project Driftwood' not found",
+          "latency_ms": 0.06,
+          "passed": false
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": false
+    },
+    {
+      "case_id": "numeric_fact_readable",
+      "question": "What is the budget for project Jinangxi?",
+      "category": "factual_current",
+      "why": "The value lives in value_numeric with value_text NULL. Every display path has to reunite those columns; the one that didn't rendered this fact as 'None'.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "reason": "entity 'project Jinangxi' not found in this database",
+          "latency_ms": 0.06,
+          "passed": false
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": false
+    },
+    {
+      "case_id": "abstain_on_unrecorded_topic",
+      "question": "What did we decide about the Antarctic expedition permits?",
+      "category": "abstention",
+      "why": "Nothing in this history is about this. The right answer is to say so. An OR'd keyword search that returns one incidentally-matching row is all it takes for the model to invent a confident answer around it.",
+      "retrieval_checks": [
+        {
+          "kind": "search_returns_nothing",
+          "results": [],
+          "reason": "no candidate cleared the relevance floor, so the agent is forced to abstain",
+          "latency_ms": 0.68,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "abstain_on_plausible_but_absent_detail",
+      "question": "Was the coffee machine repair ever approved?",
+      "category": "abstention",
+      "why": "Plausible-sounding office trivia the corpus never records. Abstention has to hold for questions that SOUND like they belong, not just obviously alien ones.",
+      "retrieval_checks": [
+        {
+          "kind": "search_returns_nothing",
+          "results": [],
+          "reason": "no candidate cleared the relevance floor, so the agent is forced to abstain",
+          "latency_ms": 0.14,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "compound_two_preferences",
+      "question": "What are my preferences for focus blocks and for meeting note formatting?",
+      "category": "compound_query",
+      "why": "Two unrelated topics in one turn. The reported failure was searching the first, finding something, and answering as though the second half of the sentence wasn't there.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "evt_001",
+              "node_type": "event"
+            }
+          ],
+          "reason": "0 matching result(s)",
+          "latency_ms": 0.36,
+          "passed": false
+        },
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "pref_003",
+              "node_type": "preference"
+            }
+          ],
+          "reason": "1 matching result(s)",
+          "latency_ms": 0.36,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": false
+    },
+    {
+      "case_id": "compound_two_entities",
+      "question": "What's the deadline for Project Driftwood, and who owns the Helix migration?",
+      "category": "compound_query",
+      "why": "Two entities, two different attributes, one turn. Tests decomposition across entities rather than across topics.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "reason": "entity 'Project Driftwood' not found in this database",
+          "latency_ms": 0.06,
+          "passed": false
+        },
+        {
+          "kind": "search_finds",
+          "results": [],
+          "reason": "0 matching result(s)",
+          "latency_ms": 0.07,
+          "passed": false
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": false
+    },
+    {
+      "case_id": "conversational_deletion_persists",
+      "question": "Forget the budget for project Jinangxi.",
+      "category": "mutation",
+      "why": "The headline failure: the agent said 'I have forgotten that' and the row kept is_active=1, deleted_at=NULL. The post_check is the whole point of this case -- a passing answer with a failing post_check is exactly the bug. Citing the record it just deleted is correct, not stale-data leakage.",
+      "retrieval_checks": [],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "commitment_status_is_respected",
+      "question": "What am I still waiting on for Project Driftwood?",
+      "category": "commitment_status",
+      "why": "Completed and cancelled commitments must not be presented as outstanding work. A memory system that reminds you about things you already finished stops being trusted quickly.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [
+            {
+              "node_id": "ent_meridian",
+              "node_type": "entity"
+            },
+            {
+              "node_id": "fact_002",
+              "node_type": "fact"
+            },
+            {
+              "node_id": "com_002",
+              "node_type": "commitment"
+            },
+            {
+              "node_id": "com_001",
+              "node_type": "commitment"
+            }
+          ],
+          "reason": "4 matching result(s)",
+          "latency_ms": 0.56,
+          "passed": true
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "history_available_on_request",
+      "question": "What was Project Driftwood's owner before the current one?",
+      "category": "episodic",
+      "why": "Superseded values are hidden from ordinary retrieval but must remain reachable when the question is explicitly about history -- otherwise 'never show stale data' has quietly become 'destroy the audit trail'. The citation here SHOULD be the superseded row -- that is the record being asked about.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [],
+          "reason": "0 matching result(s)",
+          "latency_ms": 0.5,
+          "passed": false
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": false
+    },
+    {
+      "case_id": "preference_recall",
+      "question": "How do I like my commit messages written?",
+      "category": "preference",
+      "why": "Preference-level recall, phrased nothing like the stored text. Tests that the preference layer is retrievable by intent, not just by matching words.",
+      "retrieval_checks": [
+        {
+          "kind": "search_finds",
+          "results": [],
+          "reason": "0 matching result(s)",
+          "latency_ms": 0.26,
+          "passed": false
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": false
+    },
+    {
+      "case_id": "distributed_across_dictations",
+      "question": "Tell me everything currently true about the Helix migration.",
+      "category": "multi_hop",
+      "why": "The answer is spread across several dictations recorded weeks apart. This is the case that proves memory is doing something a single transcript search cannot.",
+      "retrieval_checks": [
+        {
+          "kind": "no_duplicate_attribute",
+          "reason": "entity 'Helix migration' not found",
+          "latency_ms": 0.06,
+          "passed": false
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": false
+    },
+    {
+      "case_id": "false_premise_is_corrected",
+      "question": "Since the Driftwood deadline was already agreed and signed off, what's the next step?",
+      "category": "false_premise",
+      "why": "The question smuggles in an assumption. Accepting a premise the history doesn't support is a subtler kind of hallucination than inventing a fact, and a more damaging one.",
+      "retrieval_checks": [
+        {
+          "kind": "entity_fact",
+          "reason": "entity 'Project Driftwood' not found in this database",
+          "latency_ms": 0.05,
+          "passed": false
+        }
+      ],
+      "agent": null,
+      "post_checks": [],
+      "passed": false
+    },
+    {
+      "case_id": "what_should_i_do_first",
+      "question": "What should I work on first?",
+      "category": "ordering",
+      "why": "The product promises to 'look at their unfinished work and suggest the best order to tackle it'. The order must come from the deterministic tool, and blocked work must be reported as waiting-on rather than as today's work.",
+      "retrieval_checks": [],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "what_am_i_waiting_on",
+      "question": "What am I currently blocked on, and who am I waiting on?",
+      "category": "ordering",
+      "why": "Blocked commitments carry the user's own blocking_reason. That text IS the answer to 'what am I waiting on' -- the agent must surface it rather than paraphrase it away or list blocked items as actionable work.",
+      "retrieval_checks": [],
+      "agent": null,
+      "post_checks": [],
+      "passed": true
+    }
+  ]
+}

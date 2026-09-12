@@ -1,34 +1,12 @@
-"""
-Deterministic memory management -- update and soft-delete, with no LLM
-involvement anywhere in this file. This is the single implementation behind
-BOTH entry points the dual-path requirement asks for:
+"""Update and soft-delete. No LLM in this file.
 
-  - the REST endpoints in kivi/api/app.py (direct UI actions)
-  - the agent tools registered in kivi/retrieval/agent.py (conversational
-    actions, triggered by tool-calling)
+Both entry points run this same code: the REST endpoints in
+kivi/api/app.py and the agent's tools. That shared path is what actually
+guarantees a spoken "forget that" can't do anything the delete button
+can't.
 
-Both paths call the exact same functions below. This is what actually
-guarantees "conversational modification can't do anything the deterministic
-REST path couldn't" -- not a documentation claim, a shared code path. If the
-UI's delete button and the agent's delete_memory tool ever diverged in
-behavior, that would be a bug in this design; there is structurally no way
-for that behavior to be defined twice.
-
-Design decisions worth being explicit about:
-  - update_memory() never mutates a row in place. For a fact or commitment,
-    it performs the exact same supersession dance as kivi/ingestion/writer.py
-    (new active row, old row deactivated and pointed at the new one) --
-    the only difference is the source is a synthetic 'manual_edit' capture
-    instead of a dictation. For an event (which has no supersession concept
-    in this schema -- an event is a point-in-time occurrence, not a value
-    that changes), an update instead soft-deletes the old event and inserts
-    a corrected one, linked by a 'corrects' relationship -- reusing the
-    existing graph machinery rather than inventing event-versioning.
-  - delete_memory() only ever sets deleted_at; the row is never removed
-    from the table. Entities cannot be deleted through this module -- doing
-    so would orphan every fact/event/commitment attached to them, which is
-    a different, larger operation this narrow implementation doesn't
-    attempt (see the module-level TODO below).
+Nothing is updated in place and nothing is removed. An update supersedes;
+a delete sets deleted_at and clears is_active. Callers own the transaction.
 """
 
 from __future__ import annotations
@@ -70,8 +48,8 @@ def _create_manual_edit_capture(conn: sqlite3.Connection, note: Optional[str]) -
 # ---------------------------------------------------------------------------
 
 def get_memory(conn: sqlite3.Connection, memory_id: str) -> dict:
-    """Thin passthrough to get_node_details -- kept as its own function so
-    the REST layer and the agent's tools both go through kivi/api/memory_ops.py
+    """Thin passthrough to get_node_details -- kept as its own function so the
+    REST layer and the agent's tools both go through kivi/api/memory_ops.py
     for every memory operation, not just the mutating ones."""
     return get_node_details(conn, memory_id)
 
@@ -81,17 +59,7 @@ def get_memory(conn: sqlite3.Connection, memory_id: str) -> dict:
 # ---------------------------------------------------------------------------
 
 def update_memory(conn: sqlite3.Connection, memory_id: str, updates: dict[str, Any], note: Optional[str] = None) -> dict:
-    """Applies a correction to a memory. Never mutates the target row.
-
-    updates' allowed keys depend on node_type:
-      - fact: value_text, value_numeric, unit
-      - commitment: status, status_confirmed_by_user, blocking_reason,
-        due_date_relative_expression, due_date_resolved
-      - event: description (creates a new corrected event + a 'corrects'
-        edge back to the original, which is soft-deleted)
-    Returns the new/updated node's full details (via get_node_details) on
-    success, or {"error": ...} -- never raises.
-    """
+    """Applies a correction to a memory."""
     node_type = node_type_from_id(memory_id)
     if node_type is None:
         return {"error": f"unrecognized memory_id format: '{memory_id}'"}
@@ -112,6 +80,10 @@ def _update_fact(conn: sqlite3.Connection, fact_id: str, updates: dict[str, Any]
     current = conn.execute("SELECT * FROM declarative_facts WHERE fact_id = ?", (fact_id,)).fetchone()
     if not current:
         return {"error": f"no fact found with id '{fact_id}'"}
+    # Deleted before superseded: a delete also clears is_active, so the other
+    # order reports a deleted fact as "superseded by 'None'".
+    if current["deleted_at"] is not None:
+        return {"error": f"fact '{fact_id}' has been deleted; updating a deleted memory is not supported"}
     if not current["is_active"]:
         return {
             "error": (
@@ -119,8 +91,6 @@ def _update_fact(conn: sqlite3.Connection, fact_id: str, updates: dict[str, Any]
                 f"'{current['superseded_by_id']}') -- update the current version instead"
             )
         }
-    if current["deleted_at"] is not None:
-        return {"error": f"fact '{fact_id}' has been deleted; updating a deleted memory is not supported"}
 
     allowed = {"value_text", "value_numeric", "unit"}
     unknown = set(updates) - allowed
@@ -252,29 +222,32 @@ def _update_event(conn: sqlite3.Connection, event_id: str, updates: dict[str, An
 # Delete (soft delete only -- see module docstring)
 # ---------------------------------------------------------------------------
 
+_DELETABLE_TABLES = {
+    "fact": ("declarative_facts", "fact_id"),
+    "event": ("episodic_events", "event_id"),
+    "commitment": ("commitments", "commitment_id"),
+    # preferences were missing here -- a pref_ id raised KeyError, which the
+    # agent then paraphrased back as success
+    "preference": ("preferences", "preference_id"),
+}
+
+# Tables that also carry is_active, which a delete must clear -- see the
+# docstring below for why deleting now deactivates as well as marks.
+_HAS_IS_ACTIVE = {"fact", "preference"}
+
+
 def delete_memory(conn: sqlite3.Connection, memory_id: str, reason: Optional[str] = None) -> dict:
-    """Soft-deletes a fact, event, or commitment: sets deleted_at, never
-    removes the row. The row remains fully visible via get_node_details and
-    get_node_history for audit purposes; it's excluded from search_nodes
-    and get_connected_edges going forward (see kivi/retrieval/tools.py).
-
-    Entities are not deletable through this operation -- see the module
-    docstring.
-
-    TODO (out of scope for this pass): deleting an entity would need to
-    decide what happens to every fact/event/commitment/relationship
-    attached to it -- cascade-delete, orphan them, or refuse if any exist.
-    That's a materially different, larger operation than deleting one
-    memory, and isn't implemented here.
-    """
+    """Soft-deletes a fact, event, commitment, or preference: sets deleted_at
+    (and clears is_active where that column exists), never removes the row."""
     node_type = node_type_from_id(memory_id)
     if node_type is None:
         return {"error": f"unrecognized memory_id format: '{memory_id}'"}
     if node_type == "entity":
         return {"error": "entities cannot be deleted through this operation (see module docstring)"}
+    if node_type not in _DELETABLE_TABLES:
+        return {"error": f"memories of type '{node_type}' cannot be deleted through this operation"}
 
-    table = {"fact": "declarative_facts", "event": "episodic_events", "commitment": "commitments"}[node_type]
-    id_col = {"fact": "fact_id", "event": "event_id", "commitment": "commitment_id"}[node_type]
+    table, id_col = _DELETABLE_TABLES[node_type]
 
     row = conn.execute(f"SELECT deleted_at FROM {table} WHERE {id_col} = ?", (memory_id,)).fetchone()
     if row is None:
@@ -283,7 +256,22 @@ def delete_memory(conn: sqlite3.Connection, memory_id: str, reason: Optional[str
         return {"error": f"{node_type} '{memory_id}' is already deleted (deleted_at={row['deleted_at']})"}
 
     deleted_at = _now_iso()
-    conn.execute(f"UPDATE {table} SET deleted_at = ? WHERE {id_col} = ?", (deleted_at, memory_id))
+    if node_type in _HAS_IS_ACTIVE:
+        conn.execute(
+            f"UPDATE {table} SET deleted_at = ?, is_active = 0 WHERE {id_col} = ?",
+            (deleted_at, memory_id),
+        )
+    else:
+        conn.execute(f"UPDATE {table} SET deleted_at = ? WHERE {id_col} = ?", (deleted_at, memory_id))
+
+    # Status lives in commitment_status_events, so retire that too. Otherwise
+    # the deleted commitment still reads as open through the join.
+    if node_type == "commitment":
+        conn.execute(
+            "UPDATE commitment_status_events SET is_active = 0 "
+            "WHERE commitment_id = ? AND is_active = 1",
+            (memory_id,),
+        )
 
     return {
         "memory_id": memory_id,

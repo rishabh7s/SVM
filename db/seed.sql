@@ -1,10 +1,7 @@
--- Hand-written seed data. Small and readable on purpose -- this exists to
--- sanity-check the schema by hand before any pipeline or LLM code touches it.
--- Narrative: work on the "Meridian project" -- a budget gets revised
--- (supersession), a Simulink convergence bug gets fixed (problem/resolution
--- relationship), two commitments are sequenced (must_precede relationship),
--- one commitment gets explicitly confirmed done, and one capture is
--- deliberately quarantined (pii_detected) to exercise the discard path.
+-- Hand-written seed data: small enough to read, and the test suite asserts
+-- against it. A Meridian budget gets revised (supersession), a Simulink bug
+-- gets fixed (problem/resolution), two commitments are sequenced, one is
+-- confirmed done, and one capture is quarantined as PII.
 
 PRAGMA foreign_keys = ON;
 
@@ -113,6 +110,34 @@ INSERT INTO commitment_status_events (status_event_id, commitment_id, status, st
 
 INSERT INTO commitment_status_events (status_event_id, commitment_id, status, status_confirmed_by_user, blocking_reason, due_date_relative_expression, due_date_resolved, source_capture_id, is_active, superseded_by_id, created_at) VALUES
 ('cse_003', 'com_002', 'blocked', 0, 'waiting on budget confirmation from the finance lead', NULL, NULL, 'cap_006', 1, NULL, '2026-08-21T09:16:05');
+
+-- ============================================================
+-- Preferences -- the fourth memory layer, seeded so it is exercised by the
+-- test suite and visible in the Memory Inspector on a freshly initialized
+-- database, exactly like facts/events/commitments already were.
+--
+-- Three shapes:
+--   pref_001/pref_002  an entity+category scoped pair demonstrating
+--                      supersession (the newer row is inserted first so the
+--                      older one can point at it, same as facts above);
+--   pref_003           an unscoped standing instruction (no entity, no
+--                      category), which is appended rather than superseded
+--                      -- see kivi/ingestion/writer.py's _write_preference.
+-- ============================================================
+INSERT INTO preferences (preference_id, entity_id, category, preference_text, is_active, superseded_by_id, source_capture_id, created_at) VALUES
+('pref_002', 'ent_finance_lead', 'communication_style',
+             'The finance lead prefers a written summary ahead of any budget conversation, not a call.',
+             1, NULL, 'cap_007', '2026-08-25T16:00:05');
+
+INSERT INTO preferences (preference_id, entity_id, category, preference_text, is_active, superseded_by_id, source_capture_id, created_at) VALUES
+('pref_001', 'ent_finance_lead', 'communication_style',
+             'The finance lead prefers async updates over meetings.',
+             0, 'pref_002', 'cap_005', '2026-08-21T09:15:05');
+
+INSERT INTO preferences (preference_id, entity_id, category, preference_text, is_active, superseded_by_id, source_capture_id, created_at) VALUES
+('pref_003', NULL, NULL,
+             'Always summarize meeting notes as bullet points, never paragraphs.',
+             1, NULL, 'cap_006', '2026-08-21T09:16:05');
 
 -- ============================================================
 -- Relationships -- solution reuse (resolves) and ordering (must_precede)

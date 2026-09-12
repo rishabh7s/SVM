@@ -1,25 +1,12 @@
-"""
-Batch ingestion CLI.
+"""Batch ingestion.
 
     python -m kivi.ingestion.pipeline --input corpus/some_captures.json
+    python -m kivi.ingestion.pipeline --retry-failed
 
-Behavior:
-  1. Loads a JSON array of raw capture records, inserts any not already in
-     `captures` (extraction_status='pending'), sorted by captured_at.
-  2. Processes every 'pending' capture in chronological order, one
-     transaction each:
-       a. PII/secret triage on the raw text -- if flagged, quarantine the
-          capture directly with NO LLM call (the secret never leaves the
-          machine).
-       b. Otherwise, call the LLM extractor (kivi/ingestion/extractor.py).
-       c. Write the result via kivi/ingestion/writer.py (entity resolution,
-          supersession, relationships).
-       d. Update the capture's own extraction_status/discard_reason.
-  3. Prints progress and a final summary (counts, vocab drift, warnings).
-
-Each capture's triage + extraction + write is one atomic transaction: either
-all of it lands, or a rollback leaves that capture untouched for the next
-run to retry -- a crash mid-batch never leaves a capture half-written.
+Loads a JSON array of captures, then for each pending one: triage (no LLM --
+a flagged secret never leaves the machine), extract, write, log the
+decision. One transaction per capture, so a crash mid-batch leaves the rest
+retryable.
 """
 
 from __future__ import annotations
@@ -40,37 +27,17 @@ from kivi.llm import get_extraction_client
 DB_PATH = Path(__file__).resolve().parents[2] / "db" / "kivi.db"
 VOCAB_LOG_PATH = Path(__file__).resolve().parents[2] / "logs" / "vocab_observations.json"
 
-# Rate-limit backoff: a 429 (or any transient provider error whose message
-# mentions "429"/"rate limit") is retried with exponential backoff rather
-# than immediately failing the capture -- a real ~500-record corpus run
-# will hit rate limits somewhere in the middle, and one throttled call
-# should not cost a capture its extraction the way a genuine malformed-
-# response failure should. Distinct from instructor's own max_retries
-# inside extract_capture, which handles "model returned invalid JSON," not
-# "the provider is throttling us."
-MAX_RATE_LIMIT_RETRIES = 5
-INITIAL_BACKOFF_SECONDS = 2.0
-
-
-def _is_rate_limit_error(exc: Exception) -> bool:
-    text = str(exc).lower()
-    return "429" in text or "rate limit" in text or "resource_exhausted" in text
+# Backoff lives in kivi/retry.py now, inside extract_capture, so /ingest gets
+# it too. This only prints progress -- a long wait shouldn't look like a hang.
+def _print_retry(attempt: int, delay: float, exc: BaseException) -> None:
+    print(f"\n    [transient provider error] retrying in {delay:.1f}s (attempt {attempt}): {exc}", end=" ")
 
 
 def _extract_with_backoff(conn, client, capture_id, raw_asr_text, formatted_text, captured_at):
-    """Wraps extract_capture with exponential backoff on rate-limit errors
-    specifically. Any other ExtractionFailed propagates immediately --
-    only throttling is worth waiting out here."""
-    backoff = INITIAL_BACKOFF_SECONDS
-    for attempt in range(MAX_RATE_LIMIT_RETRIES + 1):
-        try:
-            return extract_capture(conn, client, capture_id, raw_asr_text, formatted_text, captured_at)
-        except ExtractionFailed as e:
-            if attempt >= MAX_RATE_LIMIT_RETRIES or not _is_rate_limit_error(e.underlying):
-                raise
-            print(f"    [rate-limited] retrying in {backoff:.1f}s (attempt {attempt + 1}/{MAX_RATE_LIMIT_RETRIES})...")
-            time.sleep(backoff)
-            backoff *= 2
+    """Thin pass-through to extract_capture, supplying the progress printer."""
+    return extract_capture(
+        conn, client, capture_id, raw_asr_text, formatted_text, captured_at, on_retry=_print_retry
+    )
 
 
 def _load_and_import_captures(conn: sqlite3.Connection, input_path: Path) -> int:
@@ -93,7 +60,12 @@ def _load_and_import_captures(conn: sqlite3.Connection, input_path: Path) -> int
             """,
             (
                 r["capture_id"], r.get("raw_asr_text", ""), r.get("formatted_text", ""),
-                r["source_modality"], r.get("foreground_app"), r.get("window_title"), r["captured_at"],
+                # Defaults to speech: an imported dictation corpus is spoken by
+                # definition, and a foreign corpus is unlikely to carry a field
+                # named for this schema's CHECK constraint. Requiring it would
+                # abort an otherwise valid import on a purely notational gap.
+                r.get("source_modality") or "speech",
+                r.get("foreground_app"), r.get("window_title"), r["captured_at"],
             ),
         )
         inserted += 1
@@ -101,7 +73,8 @@ def _load_and_import_captures(conn: sqlite3.Connection, input_path: Path) -> int
     return inserted
 
 
-def run(input_path: Path) -> None:
+def run(input_path: Path | None = None, retry_failed: bool = False) -> None:
+    """Imports `input_path` (when given) and processes every pending capture."""
     run_started = time.monotonic()
     db_size_before = DB_PATH.stat().st_size if DB_PATH.exists() else 0
 
@@ -109,8 +82,17 @@ def run(input_path: Path) -> None:
     conn.execute("PRAGMA foreign_keys = ON;")
     conn.row_factory = sqlite3.Row
 
-    imported = _load_and_import_captures(conn, input_path)
-    print(f"[pipeline] imported {imported} new capture(s) from {input_path.name}")
+    if input_path is not None:
+        imported = _load_and_import_captures(conn, input_path)
+        print(f"[pipeline] imported {imported} new capture(s) from {input_path.name}")
+
+    if retry_failed:
+        requeued = conn.execute(
+            "UPDATE captures SET extraction_status = 'pending', discard_reason = NULL "
+            "WHERE extraction_status = 'incomplete_capture'"
+        ).rowcount
+        conn.commit()
+        print(f"[pipeline] re-queued {requeued} previously-failed capture(s) for another attempt")
 
     pending = conn.execute(
         "SELECT * FROM captures WHERE extraction_status = 'pending' ORDER BY captured_at ASC"
@@ -235,11 +217,21 @@ def run(input_path: Path) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Batch-ingest a JSON corpus of raw captures into kivi.db")
-    parser.add_argument("--input", required=True, type=Path, help="Path to a JSON file of raw capture records")
+    parser.add_argument("--input", type=Path, help="Path to a JSON file of raw capture records")
+    parser.add_argument(
+        "--retry-failed",
+        action="store_true",
+        help="Also re-process captures left in 'incomplete_capture' by an earlier provider "
+             "failure (503/429). Does NOT retry content the model rejected or triage quarantined.",
+    )
     args = parser.parse_args()
 
-    if not args.input.exists():
+    if args.input is None and not args.retry_failed:
+        print("[pipeline] nothing to do: pass --input <corpus.json>, --retry-failed, or both", file=sys.stderr)
+        sys.exit(1)
+
+    if args.input is not None and not args.input.exists():
         print(f"[pipeline] input file not found: {args.input}", file=sys.stderr)
         sys.exit(1)
 
-    run(args.input)
+    run(args.input, retry_failed=args.retry_failed)
